@@ -68,9 +68,9 @@ p{margin:0}
 .scroller{position:absolute;z-index:2;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;overscroll-behavior:contain}
 .scroller::-webkit-scrollbar{display:none}
 .content{position:relative;padding-top:318px;padding-bottom:140px}
-.large-title{position:absolute;top:86px;left:20px;height:22px;font-weight:700;font-size:22px;line-height:26px;color:var(--neutral-100);
-  opacity:clamp(0,calc(1 - var(--p) * 2.2),1)}
-.sync-hero{position:absolute;top:285px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:4px;
+.nav-title{position:absolute;z-index:6;left:50%;top:53px;width:247px;margin:0;transform:translate(-50%,calc(-8px * var(--p)));text-align:center;pointer-events:none;
+  font-weight:700;font-size:16px;line-height:20px;color:var(--neutral-100);opacity:clamp(0,calc(1 - var(--p) * 2.5),1)}
+.sync-hero{position:absolute;top:274px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:4px;
   opacity:clamp(0,calc(1 - var(--p) * 2.5),1)}
 .sync-row{display:flex;align-items:center;gap:4px}
 .sync-txt{font-size:10px;line-height:12px;letter-spacing:.1px;color:var(--neutral-60);white-space:nowrap}
@@ -108,7 +108,9 @@ p{margin:0}
 .abs{position:absolute}
 
 /* Danh sách */
-.list{display:flex;flex-direction:column;gap:16px}
+.list{display:flex;flex-direction:column;gap:20px}
+.src{display:flex;flex-direction:column;gap:16px}
+.src-rows{display:flex;flex-direction:column;gap:8px}
 .group{display:flex;flex-direction:column;gap:8px}
 .h14{font-weight:700;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--dark100)}
 .row{display:flex;justify-content:space-between;align-items:flex-start;width:100%;border-radius:8px;transition:transform .15s,background .15s}
@@ -175,7 +177,7 @@ p{margin:0}
 
 /* Tab Tài sản / Phải trả (kiểu xám kính – Figma 266:20926, 269:23257): x64 y140 ở Mặc định → x64 y48 khi cuộn */
 .tabs{position:absolute;z-index:6;left:0;top:0;
-  transform:translate(64px,calc(140px - 92px * var(--p)))}
+  transform:translate(64px,calc(112px - 64px * var(--p)))}
 .tabs-in{position:relative;width:248px;height:32px;display:flex;border-radius:100px;background:rgba(255,255,255,.75);border:1px solid var(--white)}
 .tabs .pill{position:absolute;left:0;top:0;width:50%;height:100%;border-radius:100px;background:rgba(178,178,178,.2);border:1px solid var(--neutral-05);
   transition:transform .5s cubic-bezier(.3,1.35,.5,1)}
@@ -185,7 +187,7 @@ p{margin:0}
 
 /* Tổng tiền: căn giữa (theo chiều rộng thực) ở Mặc định → x20 ở Scroll */
 .t-label{position:absolute;z-index:6;left:0;top:0;display:flex;align-items:center;gap:4px;
-  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(207px - 115px * var(--p)))}
+  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(192px - 100px * var(--p)))}
 .t-label .tx{font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--neutral-80);white-space:nowrap}
 .eye{position:relative;width:20px;height:20px}
 .eye img{position:absolute;left:50%;top:50%;width:16.667px;height:13.157px;transform:translate(-50%,-50%)}
@@ -193,12 +195,12 @@ p{margin:0}
   transform:translate(-50%,-50%) rotate(-40deg);transition:width .25s cubic-bezier(.2,.8,.2,1)}
 .masked .eye::after{width:19px}
 .t-amount{position:absolute;z-index:6;left:0;top:0;transform-origin:0 0;pointer-events:none;
-  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(235px - 115px * var(--p))) scale(calc(1 - .3125 * var(--p)))}
+  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(220px - 100px * var(--p))) scale(calc(1 - .3125 * var(--p)))}
 
 /* ===== Màn Phải trả ===== */
 .pane[hidden]{display:none}
 /* Tài sản (Figma "Mặc định - op2" 269:24263): card kính chứa chart bắt đầu ở y=357 */
-.pane-asset{padding-top:39px}
+.pane-asset{padding-top:38px}
 
 /* Cảm giác "túm block biểu đồ kéo lên"
    --pull: vận tốc cuộn đã làm mượt (−1…1), --pullAbs: độ lớn, --p: tiến độ thu gọn */
@@ -311,7 +313,6 @@ p{margin:0}
    <!-- ===== Nội dung cuộn ===== -->
    <div class="scroller" id="scroller">
     <div class="content">
-     <h1 class="large-title" style="margin:0"><span class="drop" style="display:block;--d:.05s">Trung tâm tài chính</span></h1>
 
      <div class="sync-hero">
       <span class="sync-row rise" style="--d:.5s">
@@ -428,7 +429,9 @@ p{margin:0}
            </span><span class="chev-w"><span class="chev"><img data-a="chevron" alt=""></span></span></span>
          </button>
         </div>
+        <div class="src">
         <p class="h14 rise" style="--d:.35s;--i:5">Nguồn tiền</p>
+        <div class="src-rows">
         <button class="row c rise" style="--d:.35s;--i:6">
          <span class="lbl"><i class="bar" style="background:var(--c-tdd)"></i><span class="name">Tiền di động</span></span>
          <span class="rt"><span class="amt"><span class="n money" data-v="632,000">632,000</span><span class="d">đ</span></span><span class="chev"><img data-a="chevron" alt=""></span></span>
@@ -437,6 +440,8 @@ p{margin:0}
          <span class="lbl"><i class="bar" style="background:var(--c-vtp)"></i><span class="name">ViettelPay</span></span>
          <span class="rt"><span class="amt"><span class="n money" data-v="0">0</span><span class="d">đ</span></span><span class="chev"><img data-a="chevron" alt=""></span></span>
         </button>
+        </div>
+        </div>
        </div>
       </div>
      </section>
@@ -521,6 +526,7 @@ p{margin:0}
     <button class="ic24 ic-back" aria-label="Quay lại"><span class="box"><img data-a="arrowLeft" alt=""></span></button>
     <button class="ic24 ic-help" aria-label="Hướng dẫn"><span class="box"><div><img data-a="dangerCircle" alt=""></div></span></button>
    </div>
+   <h1 class="nav-title"><span class="drop" style="display:block;--d:.05s">Trung tâm tài chính</span></h1>
 
    <div class="tabs" id="tabs" data-i="0">
     <div class="tabs-in drop" style="--d:.1s">
@@ -618,9 +624,9 @@ addEventListener("resize", fit); fit();
 /* ===== Scroll → --p (0 = Mặc định, 1 = Scroll) ===== */
 const screen = document.getElementById("screen"), sc = document.getElementById("scroller"), tabbar = document.getElementById("tabbar");
 /* Quãng cuộn để thu gọn header:
-   Tài sản: card từ y=357 (Mặc định) lên y=184 (Scroll) = 173
+   Tài sản: card từ y=356 (Mặc định) lên y=184 (Scroll) = 172
    Phải trả: 2 thẻ từ y=334 lên y=184 (ngay dưới header 162 + 22, như card Tài sản) = 150 */
-const COLL = [173, 150];
+const COLL = [172, 150];
 const TABS = [
   { label: "Tổng tài sản",   value: 52000000 },
   { label: "Khoản phải trả", value: 2152000 }
@@ -763,7 +769,7 @@ function switchTab(i){
     out.cancel();
     paneBody.animate([{ opacity: 0, transform: `translateX(${dir * 28}px)` }, { opacity: 1, transform: "none" }], { duration: 340, easing: ease });
     [totalLabel, amountIn].forEach(el => { el.getAnimations().forEach(a => a.cancel()); el.animate([{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 300, easing: ease }); });
-    panes[i].querySelectorAll(i ? ".qcard" : ".row, .list > .h14").forEach((el, k) =>
+    panes[i].querySelectorAll(i ? ".qcard" : ".row, .list .h14").forEach((el, k) =>
       el.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: 60 + k * 50, easing: ease, fill: "backwards" }));
     if (i === 0) replayChart();
     maybeCount(wasCompact, 700, 120);
