@@ -52,7 +52,7 @@ p{margin:0}
 .side-btn.l3{left:-5px;top:280px;height:60px}
 .side-btn.r1{right:-5px;top:230px;height:96px}
 .screen{
-  --p:0;--cp:var(--p);
+  --p:0;
   position:relative;width:375px;height:812px;border-radius:50px;overflow:hidden;background:var(--neutral-02);
   isolation:isolate;transform:translateZ(0);
 }
@@ -82,15 +82,15 @@ p{margin:0}
 /* ===== Card tài sản (chart + danh sách) ===== */
 .card{position:relative;margin:0 16px;border-radius:24px}
 .card-surface{position:absolute;left:0;right:0;bottom:0;
-  top:calc((1 - var(--cp)) * (266px + 46px * (1 - var(--cp))))}
+  top:0}
 .card-surface .blur{position:absolute;inset:0;border-radius:24px;background:rgba(255,255,255,.6);filter:blur(2px)}
 .card-surface .glass{position:absolute;inset:0;border-radius:24px;background:rgba(255,255,255,.1);
   box-shadow:inset 1.094px 1.094px 1.094px 0 rgba(255,255,255,.6),inset 4.377px 3.283px 4.377px 0 rgba(255,255,255,.25),inset 0 4.377px 76.599px 0 rgba(255,255,255,.5)}
 .card-inner{position:relative;padding:16px}
-.chart-gap{height:calc(10px + 46px * (1 - var(--cp)))}
+.chart-gap{height:10px}
 
 /* Chart 311×256 */
-.chart{position:relative;width:311px;height:256px;overflow:hidden;transform:translateX(calc(4px * (1 - var(--cp))))}
+.chart{position:relative;width:311px;height:256px;overflow:hidden}
 .chart .ring{position:absolute;left:57.5px;top:42px;width:185px;height:185px}
 .chart .ring img,.pie img,.fill{position:absolute;inset:0;width:100%;height:100%}
 .pie{position:absolute;left:63.5px;top:49px;width:174px;height:174px;
@@ -108,7 +108,7 @@ p{margin:0}
 
 /* Danh sách */
 .list{display:flex;flex-direction:column;gap:16px}
-.group{display:flex;flex-direction:column;gap:calc(8px + 8px * (1 - var(--cp)))}
+.group{display:flex;flex-direction:column;gap:8px}
 .h14{font-weight:700;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--dark100)}
 .row{display:flex;justify-content:space-between;align-items:flex-start;width:100%;border-radius:8px;transition:transform .15s,background .15s}
 .row.c{align-items:center}
@@ -141,7 +141,7 @@ p{margin:0}
 .adv .tt{font-weight:700;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--neutral-100)}
 .adv .ds{font-size:13px;line-height:16px;letter-spacing:-.08px;color:var(--neutral-80)}
 .tag{padding:4px;border-radius:4px;background:var(--pine05);font-weight:700;font-size:13px;line-height:16px;color:var(--green);white-space:nowrap}
-.btn-dark{flex:none;padding:8px;border-radius:37.587px;background:var(--neutral-100);color:var(--white);font-weight:510;font-size:12px;line-height:14px;white-space:nowrap;transition:transform .15s}
+.btn-dark{flex:none;padding:8px;border-radius:37.587px;background:var(--red);color:var(--white);font-weight:510;font-size:12px;line-height:14px;white-space:nowrap;transition:transform .15s}
 .btn-dark:active{transform:scale(.94)}
 .sec-h{display:flex;align-items:center;justify-content:space-between}
 .see-all{display:flex;align-items:center;gap:6px;font-weight:510;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--red)}
@@ -196,22 +196,20 @@ p{margin:0}
 
 /* ===== Màn Phải trả ===== */
 .pane[hidden]{display:none}
-/* Opt 2 (Figma 269:24263): card kính chứa chart bắt đầu ở y=357 */
-.screen[data-opt="2"]{--cp:1}
-.screen[data-opt="2"] .pane-asset{padding-top:39px}
+/* Tài sản (Figma "Mặc định - op2" 269:24263): card kính chứa chart bắt đầu ở y=357 */
+.pane-asset{padding-top:39px}
 
-/* Opt 2 – cảm giác "túm block biểu đồ kéo lên"
+/* Cảm giác "túm block biểu đồ kéo lên"
    --pull: vận tốc cuộn đã làm mượt (−1…1), --pullAbs: độ lớn, --p: tiến độ thu gọn */
 .screen{--pull:0;--pullAbs:0}
-.grabber{display:none}
-.screen[data-opt="2"] .grabber{display:block;position:absolute;left:50%;top:6px;width:calc(36px + 12px * var(--pullAbs));height:4px;border-radius:2px;
+.grabber{display:block;position:absolute;left:50%;top:6px;width:calc(36px + 12px * var(--pullAbs));height:4px;border-radius:2px;
   background:rgba(34,34,34,calc(.14 + .14 * var(--pullAbs)));transform:translateX(-50%);opacity:clamp(0,calc(1 - var(--p) * 1.3),1);transition:background-color .2s}
-.screen[data-opt="2"] .card-surface{margin-top:calc(var(--pull) * -12px);
+.card-surface{margin-top:calc(var(--pull) * -12px);
   filter:drop-shadow(0 calc(-6px - 10px * var(--pullAbs)) calc(14px + 20px * var(--pullAbs)) rgba(0,0,0,calc(.03 + .07 * var(--pullAbs))))}
-.screen[data-opt="2"] .card-inner{transform:translateY(calc(var(--pull) * 5px))}
-.screen[data-opt="2"] .chart{transform:translateY(calc(var(--pull) * 7px))}
-.screen[data-opt="2"] .card.grab .card-surface{--pullAbs:.6}
-.screen[data-opt="2"] .card.grab .grabber{width:48px;background:rgba(34,34,34,.32)}
+.card-inner{transform:translateY(calc(var(--pull) * 5px))}
+.chart{transform:translateY(calc(var(--pull) * 7px))}
+.card.grab .card-surface{--pullAbs:.6}
+.card.grab .grabber{width:48px;background:rgba(34,34,34,.32)}
 .pane-debt{padding-top:16px}
 .quick{display:flex;gap:12px;margin-left:18px;width:347px}
 .qcard{flex:1 0 0;min-width:1px;display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:12px;text-align:left;
@@ -556,7 +554,6 @@ p{margin:0}
 </button>
 <div class="panel" id="panel">
  <div><h2>Trung tâm tài chính</h2><div class="sub"><span class="hint-mouse">Cuộn hoặc kéo chuột trong màn hình</span><span class="hint-touch">Vuốt trong màn hình để cuộn</span></div></div>
- <div class="seg" id="optSeg"><button data-o="1" class="on">Opt 1</button><button data-o="2">Opt 2</button></div>
  <div class="seg" id="seg"><button data-s="0" class="on">Mặc định</button><button data-s="1">Scroll</button></div>
  <div class="acts"><button id="demo">▶ Demo cuộn</button><button id="replay" class="ghost">↺ Intro</button></div>
 </div>
@@ -618,16 +615,15 @@ addEventListener("resize", fit); fit();
 /* ===== Scroll → --p (0 = Mặc định, 1 = Scroll) ===== */
 const screen = document.getElementById("screen"), sc = document.getElementById("scroller"), tabbar = document.getElementById("tabbar");
 /* Quãng cuộn để thu gọn header:
-   Tài sản: chart từ y=334 (Mặc định) lên y=200 (Scroll) = 134
+   Tài sản: card từ y=357 (Mặc định) lên y=184 (Scroll) = 173
    Phải trả: 2 thẻ từ y=334 lên y=184 (ngay dưới header 162 + 22, như card Tài sản) = 150 */
-const COLL = { 1: [134, 150], 2: [173, 150] }; // Opt 2: card từ y=357 lên y=184
-let opt = new URLSearchParams(location.search).get("opt") === "2" ? 2 : 1;
+const COLL = [173, 150];
 const TABS = [
   { label: "Tổng tài sản",   value: 52000000 },
   { label: "Khoản phải trả", value: 2152000 }
 ];
 let tab = 0;
-const C = () => COLL[opt][tab];
+const C = () => COLL[tab];
 const seg = document.getElementById("seg");
 let lastY = 0, ticking = false, busy = false, snapT;
 function update(){
@@ -648,8 +644,8 @@ sc.addEventListener("scroll", () => {
     const st = sc.scrollTop;
     if (st > 1 && st < C() - 1) {
       const up = st >= C() / 2;
-      // Opt 2: thả tay → card "bật" lên vị trí thu gọn, có nảy nhẹ
-      if (opt === 2 && tab === 0) animateScroll(up ? C() : 0, up ? 560 : 420, up ? easeOutBack : easeOutCubic);
+      // thả tay → card "bật" lên vị trí thu gọn, có nảy nhẹ
+      if (tab === 0) animateScroll(up ? C() : 0, up ? 560 : 420, up ? easeOutBack : easeOutCubic);
       else animateScroll(up ? C() : 0, 320);
     }
   }, 140);
@@ -666,7 +662,7 @@ function trackPull(){
 function pullLoop(){
   sv += (vel - sv) * .2; vel *= .8;
   const p = Math.min(1, sc.scrollTop / C());
-  const active = opt === 2 && tab === 0 && !switching;
+  const active = tab === 0 && !switching;
   const amt = active ? Math.max(-1, Math.min(1, sv / 1.1)) * (p < 1 ? 1 : .45) : 0;
   screen.style.setProperty("--pull", amt.toFixed(3));
   screen.style.setProperty("--pullAbs", Math.abs(amt).toFixed(3));
@@ -675,7 +671,7 @@ function pullLoop(){
 }
 /* Nhấn giữ lên card = "túm" */
 const cardEl = document.querySelector(".pane-asset .card");
-cardEl.addEventListener("pointerdown", () => { if (opt === 2 && sc.scrollTop < C()) cardEl.classList.add("grab"); });
+cardEl.addEventListener("pointerdown", () => { if (tab === 0 && sc.scrollTop < C()) cardEl.classList.add("grab"); });
 addEventListener("pointerup", () => cardEl.classList.remove("grab"));
 addEventListener("pointercancel", () => cardEl.classList.remove("grab"));
 
@@ -767,28 +763,6 @@ function switchTab(i){
   });
 }
 tabs.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => switchTab(+b.dataset.t)));
-/* ===== Chọn phương án Opt 1 / Opt 2 ===== */
-const optSeg = document.getElementById("optSeg");
-function applyOpt(){
-  screen.dataset.opt = opt;
-  optSeg.querySelectorAll("button").forEach(b => b.classList.toggle("on", +b.dataset.o === opt));
-  const u = new URL(location.href); opt === 2 ? u.searchParams.set("opt", "2") : u.searchParams.delete("opt");
-  try { history.replaceState(null, "", u); } catch (e) {}
-}
-function setOpt(n){
-  if (n === opt || switching) return;
-  switching = true;
-  const out = paneBody.animate([{ opacity: 1 }, { opacity: 0, transform: "translateY(8px)" }], { duration: 160, fill: "forwards" });
-  out.finished.then(() => {
-    opt = n; applyOpt(); sc.scrollTop = 0; tabbar.classList.remove("hide"); update();
-    out.cancel();
-    paneBody.animate([{ opacity: 0, transform: "translateY(16px)" }, { opacity: 1, transform: "none" }], { duration: 380, easing: "cubic-bezier(.2,.8,.2,1)" });
-    if (tab === 0) replayChart();
-    switching = false;
-  });
-}
-optSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setOpt(+b.dataset.o)));
-applyOpt();
 function replayChart(){
   const els = document.querySelectorAll(".chart .pie, .chart .ring, .chart .pop, .chart .fd");
   els.forEach(el => { el.style.animation = "none"; void el.offsetWidth; el.style.animation = ""; });
