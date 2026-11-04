@@ -1,0 +1,5 @@
+{
+  "buildCommand": "bash tai-assets.sh",
+  "outputDirectory": "public",
+  "cleanUrls": true
+}
