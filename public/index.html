@@ -247,8 +247,24 @@ p{margin:0}
 .seg button{flex:1;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:600;color:var(--neutral-80);transition:background .2s,color .2s}
 .seg button.on{background:#fff;color:var(--neutral-100);box-shadow:0 1px 2px rgba(0,0,0,.08)}
 .panel .acts{display:flex;gap:6px}
-.panel .acts button{flex:1;padding:8px 10px;border-radius:10px;background:var(--neutral-100);color:#fff;font-size:12px;font-weight:600}
+.panel .acts button{flex:1;white-space:nowrap;padding:8px 10px;border-radius:10px;background:var(--neutral-100);color:#fff;font-size:12px;font-weight:600}
 .panel .acts button.ghost{background:#eef0f3;color:var(--neutral-100)}
+.panel .hint-touch{display:none}
+.panel-toggle{display:none;position:fixed;right:16px;bottom:16px;z-index:52;width:48px;height:48px;border-radius:24px;align-items:center;justify-content:center;
+  background:var(--neutral-100);color:#fff;box-shadow:0 8px 24px -8px rgba(0,0,0,.45);transition:transform .2s}
+.panel-toggle:active{transform:scale(.92)}
+.panel-toggle svg{width:22px;height:22px;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .2s;position:absolute}
+.panel-toggle .x{opacity:0;transform:rotate(-90deg)}
+.panel-toggle.open .s{opacity:0;transform:rotate(90deg)}
+.panel-toggle.open .x{opacity:1;transform:none}
+/* Điện thoại / màn cảm ứng nhỏ: ẩn bảng, bật bằng nút */
+@media (max-width:640px), (hover:none) and (pointer:coarse) and (max-width:1024px){
+  .panel-toggle{display:flex}
+  .panel{left:auto;right:16px;bottom:76px;max-width:calc(100vw - 24px);opacity:0;transform:translateY(12px) scale(.97);transform-origin:bottom right;pointer-events:none;
+    transition:opacity .25s ease,transform .3s cubic-bezier(.2,.8,.2,1)}
+  .panel.open{opacity:1;transform:none;pointer-events:auto}
+  .panel .hint-mouse{display:none} .panel .hint-touch{display:inline}
+}
 </style>
 </head>
 <body>
@@ -476,8 +492,12 @@ p{margin:0}
 </div>
 
 <!-- Bảng điều khiển demo (ngoài điện thoại) -->
-<div class="panel">
- <div><h2>Trung tâm tài chính</h2><div class="sub">Cuộn hoặc kéo chuột trong màn hình</div></div>
+<button class="panel-toggle" id="panelToggle" aria-label="Bảng điều khiển" aria-expanded="false" aria-controls="panel">
+ <svg class="s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+ <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+</button>
+<div class="panel" id="panel">
+ <div><h2>Trung tâm tài chính</h2><div class="sub"><span class="hint-mouse">Cuộn hoặc kéo chuột trong màn hình</span><span class="hint-touch">Vuốt trong màn hình để cuộn</span></div></div>
  <div class="seg" id="seg"><button data-s="0" class="on">Mặc định</button><button data-s="1">Scroll</button></div>
  <div class="acts"><button id="demo">▶ Demo cuộn</button><button id="replay" class="ghost">↺ Intro</button></div>
 </div>
@@ -677,6 +697,12 @@ document.getElementById("demo").addEventListener("click", async () => {
   await animateScroll(COLLAPSE, 1100); await wait(700);
   await animateScroll(0, 900);
 });
+/* ===== Bật/tắt bảng điều khiển (điện thoại) ===== */
+const panel = document.getElementById("panel"), pt = document.getElementById("panelToggle");
+function setPanel(open){ panel.classList.toggle("open", open); pt.classList.toggle("open", open); pt.setAttribute("aria-expanded", open); }
+pt.addEventListener("click", e => { e.stopPropagation(); setPanel(!panel.classList.contains("open")); });
+document.addEventListener("click", e => { if (panel.classList.contains("open") && !panel.contains(e.target)) setPanel(false); });
+
 intro();
 </script>
 </body>
