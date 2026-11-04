@@ -52,7 +52,7 @@ p{margin:0}
 .side-btn.l3{left:-5px;top:280px;height:60px}
 .side-btn.r1{right:-5px;top:230px;height:96px}
 .screen{
-  --p:0;
+  --p:0;--cp:var(--p);
   position:relative;width:375px;height:812px;border-radius:50px;overflow:hidden;background:var(--neutral-02);
   isolation:isolate;transform:translateZ(0);
 }
@@ -82,15 +82,15 @@ p{margin:0}
 /* ===== Card tài sản (chart + danh sách) ===== */
 .card{position:relative;margin:0 16px;border-radius:24px}
 .card-surface{position:absolute;left:0;right:0;bottom:0;
-  top:calc((1 - var(--p)) * (266px + 46px * (1 - var(--p))))}
+  top:calc((1 - var(--cp)) * (266px + 46px * (1 - var(--cp))))}
 .card-surface .blur{position:absolute;inset:0;border-radius:24px;background:rgba(255,255,255,.6);filter:blur(2px)}
 .card-surface .glass{position:absolute;inset:0;border-radius:24px;background:rgba(255,255,255,.1);
   box-shadow:inset 1.094px 1.094px 1.094px 0 rgba(255,255,255,.6),inset 4.377px 3.283px 4.377px 0 rgba(255,255,255,.25),inset 0 4.377px 76.599px 0 rgba(255,255,255,.5)}
 .card-inner{position:relative;padding:16px}
-.chart-gap{height:calc(10px + 46px * (1 - var(--p)))}
+.chart-gap{height:calc(10px + 46px * (1 - var(--cp)))}
 
 /* Chart 311×256 */
-.chart{position:relative;width:311px;height:256px;overflow:hidden;transform:translateX(calc(4px * (1 - var(--p))))}
+.chart{position:relative;width:311px;height:256px;overflow:hidden;transform:translateX(calc(4px * (1 - var(--cp))))}
 .chart .ring{position:absolute;left:57.5px;top:42px;width:185px;height:185px}
 .chart .ring img,.pie img,.fill{position:absolute;inset:0;width:100%;height:100%}
 .pie{position:absolute;left:63.5px;top:49px;width:174px;height:174px;
@@ -108,7 +108,7 @@ p{margin:0}
 
 /* Danh sách */
 .list{display:flex;flex-direction:column;gap:16px}
-.group{display:flex;flex-direction:column;gap:calc(8px + 8px * (1 - var(--p)))}
+.group{display:flex;flex-direction:column;gap:calc(8px + 8px * (1 - var(--cp)))}
 .h14{font-weight:700;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--dark100)}
 .row{display:flex;justify-content:space-between;align-items:flex-start;width:100%;border-radius:8px;transition:transform .15s,background .15s}
 .row.c{align-items:center}
@@ -172,23 +172,15 @@ p{margin:0}
 .ic-help .box > div{position:absolute;inset:-4.05%}
 .ic-help img{width:100%;height:100%}
 
-/* Tab: Tài sản (pill đen, x73 y147) ↔ Phải trả (pill xám kính, x64 y140) — cả 2 thu về x64 y48 khi cuộn */
-@property --tx0{syntax:'<length>';inherits:false;initial-value:73px}
-@property --ty0{syntax:'<length>';inherits:false;initial-value:147px}
-.tabs{position:absolute;z-index:6;left:0;top:0;--tx0:73px;--ty0:147px;
-  transition:--tx0 .45s cubic-bezier(.2,.8,.2,1),--ty0 .45s cubic-bezier(.2,.8,.2,1);
-  transform:translate(calc(var(--tx0) + (64px - var(--tx0)) * var(--p)),calc(var(--ty0) + (48px - var(--ty0)) * var(--p)))}
-.tabs[data-i="1"]{--tx0:64px;--ty0:140px}
-.tabs-in{position:relative;width:248px;height:32px;display:flex;border-radius:100px;background:var(--white);border:1px solid var(--neutral-05);
-  transition:background-color .35s,border-color .35s}
-.tabs[data-i="1"] .tabs-in{background:rgba(255,255,255,.75);border-color:var(--white)}
-.tabs .pill{position:absolute;left:0;top:0;width:50%;height:100%;border-radius:100px;background:var(--neutral-100);border:1px solid var(--neutral-05);
-  transition:transform .5s cubic-bezier(.3,1.35,.5,1),background-color .35s}
-.tabs[data-i="1"] .pill{transform:translateX(100%);background:rgba(178,178,178,.2)}
-.tab{position:relative;flex:1 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:14px;color:var(--neutral-80);transition:color .3s}
-.tab.on{font-weight:700;color:var(--white)}
-.tabs[data-i="1"] .tab{color:var(--neutral-60)}
-.tabs[data-i="1"] .tab.on{color:var(--neutral-100)}
+/* Tab Tài sản / Phải trả (kiểu xám kính – Figma 266:20926, 269:23257): x64 y140 ở Mặc định → x64 y48 khi cuộn */
+.tabs{position:absolute;z-index:6;left:0;top:0;
+  transform:translate(64px,calc(140px - 92px * var(--p)))}
+.tabs-in{position:relative;width:248px;height:32px;display:flex;border-radius:100px;background:rgba(255,255,255,.75);border:1px solid var(--white)}
+.tabs .pill{position:absolute;left:0;top:0;width:50%;height:100%;border-radius:100px;background:rgba(178,178,178,.2);border:1px solid var(--neutral-05);
+  transition:transform .5s cubic-bezier(.3,1.35,.5,1)}
+.tabs[data-i="1"] .pill{transform:translateX(100%)}
+.tab{position:relative;flex:1 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:14px;color:var(--neutral-60);transition:color .3s}
+.tab.on{font-weight:700;color:var(--neutral-100)}
 
 /* Tổng tiền: căn giữa (theo chiều rộng thực) ở Mặc định → x20 ở Scroll */
 .t-label{position:absolute;z-index:6;left:0;top:0;display:flex;align-items:center;gap:4px;
@@ -204,6 +196,9 @@ p{margin:0}
 
 /* ===== Màn Phải trả ===== */
 .pane[hidden]{display:none}
+/* Opt 2 (Figma 269:24263): card kính chứa chart bắt đầu ở y=357 */
+.screen[data-opt="2"]{--cp:1}
+.screen[data-opt="2"] .pane-asset{padding-top:39px}
 .pane-debt{padding-top:16px}
 .quick{display:flex;gap:12px;margin-left:18px;width:347px}
 .qcard{flex:1 0 0;min-width:1px;display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:12px;text-align:left;
@@ -548,6 +543,7 @@ p{margin:0}
 </button>
 <div class="panel" id="panel">
  <div><h2>Trung tâm tài chính</h2><div class="sub"><span class="hint-mouse">Cuộn hoặc kéo chuột trong màn hình</span><span class="hint-touch">Vuốt trong màn hình để cuộn</span></div></div>
+ <div class="seg" id="optSeg"><button data-o="1" class="on">Opt 1</button><button data-o="2">Opt 2</button></div>
  <div class="seg" id="seg"><button data-s="0" class="on">Mặc định</button><button data-s="1">Scroll</button></div>
  <div class="acts"><button id="demo">▶ Demo cuộn</button><button id="replay" class="ghost">↺ Intro</button></div>
 </div>
@@ -611,13 +607,14 @@ const screen = document.getElementById("screen"), sc = document.getElementById("
 /* Quãng cuộn để thu gọn header:
    Tài sản: chart từ y=334 (Mặc định) lên y=200 (Scroll) = 134
    Phải trả: 2 thẻ từ y=334 lên y=184 (ngay dưới header 162 + 22, như card Tài sản) = 150 */
-const COLL = [134, 150];
+const COLL = { 1: [134, 150], 2: [173, 150] }; // Opt 2: card từ y=357 lên y=184
+let opt = new URLSearchParams(location.search).get("opt") === "2" ? 2 : 1;
 const TABS = [
   { label: "Tổng tài sản",   value: 52000000 },
   { label: "Khoản phải trả", value: 2152000 }
 ];
 let tab = 0;
-const C = () => COLL[tab];
+const C = () => COLL[opt][tab];
 const seg = document.getElementById("seg");
 let lastY = 0, ticking = false, busy = false, snapT;
 function update(){
@@ -726,6 +723,28 @@ function switchTab(i){
   });
 }
 tabs.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => switchTab(+b.dataset.t)));
+/* ===== Chọn phương án Opt 1 / Opt 2 ===== */
+const optSeg = document.getElementById("optSeg");
+function applyOpt(){
+  screen.dataset.opt = opt;
+  optSeg.querySelectorAll("button").forEach(b => b.classList.toggle("on", +b.dataset.o === opt));
+  const u = new URL(location.href); opt === 2 ? u.searchParams.set("opt", "2") : u.searchParams.delete("opt");
+  try { history.replaceState(null, "", u); } catch (e) {}
+}
+function setOpt(n){
+  if (n === opt || switching) return;
+  switching = true;
+  const out = paneBody.animate([{ opacity: 1 }, { opacity: 0, transform: "translateY(8px)" }], { duration: 160, fill: "forwards" });
+  out.finished.then(() => {
+    opt = n; applyOpt(); sc.scrollTop = 0; tabbar.classList.remove("hide"); update();
+    out.cancel();
+    paneBody.animate([{ opacity: 0, transform: "translateY(16px)" }, { opacity: 1, transform: "none" }], { duration: 380, easing: "cubic-bezier(.2,.8,.2,1)" });
+    if (tab === 0) replayChart();
+    switching = false;
+  });
+}
+optSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setOpt(+b.dataset.o)));
+applyOpt();
 function replayChart(){
   const els = document.querySelectorAll(".chart .pie, .chart .ring, .chart .pop, .chart .fd");
   els.forEach(el => { el.style.animation = "none"; void el.offsetWidth; el.style.animation = ""; });
