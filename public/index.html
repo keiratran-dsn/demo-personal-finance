@@ -210,7 +210,6 @@ p{margin:0}
   filter:drop-shadow(0 calc(-6px - 10px * var(--pullAbs)) calc(14px + 20px * var(--pullAbs)) rgba(0,0,0,calc(.03 + .07 * var(--pullAbs))))}
 .screen[data-opt="2"] .card-inner{transform:translateY(calc(var(--pull) * 5px))}
 .screen[data-opt="2"] .chart{transform:translateY(calc(var(--pull) * 7px))}
-.screen[data-opt="2"] .bg{transform-origin:50% 0;transform:translateY(calc(-24px * var(--p))) scale(calc(1 - .05 * var(--p)));filter:brightness(calc(1 - .05 * var(--p)))}
 .screen[data-opt="2"] .card.grab .card-surface{--pullAbs:.6}
 .screen[data-opt="2"] .card.grab .grabber{width:48px;background:rgba(34,34,34,.32)}
 .pane-debt{padding-top:16px}
@@ -763,7 +762,7 @@ function switchTab(i){
     panes[i].querySelectorAll(i ? ".qcard" : ".row, .list > .h14").forEach((el, k) =>
       el.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: 60 + k * 50, easing: ease, fill: "backwards" }));
     if (i === 0) replayChart();
-    countUp(700);
+    maybeCount(wasCompact, 700, 120);
     switching = false;
   });
 }
@@ -816,6 +815,22 @@ document.querySelectorAll(".js-sync").forEach(b => b.addEventListener("click", (
 /* ===== Intro: vẽ donut, pop icon, đếm số ===== */
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let countRaf;
+/* Số tiền chỉ chạy từ 0 một lần cho mỗi tab trong một phiên vào Trung tâm tài chính (sessionStorage).
+   Đang ở trạng thái header thu gọn thì không chạy, hiện ngay số cuối. */
+const SEEN_KEY = "ttc_amount_counted";
+let memSeen = {};
+function getSeen(){ try { return JSON.parse(sessionStorage.getItem(SEEN_KEY) || "{}"); } catch (e) { return memSeen; } }
+function markSeen(i){ const s = getSeen(); s[i] = 1; memSeen = s; try { sessionStorage.setItem(SEEN_KEY, JSON.stringify(s)); } catch (e) {} }
+function resetSeen(){ memSeen = {}; try { sessionStorage.removeItem(SEEN_KEY); } catch (e) {} }
+function showAmount(){
+  cancelAnimationFrame(countRaf); total.classList.remove("counting");
+  total.textContent = masked ? "******" : TABS[tab].value.toLocaleString("en-US");
+}
+function maybeCount(compact, dur, delay){
+  const first = !getSeen()[tab];
+  markSeen(tab);
+  if (first && !compact) countUp(dur, delay); else showAmount();
+}
 function countUp(dur = 1300, delay = 250){
   cancelAnimationFrame(countRaf);
   const end = TABS[tab].value;
@@ -839,11 +854,12 @@ function setupReveal(){
 }
 function intro(){
   screen.classList.remove("run"); void screen.offsetWidth; screen.classList.add("run");
-  countUp(); setupReveal();
+  maybeCount(sc.scrollTop >= C() - 1); setupReveal();
 }
 document.getElementById("replay").addEventListener("click", async () => {
   tabbar.classList.remove("hide");
   if (sc.scrollTop > 0) await animateScroll(0, 450);
+  resetSeen();   // "↺ Intro" = vào lại Trung tâm tài chính như phiên mới
   intro();
 });
 seg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
