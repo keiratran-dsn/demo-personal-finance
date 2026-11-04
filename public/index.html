@@ -145,7 +145,7 @@ p{margin:0}
 .btn-dark:active{transform:scale(.94)}
 .sec-h{display:flex;align-items:center;justify-content:space-between}
 .see-all{display:flex;align-items:center;gap:6px;font-weight:510;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--red)}
-.rail{display:flex;gap:8px;margin:0 -16px;padding:0 16px 8px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;scroll-padding:0 16px}
+.rail{display:flex;gap:8px;margin:0 -16px;padding:0 16px 8px;overflow-x:auto;overflow-y:hidden;touch-action:pan-x pan-y;overscroll-behavior-x:contain;overscroll-behavior-y:auto;scrollbar-width:none;scroll-snap-type:x mandatory;scroll-padding:0 16px}
 .rail::-webkit-scrollbar{display:none}
 .news{flex:none;width:148px;border-radius:16px;background:var(--white);overflow:hidden;scroll-snap-align:start;display:flex;flex-direction:column;
   box-shadow:0 0 0 1px rgba(25,28,33,.02),0 1px 0 0 rgba(25,28,33,.01),0 2px 3px 0 rgba(0,0,0,.02);transition:transform .15s}
@@ -693,20 +693,25 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 /* ===== Kéo chuột để cuộn (giả lập vuốt) + quán tính ===== */
 const drag = { active:false };
 function dragScroll(el, axis){
-  let down = false, moved = false, start = 0, s0 = 0, last = 0, lt = 0, v = 0, raf;
+  let down = false, moved = false, start = 0, s0 = 0, last = 0, lt = 0, v = 0, raf, ox = 0, oy = 0;
   const get = () => axis === "y" ? el.scrollTop : el.scrollLeft;
   const set = x => axis === "y" ? (el.scrollTop = x) : (el.scrollLeft = x);
   el.addEventListener("pointerdown", e => {
     if (e.pointerType !== "mouse" || e.button !== 0) return;
-    if (axis === "x") e.stopPropagation();
-    down = true; moved = false; cancelAnimationFrame(raf);
+    down = true; moved = false; cancelAnimationFrame(raf); ox = e.clientX; oy = e.clientY;
     start = last = axis === "y" ? e.clientY : e.clientX; s0 = get(); lt = performance.now(); v = 0;
     if (axis === "x") el.style.scrollSnapType = "none";
   });
   addEventListener("pointermove", e => {
     if (!down) return;
     const pos = axis === "y" ? e.clientY : e.clientX, d = (pos - start) / SCALE;
-    if (!moved && Math.abs(d) > 4) { moved = true; drag.active = true; }
+    if (!moved) {
+      const dx = Math.abs(e.clientX - ox), dy = Math.abs(e.clientY - oy);
+      if (Math.max(dx, dy) <= 4) return;
+      const mine = axis === "y" ? dy >= dx : dx > dy;   // sai trục → nhường cho lớp kia
+      if (!mine) { down = false; if (axis === "x") el.style.scrollSnapType = ""; return; }
+      moved = true; drag.active = true;
+    }
     if (!moved) return;
     set(s0 - d);
     const now = performance.now(); v = ((pos - last) / SCALE) / Math.max(1, now - lt); last = pos; lt = now;
