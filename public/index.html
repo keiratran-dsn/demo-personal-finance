@@ -72,6 +72,7 @@ p{margin:0}
   opacity:clamp(0,calc(1 - var(--p) * 2.2),1)}
 .sync-hero{position:absolute;top:285px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:4px;
   opacity:clamp(0,calc(1 - var(--p) * 2.5),1)}
+.sync-row{display:flex;align-items:center;gap:4px}
 .sync-txt{font-size:10px;line-height:12px;letter-spacing:.1px;color:var(--neutral-60);white-space:nowrap}
 .ic-sync{position:relative;width:14px;height:14px;flex:none}
 .ic-sync .a{position:absolute;left:1.17px;top:2.21px;width:10.542px;height:4.993px;transform:rotate(180deg)}
@@ -313,8 +314,10 @@ p{margin:0}
      <h1 class="large-title" style="margin:0"><span class="drop" style="display:block;--d:.05s">Trung tâm tài chính</span></h1>
 
      <div class="sync-hero">
-      <button class="ic-sync js-sync" aria-label="Đồng bộ"><img class="a" data-a="group36289" alt=""><img class="b" data-a="group36290" alt=""></button>
-      <span class="sync-txt rise" style="--d:.5s">Đồng bộ lúc 17:04 18/08/2025</span>
+      <span class="sync-row rise" style="--d:.5s">
+       <button class="ic-sync js-sync" aria-label="Đồng bộ"><img class="a" data-a="group36289" alt=""><img class="b" data-a="group36290" alt=""></button>
+       <span class="sync-txt">Đồng bộ lúc 17:04 18/08/2025</span>
+      </span>
      </div>
 
      <div id="paneBody">
