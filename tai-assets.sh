@@ -59,5 +59,11 @@ curl -fsSL -o "public/assets/ellipse2116.svg" "https://www.figma.com/api/mcp/ass
 curl -fsSL -o "public/assets/group3.svg" "https://www.figma.com/api/mcp/asset/7df558f9-b6b8-4503-b465-6ec32016698d.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/chevronRed.svg" "https://www.figma.com/api/mcp/asset/a74afe5e-deb1-4479-bb75-4afd8b1e3da8.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/home.svg" "https://www.figma.com/api/mcp/asset/707d24ac-3691-4088-b59b-cbc6b7b2ae7d.svg" && ok=$((ok+1))
-echo "Asset tải được: $ok/56"
+curl -fsSL -o "public/assets/debtShape0.svg" "https://www.figma.com/api/mcp/asset/496a588c-c5d2-42b4-9329-9e02a67590c8.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/debtGlow0.svg" "https://www.figma.com/api/mcp/asset/95bfb64d-8bb5-416e-aee8-eed6419e4499.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/debtIcon0.svg" "https://www.figma.com/api/mcp/asset/abdd58b9-3f0b-4912-976e-7b9ea6fad6d7.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/debtShape1.svg" "https://www.figma.com/api/mcp/asset/8fc5bc6f-601e-4763-ae19-b68f492b9d24.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/debtGlow1.svg" "https://www.figma.com/api/mcp/asset/0838a960-9e26-4c64-bcb5-a7dc6afa3969.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/debtIcon1.svg" "https://www.figma.com/api/mcp/asset/6311189e-59d6-4298-a29c-f0d7316c9416.svg" && ok=$((ok+1))
+echo "Asset tải được: $ok/62"
 exit 0

@@ -172,17 +172,27 @@ p{margin:0}
 .ic-help .box > div{position:absolute;inset:-4.05%}
 .ic-help img{width:100%;height:100%}
 
-.tabs{position:absolute;z-index:6;left:0;top:0;
-  transform:translate(calc(73px - 9px * var(--p)),calc(147px - 99px * var(--p)))}
-.tabs-in{position:relative;width:248px;height:32px;display:flex;border-radius:100px;background:var(--white);border:1px solid var(--neutral-05)}
+/* Tab: Tài sản (pill đen, x73 y147) ↔ Phải trả (pill xám kính, x64 y140) — cả 2 thu về x64 y48 khi cuộn */
+@property --tx0{syntax:'<length>';inherits:false;initial-value:73px}
+@property --ty0{syntax:'<length>';inherits:false;initial-value:147px}
+.tabs{position:absolute;z-index:6;left:0;top:0;--tx0:73px;--ty0:147px;
+  transition:--tx0 .45s cubic-bezier(.2,.8,.2,1),--ty0 .45s cubic-bezier(.2,.8,.2,1);
+  transform:translate(calc(var(--tx0) + (64px - var(--tx0)) * var(--p)),calc(var(--ty0) + (48px - var(--ty0)) * var(--p)))}
+.tabs[data-i="1"]{--tx0:64px;--ty0:140px}
+.tabs-in{position:relative;width:248px;height:32px;display:flex;border-radius:100px;background:var(--white);border:1px solid var(--neutral-05);
+  transition:background-color .35s,border-color .35s}
+.tabs[data-i="1"] .tabs-in{background:rgba(255,255,255,.75);border-color:var(--white)}
 .tabs .pill{position:absolute;left:0;top:0;width:50%;height:100%;border-radius:100px;background:var(--neutral-100);border:1px solid var(--neutral-05);
-  transition:transform .5s cubic-bezier(.3,1.35,.5,1)}
-.tabs[data-i="1"] .pill{transform:translateX(100%)}
+  transition:transform .5s cubic-bezier(.3,1.35,.5,1),background-color .35s}
+.tabs[data-i="1"] .pill{transform:translateX(100%);background:rgba(178,178,178,.2)}
 .tab{position:relative;flex:1 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:14px;color:var(--neutral-80);transition:color .3s}
 .tab.on{font-weight:700;color:var(--white)}
+.tabs[data-i="1"] .tab{color:var(--neutral-60)}
+.tabs[data-i="1"] .tab.on{color:var(--neutral-100)}
 
+/* Tổng tiền: căn giữa (theo chiều rộng thực) ở Mặc định → x20 ở Scroll */
 .t-label{position:absolute;z-index:6;left:0;top:0;display:flex;align-items:center;gap:4px;
-  transform:translate(calc(136px - 116px * var(--p)),calc(207px - 115px * var(--p)))}
+  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(207px - 115px * var(--p)))}
 .t-label .tx{font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--neutral-80);white-space:nowrap}
 .eye{position:relative;width:20px;height:20px}
 .eye img{position:absolute;left:50%;top:50%;width:16.667px;height:13.157px;transform:translate(-50%,-50%)}
@@ -190,7 +200,20 @@ p{margin:0}
   transform:translate(-50%,-50%) rotate(-40deg);transition:width .25s cubic-bezier(.2,.8,.2,1)}
 .masked .eye::after{width:19px}
 .t-amount{position:absolute;z-index:6;left:0;top:0;transform-origin:0 0;pointer-events:none;
-  transform:translate(calc(85px - 65px * var(--p)),calc(235px - 115px * var(--p))) scale(calc(1 - .3125 * var(--p)))}
+  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(235px - 115px * var(--p))) scale(calc(1 - .3125 * var(--p)))}
+
+/* ===== Màn Phải trả ===== */
+.pane[hidden]{display:none}
+.pane-debt{padding-top:16px}
+.quick{display:flex;gap:12px;margin-left:18px;width:347px}
+.qcard{flex:1 0 0;min-width:1px;display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:12px;text-align:left;
+  background:rgba(255,255,255,.8);border:1px solid var(--border-default);transition:transform .15s}
+.qcard:active{transform:scale(.97)}
+.qc-l{display:flex;flex-direction:column;gap:8px;align-items:flex-start;justify-content:center}
+.ico30{position:relative;width:30px;height:30px;overflow:hidden;flex:none}
+.ico30 .shape{position:absolute;left:0;top:0;width:30px;height:30px}
+.qt{font-weight:510;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--dark100);white-space:nowrap}
+.screen[data-tab="1"] .slot{margin-top:35px}
 .t-amount-in{display:flex;gap:2px;font-weight:700;font-size:32px;line-height:38px;letter-spacing:.39px;white-space:nowrap}
 .t-amount .n{color:var(--neutral-100)} .t-amount .d{color:var(--neutral-60)}
 .counting{font-variant-numeric:tabular-nums}
@@ -288,6 +311,9 @@ p{margin:0}
       <span class="sync-txt rise" style="--d:.5s">Đồng bộ lúc 17:04 18/08/2025</span>
      </div>
 
+     <div id="paneBody">
+     <!-- ===== Pane: Tài sản ===== -->
+     <div class="pane pane-asset" id="paneAsset">
      <section class="card">
       <div class="card-surface"><div class="blur"></div><div class="glass"></div></div>
       <div class="card-inner">
@@ -405,6 +431,29 @@ p{margin:0}
        </div>
       </div>
      </section>
+     </div>
+
+     <!-- ===== Pane: Phải trả ===== -->
+     <div class="pane pane-debt" id="paneDebt" hidden>
+      <div class="quick">
+       <button class="qcard">
+        <span class="qc-l">
+         <span class="ico30"><img class="shape" data-a="debtShape0" alt=""><span class="glow"><div><img data-a="debtGlow0" alt=""></div></span>
+          <span class="abs" style="inset:26.67% 22.15% 21.26% 20%"><img class="fill" data-a="debtIcon0" alt=""></span></span>
+         <span class="qt">Quản lý<br>khoản vay</span>
+        </span>
+        <span class="chev"><img data-a="chevron" alt=""></span>
+       </button>
+       <button class="qcard">
+        <span class="qc-l">
+         <span class="ico30"><img class="shape" data-a="debtShape1" alt=""><span class="glow"><div><img data-a="debtGlow1" alt=""></div></span>
+          <span class="abs" style="inset:23.33% 19.84% 20% 16.67%"><img class="fill" data-a="debtIcon1" alt=""></span></span>
+         <span class="qt">Quản lý hoá đơn<br>thanh toán</span>
+        </span>
+        <span class="chev"><img data-a="chevron" alt=""></span>
+       </button>
+      </div>
+     </div>
 
      <!-- ===== Gợi ý cho bạn ===== -->
      <section class="slot">
@@ -447,6 +496,7 @@ p{margin:0}
        <div class="news bd reveal" style="--i:3"><div class="im"><img data-a="image38" alt=""></div><div class="ct"><p class="a">Duyệt vay 100TR chỉ 3 phút</p><p class="b">Khám phá →</p></div></div>
       </div>
      </section>
+     </div><!-- /paneBody -->
     </div>
    </div>
 
@@ -471,7 +521,7 @@ p{margin:0}
     </div>
    </div>
 
-   <div class="t-label"><span class="tx drop" style="--d:.2s">Tổng tài sản</span><button class="eye drop" id="eye" style="--d:.2s" aria-label="Ẩn/hiện số dư"><img data-a="show" alt=""></button></div>
+   <div class="t-label"><span class="tx drop" id="totalLabel" style="--d:.2s">Tổng tài sản</span><button class="eye drop" id="eye" style="--d:.2s" aria-label="Ẩn/hiện số dư"><img data-a="show" alt=""></button></div>
    <div class="t-amount"><div class="t-amount-in drop" style="--d:.25s"><span class="n" id="total">52,000,000</span><span class="d">đ</span></div></div>
 
    <div class="sync-compact">
@@ -533,7 +583,11 @@ const A = {
  shape5:"8a7c3eca-9be4-4acc-9450-ed5661027e21.svg", ellipse2115:"5d1c070a-9eff-46bc-bda8-40edf35d414e.svg",
  group2:"ce54b1de-6b39-4ea6-bc4a-dd1fb6caa222.svg", shape6:"100e94a3-9742-4c8f-9c32-4f1966718509.svg",
  ellipse2116:"79218e4f-dd52-4366-b6a2-95d4b63d563a.svg", group3:"7df558f9-b6b8-4503-b465-6ec32016698d.svg",
- chevronRed:"a74afe5e-deb1-4479-bb75-4afd8b1e3da8.svg", home:"707d24ac-3691-4088-b59b-cbc6b7b2ae7d.svg"
+ chevronRed:"a74afe5e-deb1-4479-bb75-4afd8b1e3da8.svg", home:"707d24ac-3691-4088-b59b-cbc6b7b2ae7d.svg",
+ /* Màn Phải trả (node 269:23243) */
+ debtShape0:"496a588c-c5d2-42b4-9329-9e02a67590c8.svg", debtGlow0:"95bfb64d-8bb5-416e-aee8-eed6419e4499.svg",
+ debtIcon0:"abdd58b9-3f0b-4912-976e-7b9ea6fad6d7.svg", debtShape1:"8fc5bc6f-601e-4763-ae19-b68f492b9d24.svg",
+ debtGlow1:"0838a960-9e26-4c64-bcb5-a7dc6afa3969.svg", debtIcon1:"6311189e-59d6-4298-a29c-f0d7316c9416.svg"
 };
 const ext = f => f.slice(f.lastIndexOf("."));
 function applyAssets(local){
@@ -554,12 +608,21 @@ addEventListener("resize", fit); fit();
 
 /* ===== Scroll → --p (0 = Mặc định, 1 = Scroll) ===== */
 const screen = document.getElementById("screen"), sc = document.getElementById("scroller"), tabbar = document.getElementById("tabbar");
-const COLLAPSE = 134; // chart từ y=334 (Mặc định) lên y=200 (Scroll)
+/* Quãng cuộn để thu gọn header:
+   Tài sản: chart từ y=334 (Mặc định) lên y=200 (Scroll) = 134
+   Phải trả: 2 thẻ từ y=334 lên y=184 (ngay dưới header 162 + 22, như card Tài sản) = 150 */
+const COLL = [134, 150];
+const TABS = [
+  { label: "Tổng tài sản",   value: 52000000 },
+  { label: "Khoản phải trả", value: 2152000 }
+];
+let tab = 0;
+const C = () => COLL[tab];
 const seg = document.getElementById("seg");
 let lastY = 0, ticking = false, busy = false, snapT;
 function update(){
   ticking = false;
-  const st = Math.max(0, sc.scrollTop), p = Math.min(1, st / COLLAPSE);
+  const st = Math.max(0, sc.scrollTop), p = Math.min(1, st / C());
   screen.style.setProperty("--p", p.toFixed(4));
   if (st > lastY + 4 && st > 40) tabbar.classList.add("hide");
   else if (st < lastY - 4) tabbar.classList.remove("hide");
@@ -573,7 +636,7 @@ sc.addEventListener("scroll", () => {
   snapT = setTimeout(() => {           // snap kiểu iOS large-title
     if (busy || drag.active) return;
     const st = sc.scrollTop;
-    if (st > 1 && st < COLLAPSE - 1) animateScroll(st < COLLAPSE / 2 ? 0 : COLLAPSE, 320);
+    if (st > 1 && st < C() - 1) animateScroll(st < C() / 2 ? 0 : C(), 320);
   }, 140);
 }, { passive: true });
 
@@ -631,10 +694,42 @@ dragScroll(document.getElementById("rail"), "x");
 
 /* ===== Tab Tài sản / Phải trả ===== */
 const tabs = document.getElementById("tabs");
-tabs.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
-  tabs.dataset.i = b.dataset.t;
-  tabs.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x === b));
-}));
+const paneBody = document.getElementById("paneBody"), panes = [document.getElementById("paneAsset"), document.getElementById("paneDebt")];
+const totalLabel = document.getElementById("totalLabel"), amountIn = document.querySelector(".t-amount-in");
+let switching = false;
+function switchTab(i){
+  if (i === tab || switching) return;
+  switching = true;
+  const dir = i > tab ? 1 : -1, wasCompact = sc.scrollTop >= C() - 1;
+  tab = i;
+  tabs.dataset.i = i; screen.dataset.tab = i;
+  tabs.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", +x.dataset.t === i));
+  // 1) nội dung + tiêu đề số tiền trượt ra
+  const ease = "cubic-bezier(.2,.8,.2,1)";
+  const out = paneBody.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: `translateX(${-dir * 28}px)` }],
+    { duration: 180, easing: "ease-in", fill: "forwards" });
+  [totalLabel, amountIn].forEach(el => el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150, fill: "forwards" }));
+  out.finished.then(() => {
+    // 2) đổi pane + giữ trạng thái header (đang thu gọn thì vẫn thu gọn)
+    panes.forEach((pn, k) => pn.hidden = k !== i);
+    sc.scrollTop = wasCompact ? C() : 0;
+    update();
+    totalLabel.textContent = TABS[i].label;
+    out.cancel();
+    paneBody.animate([{ opacity: 0, transform: `translateX(${dir * 28}px)` }, { opacity: 1, transform: "none" }], { duration: 340, easing: ease });
+    [totalLabel, amountIn].forEach(el => { el.getAnimations().forEach(a => a.cancel()); el.animate([{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 300, easing: ease }); });
+    panes[i].querySelectorAll(i ? ".qcard" : ".row, .list > .h14").forEach((el, k) =>
+      el.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: 60 + k * 50, easing: ease, fill: "backwards" }));
+    if (i === 0) replayChart();
+    countUp(700);
+    switching = false;
+  });
+}
+tabs.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => switchTab(+b.dataset.t)));
+function replayChart(){
+  const els = document.querySelectorAll(".chart .pie, .chart .ring, .chart .pop, .chart .fd");
+  els.forEach(el => { el.style.animation = "none"; void el.offsetWidth; el.style.animation = ""; });
+}
 
 /* ===== Ẩn / hiện số dư ===== */
 let masked = false;
@@ -644,7 +739,7 @@ document.getElementById("eye").addEventListener("click", () => {
   const els = [total, ...document.querySelectorAll(".money")];
   els.forEach(el => { el.classList.remove("mask-flash"); void el.offsetWidth; el.classList.add("mask-flash"); });
   setTimeout(() => {
-    total.textContent = masked ? "******" : "52,000,000";
+    total.textContent = masked ? "******" : TABS[tab].value.toLocaleString("en-US");
     document.querySelectorAll(".money").forEach(el => el.textContent = masked ? "******" : el.dataset.v);
   }, 120);
 });
@@ -656,14 +751,17 @@ document.querySelectorAll(".js-sync").forEach(b => b.addEventListener("click", (
 
 /* ===== Intro: vẽ donut, pop icon, đếm số ===== */
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-function countUp(){
-  if (reduce || masked) { total.textContent = masked ? "******" : "52,000,000"; return; }
-  const end = 52000000, dur = 1300, t0 = performance.now() + 250;
+let countRaf;
+function countUp(dur = 1300, delay = 250){
+  cancelAnimationFrame(countRaf);
+  const end = TABS[tab].value;
+  if (reduce || masked) { total.textContent = masked ? "******" : end.toLocaleString("en-US"); return; }
+  const t0 = performance.now() + delay;
   total.classList.add("counting");
   (function step(now){
     const t = Math.max(0, Math.min(1, (now - t0) / dur)), e = 1 - Math.pow(1 - t, 4);
     total.textContent = Math.round(end * e).toLocaleString("en-US");
-    if (t < 1) requestAnimationFrame(step); else total.classList.remove("counting");
+    if (t < 1) countRaf = requestAnimationFrame(step); else total.classList.remove("counting");
   })(performance.now());
 }
 let io;
@@ -685,16 +783,16 @@ document.getElementById("replay").addEventListener("click", async () => {
   intro();
 });
 seg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-  const to = b.dataset.s === "1" ? COLLAPSE : 0;
+  const to = b.dataset.s === "1" ? C() : 0;
   if (to) tabbar.classList.add("hide"); else tabbar.classList.remove("hide");
   animateScroll(to, 650);
 }));
 document.getElementById("demo").addEventListener("click", async () => {
   if (busy) return;
   await animateScroll(0, 400); await wait(300);
-  await animateScroll(COLLAPSE, 900); await wait(900);
+  await animateScroll(C(), 900); await wait(900);
   await animateScroll(sc.scrollHeight - sc.clientHeight, 1400); await wait(1100);
-  await animateScroll(COLLAPSE, 1100); await wait(700);
+  await animateScroll(C(), 1100); await wait(700);
   await animateScroll(0, 900);
 });
 /* ===== Bật/tắt bảng điều khiển (điện thoại) ===== */
