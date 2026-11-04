@@ -199,6 +199,20 @@ p{margin:0}
 /* Opt 2 (Figma 269:24263): card kính chứa chart bắt đầu ở y=357 */
 .screen[data-opt="2"]{--cp:1}
 .screen[data-opt="2"] .pane-asset{padding-top:39px}
+
+/* Opt 2 – cảm giác "túm block biểu đồ kéo lên"
+   --pull: vận tốc cuộn đã làm mượt (−1…1), --pullAbs: độ lớn, --p: tiến độ thu gọn */
+.screen{--pull:0;--pullAbs:0}
+.grabber{display:none}
+.screen[data-opt="2"] .grabber{display:block;position:absolute;left:50%;top:6px;width:calc(36px + 12px * var(--pullAbs));height:4px;border-radius:2px;
+  background:rgba(34,34,34,calc(.14 + .14 * var(--pullAbs)));transform:translateX(-50%);opacity:clamp(0,calc(1 - var(--p) * 1.3),1);transition:background-color .2s}
+.screen[data-opt="2"] .card-surface{margin-top:calc(var(--pull) * -12px);
+  filter:drop-shadow(0 calc(-6px - 10px * var(--pullAbs)) calc(14px + 20px * var(--pullAbs)) rgba(0,0,0,calc(.03 + .07 * var(--pullAbs))))}
+.screen[data-opt="2"] .card-inner{transform:translateY(calc(var(--pull) * 5px))}
+.screen[data-opt="2"] .chart{transform:translateY(calc(var(--pull) * 7px))}
+.screen[data-opt="2"] .bg{transform-origin:50% 0;transform:translateY(calc(-24px * var(--p))) scale(calc(1 - .05 * var(--p)));filter:brightness(calc(1 - .05 * var(--p)))}
+.screen[data-opt="2"] .card.grab .card-surface{--pullAbs:.6}
+.screen[data-opt="2"] .card.grab .grabber{width:48px;background:rgba(34,34,34,.32)}
 .pane-debt{padding-top:16px}
 .quick{display:flex;gap:12px;margin-left:18px;width:347px}
 .qcard{flex:1 0 0;min-width:1px;display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:12px;text-align:left;
@@ -310,7 +324,7 @@ p{margin:0}
      <!-- ===== Pane: Tài sản ===== -->
      <div class="pane pane-asset" id="paneAsset">
      <section class="card">
-      <div class="card-surface"><div class="blur"></div><div class="glass"></div></div>
+      <div class="card-surface"><div class="blur"></div><div class="glass"></div><i class="grabber"></i></div>
       <div class="card-inner">
 
        <!-- Chart tổng tài sản -->
@@ -633,14 +647,45 @@ sc.addEventListener("scroll", () => {
   snapT = setTimeout(() => {           // snap kiểu iOS large-title
     if (busy || drag.active) return;
     const st = sc.scrollTop;
-    if (st > 1 && st < C() - 1) animateScroll(st < C() / 2 ? 0 : C(), 320);
+    if (st > 1 && st < C() - 1) {
+      const up = st >= C() / 2;
+      // Opt 2: thả tay → card "bật" lên vị trí thu gọn, có nảy nhẹ
+      if (opt === 2 && tab === 0) animateScroll(up ? C() : 0, up ? 560 : 420, up ? easeOutBack : easeOutCubic);
+      else animateScroll(up ? C() : 0, 320);
+    }
   }, 140);
+  trackPull();
 }, { passive: true });
 
-function animateScroll(to, dur = 700){
+/* ===== Opt 2: vận tốc cuộn → độ "căng" của card (--pull) ===== */
+let pSt = 0, pT = performance.now(), vel = 0, sv = 0, pullRaf = null;
+function trackPull(){
+  const now = performance.now(), st = sc.scrollTop, dt = Math.max(8, now - pT);
+  vel = (st - pSt) / dt; pSt = st; pT = now;
+  if (!pullRaf) pullRaf = requestAnimationFrame(pullLoop);
+}
+function pullLoop(){
+  sv += (vel - sv) * .2; vel *= .8;
+  const p = Math.min(1, sc.scrollTop / C());
+  const active = opt === 2 && tab === 0 && !switching;
+  const amt = active ? Math.max(-1, Math.min(1, sv / 1.1)) * (p < 1 ? 1 : .45) : 0;
+  screen.style.setProperty("--pull", amt.toFixed(3));
+  screen.style.setProperty("--pullAbs", Math.abs(amt).toFixed(3));
+  if (Math.abs(sv) > .003 || Math.abs(vel) > .003) pullRaf = requestAnimationFrame(pullLoop);
+  else { pullRaf = null; screen.style.setProperty("--pull", 0); screen.style.setProperty("--pullAbs", 0); }
+}
+/* Nhấn giữ lên card = "túm" */
+const cardEl = document.querySelector(".pane-asset .card");
+cardEl.addEventListener("pointerdown", () => { if (opt === 2 && sc.scrollTop < C()) cardEl.classList.add("grab"); });
+addEventListener("pointerup", () => cardEl.classList.remove("grab"));
+addEventListener("pointercancel", () => cardEl.classList.remove("grab"));
+
+const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+const easeOutBack = t => { const c1 = 1.25, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+function animateScroll(to, dur = 700, easeFn){
   return new Promise(res => {
     const from = sc.scrollTop, t0 = performance.now(); busy = true;
-    const ease = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+    const ease = easeFn || (t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2);
     (function step(now){
       const t = Math.min(1, (now - t0) / dur);
       sc.scrollTop = from + (to - from) * ease(t);
