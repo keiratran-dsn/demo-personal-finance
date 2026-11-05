@@ -161,10 +161,10 @@ p{margin:0}
 .news .ct .b{font-size:11px;line-height:12px;color:var(--red);white-space:nowrap}
 
 /* ===== Lớp cố định (header) ===== */
-.hdr-bg{position:absolute;z-index:5;left:0;top:0;width:375px;height:162px;background:var(--white);border-radius:0 0 24px 24px;pointer-events:none;
+.hdr-bg{position:absolute;z-index:5;left:0;top:0;width:375px;height:162px;border-radius:0 0 24px 24px;pointer-events:none;
   opacity:clamp(0,calc((var(--p) - .5) * 2),1);transform:translateY(calc(-14px * (1 - var(--p))))}
-/* Header kính (Figma 285:25506): nền trắng 10%, bo dưới 24 + làm mờ nội dung phía sau */
-.screen[data-hdr="glass"] .hdr-bg{background:rgba(255,255,255,.1);
+/* Header kính (Figma 287:11094): nền trắng 10%, bo dưới 24 + làm mờ nội dung phía sau */
+.hdr-bg{background:rgba(255,255,255,.1);
   -webkit-backdrop-filter:blur(24px) saturate(1.6);backdrop-filter:blur(24px) saturate(1.6);
   box-shadow:inset 1.094px 1.094px 1.094px 0 rgba(255,255,255,.6),inset 4.377px 3.283px 4.377px 0 rgba(255,255,255,.25),inset 0 -1px 0 0 rgba(255,255,255,.5)}
 .statusbar{position:absolute;z-index:6;left:0;top:0;width:375px;height:44px;pointer-events:none}
@@ -567,7 +567,6 @@ p{margin:0}
 </button>
 <div class="panel" id="panel">
  <div><h2>Trung tâm tài chính</h2><div class="sub"><span class="hint-mouse">Cuộn hoặc kéo chuột trong màn hình</span><span class="hint-touch">Vuốt trong màn hình để cuộn</span></div></div>
- <div class="seg" id="hdrSeg"><button data-h="solid" class="on">Header trắng</button><button data-h="glass">Header kính</button></div>
  <div class="seg" id="seg"><button data-s="0" class="on">Mặc định</button><button data-s="1">Scroll</button></div>
  <div class="acts"><button id="demo">▶ Demo cuộn</button><button id="replay" class="ghost">↺ Intro</button></div>
 </div>
@@ -868,20 +867,6 @@ document.getElementById("demo").addEventListener("click", async () => {
   await animateScroll(C(), 1100); await wait(700);
   await animateScroll(0, 900);
 });
-/* ===== Kiểu header: trắng / kính (?header=glass) ===== */
-const hdrSeg = document.getElementById("hdrSeg");
-function setHeader(h, push){
-  screen.dataset.hdr = h;
-  hdrSeg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.h === h));
-  if (push) {
-    const u = new URL(location.href); h === "glass" ? u.searchParams.set("header", "glass") : u.searchParams.delete("header");
-    try { history.replaceState(null, "", u); } catch (e) {}
-    if (sc.scrollTop < C() - 1) animateScroll(C(), 600);   // cuộn lên để thấy header ngay
-  }
-}
-hdrSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setHeader(b.dataset.h, true)));
-setHeader(new URLSearchParams(location.search).get("header") === "glass" ? "glass" : "solid", false);
-
 /* ===== Bật/tắt bảng điều khiển (điện thoại) ===== */
 const panel = document.getElementById("panel"), pt = document.getElementById("panelToggle");
 function setPanel(open){ panel.classList.toggle("open", open); pt.classList.toggle("open", open); pt.setAttribute("aria-expanded", open); }
