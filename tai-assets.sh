@@ -65,5 +65,6 @@ curl -fsSL -o "public/assets/debtIcon0.svg" "https://www.figma.com/api/mcp/asset
 curl -fsSL -o "public/assets/debtShape1.svg" "https://www.figma.com/api/mcp/asset/8fc5bc6f-601e-4763-ae19-b68f492b9d24.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/debtGlow1.svg" "https://www.figma.com/api/mcp/asset/0838a960-9e26-4c64-bcb5-a7dc6afa3969.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/debtIcon1.svg" "https://www.figma.com/api/mcp/asset/6311189e-59d6-4298-a29c-f0d7316c9416.svg" && ok=$((ok+1))
-echo "Asset tải được: $ok/62"
+curl -fsSL -o "public/assets/bg2.png" "https://www.figma.com/api/mcp/asset/c9bbe800-ae71-4766-8888-1cc0ded11315.png" && ok=$((ok+1))
+echo "Asset tải được: $ok/63"
 exit 0
