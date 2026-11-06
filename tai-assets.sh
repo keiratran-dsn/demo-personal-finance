@@ -66,5 +66,20 @@ curl -fsSL -o "public/assets/debtShape1.svg" "https://www.figma.com/api/mcp/asse
 curl -fsSL -o "public/assets/debtGlow1.svg" "https://www.figma.com/api/mcp/asset/0838a960-9e26-4c64-bcb5-a7dc6afa3969.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/debtIcon1.svg" "https://www.figma.com/api/mcp/asset/6311189e-59d6-4298-a29c-f0d7316c9416.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/bg2.png" "https://www.figma.com/api/mcp/asset/c9bbe800-ae71-4766-8888-1cc0ded11315.png" && ok=$((ok+1))
-echo "Asset tải được: $ok/63"
+curl -fsSL -o "public/assets/bgSilk.png" "https://www.figma.com/api/mcp/asset/151235c0-956c-4933-862c-a09d415700db.png" && ok=$((ok+1))
+curl -fsSL -o "public/assets/bgTint.png" "https://www.figma.com/api/mcp/asset/abd7a0dd-91c9-4d8a-b705-094cfe6c5e97.png" && ok=$((ok+1))
+curl -fsSL -o "public/assets/vtpRing.svg" "https://www.figma.com/api/mcp/asset/f6300f86-9ab3-4f03-bae7-ef856490209d.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/pieVtpFull.svg" "https://www.figma.com/api/mcp/asset/ccafc344-0e34-482f-854e-5313e39467aa.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/vtpConnA.svg" "https://www.figma.com/api/mcp/asset/6e5c98fc-cc45-466f-b12e-9b70f21654ac.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/vtpLine.svg" "https://www.figma.com/api/mcp/asset/47c5cbaf-c351-4bb9-b859-4b8625b1ba36.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/vtpConnB.svg" "https://www.figma.com/api/mcp/asset/4564f6fc-aa70-4544-a50c-a91d86906bab.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/vtpConnC.svg" "https://www.figma.com/api/mcp/asset/5575ba91-2c9d-4234-8849-03990abcb870.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/vtpConnD.svg" "https://www.figma.com/api/mcp/asset/45fdc125-a0aa-4559-9508-6266838a7452.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/ovArrow.svg" "https://www.figma.com/api/mcp/asset/90f6a3cb-768b-4daf-9cad-a8ca6e8c9552.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/graphUp.svg" "https://www.figma.com/api/mcp/asset/5256c31e-0c59-43d6-950f-d8d490cfe132.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/graphDown.svg" "https://www.figma.com/api/mcp/asset/cb68102e-42b3-43aa-b35f-945862c55ccb.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/regClose.svg" "https://www.figma.com/api/mcp/asset/90331beb-d2c6-4462-b993-a391ef3fff9a.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/regIll.png" "https://www.figma.com/api/mcp/asset/9074620c-30a3-4fc7-a83e-c18f007691fd.png" && ok=$((ok+1))
+curl -fsSL -o "public/assets/vtmLogo.svg" "https://www.figma.com/api/mcp/asset/ff87a912-80fb-45b5-84b8-4f7b0a42c6a3.svg" && ok=$((ok+1))
+echo "Asset tải được: $ok/78"
 exit 0

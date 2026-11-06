@@ -60,22 +60,20 @@ p{margin:0}
 
 /* ===== Nền ===== */
 .bg{position:absolute;z-index:0;left:0;top:0;width:375px;height:714px;overflow:hidden}
-.bg > img{position:absolute;inset:0;width:100%;height:100%;object-position:bottom;opacity:.5;transition:opacity .5s}
-/* Opt 2 – nền ảnh tím (Figma 313:29935 "image 3998"): 611×1085.645, lệch x−116 y−255 */
-.bg2{position:absolute;left:-116px;top:-255px;width:611px;height:1085.645px;overflow:hidden;opacity:0;transition:opacity .5s}
-.bg2 img{position:absolute;left:0;top:4.18%;width:100%;height:100%}
-.screen[data-opt="2"] .bg > img{opacity:0}
-.screen[data-opt="2"] .bg2{opacity:1}
-.bg-fade{position:absolute;z-index:1;left:0;top:610px;width:375px;height:141px;
+.bg img{position:absolute;left:0;top:0;width:375px;height:812px}
+/* Nền (Figma 344:33492): lụa 50% (object-bottom) + lớp tím phủ (object-cover), khung 375×812 cắt ở 714 */
+.bg .silk{object-position:bottom;opacity:.5}
+.bg .tint{object-fit:cover}
+.bg-fade{position:absolute;z-index:1;left:0;top:480px;width:375px;height:271px;
   background:linear-gradient(to bottom,rgba(251,251,251,0) 0%,var(--neutral-02) 35.333%)}
 
 /* ===== Vùng cuộn ===== */
 .scroller{position:absolute;z-index:2;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;overscroll-behavior:contain}
 .scroller::-webkit-scrollbar{display:none}
-.content{position:relative;padding-top:318px;padding-bottom:140px}
+.content{position:relative;padding-top:312px;padding-bottom:140px}
 .nav-title{position:absolute;z-index:6;left:50%;top:53px;width:247px;margin:0;transform:translate(-50%,calc(-8px * var(--p)));text-align:center;pointer-events:none;
   font-weight:700;font-size:16px;line-height:20px;color:var(--neutral-100);opacity:clamp(0,calc(1 - var(--p) * 2.5),1)}
-.sync-hero{position:absolute;top:274px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:4px;
+.sync-hero{position:absolute;top:258px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:4px;
   opacity:clamp(0,calc(1 - var(--p) * 2.5),1)}
 .sync-row{display:flex;align-items:center;gap:4px}
 .sync-txt{font-size:10px;line-height:12px;letter-spacing:.1px;color:var(--neutral-60);white-space:nowrap}
@@ -136,6 +134,69 @@ p{margin:0}
 .chev{position:relative;width:16px;height:16px;flex:none}
 .chev img{position:absolute;left:50%;top:50%;width:10.667px;height:5.849px;transform:translate(-50%,-50%) rotate(-90deg)}
 
+/* CTA khi chưa có tài sản (Figma 297:32664) */
+.row.cta-row{height:34px}
+.cta{font-weight:510;font-size:12px;line-height:14px;color:var(--red);white-space:nowrap}
+.chart-vtp{height:248px}
+.card[data-chart="none"] .chart,.card[data-chart="none"] .chart-gap{display:none}
+.card[data-chart="full"] .chart-vtp{display:none}
+.card[data-chart="vtp"] .chart-full{display:none}
+
+/* Tổng quan tháng 11 (Figma 345:36251) */
+.ov{margin:32px 16px 0;display:flex;flex-direction:column;gap:16px}
+.ov-h{display:flex;align-items:center;justify-content:space-between}
+.ov-btn{width:20px;height:20px;border-radius:14px;background:var(--neutral-05);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none;transition:transform .15s}
+.ov-btn:active{transform:scale(.9)}
+.ov-ic{position:relative;width:12px;height:12px;overflow:hidden;flex:none}
+.ov-ic > span{position:absolute;inset:16.67% 32.84% 16.67% 29.17%}
+.ov-ic img,.ov-gi img{width:100%;height:100%}
+.ov-cards{display:flex;gap:20px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.04))}
+.ov-card{flex:1 0 0;min-width:1px;display:flex;flex-direction:column;gap:16px;align-items:flex-start;padding:12px;border-radius:12px;background:var(--white);border:1px solid var(--neutral-05);text-align:left;transition:transform .15s}
+.ov-card:active{transform:scale(.97)}
+.ov-top{display:flex;justify-content:space-between;align-items:center;width:100%}
+.ov-t{font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--neutral-60)}
+.ov-amt{display:flex;gap:4px;align-items:center;white-space:nowrap}
+.ov-amt .n{font-weight:700;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--neutral-100)}
+.ov-amt .d{font-weight:510;font-size:12px;line-height:14px;color:var(--dark60)}
+.ov-cmp{display:flex;flex-direction:column;gap:4px;padding-right:22px;width:100%}
+.ov-trend{display:flex;gap:4px;align-items:center;font-size:12px;line-height:14px;white-space:nowrap}
+.ov-trend .v{display:flex;gap:2px}
+.ov-trend.up{color:var(--green)} .ov-trend.dn{color:var(--service-red)}
+.ov-gi{position:relative;width:14px;height:14px;overflow:hidden;flex:none}
+.ov-gi > span{position:absolute;left:3.57%;right:3.57%;top:25%;bottom:25%}
+.ov-gi > span > span{position:absolute;inset:-8.93% -4.81%}
+.ov-trend.dn .ov-gi{transform:scaleY(-1)}
+.ov-sub{font-size:12px;line-height:14px;color:var(--neutral-60);white-space:nowrap}
+
+/* Tầng 1 – popup Onboarding "RegIntro" (Figma SQUnKnAEiYIgpVPbqxuPyE 6764:62934) */
+.reg{position:absolute;inset:0;z-index:15}
+.reg[hidden]{display:none}
+.reg-ov{position:absolute;inset:0;background:rgba(0,0,0,.6);opacity:0;transition:opacity .3s}
+.reg.show .reg-ov{opacity:1}
+.reg-modal{position:absolute;left:16px;right:16px;bottom:40px;background:var(--white);border-radius:20px;padding:24px 16px;
+  transform:translateY(calc(100% + 60px));transition:transform .55s cubic-bezier(.2,.9,.25,1.06)}
+.reg.show .reg-modal{transform:none}
+.reg-x{position:absolute;right:8.07px;top:9px;width:23.93px;height:24px;overflow:hidden;transition:transform .15s}
+.reg-x:active{transform:scale(.88)}
+.reg-x > span{position:absolute;left:5px;top:4px;width:14.143px;height:15.556px}
+.reg-x img{position:absolute;left:0;top:0;width:107.07%;height:100%}
+.reg-c{display:flex;flex-direction:column;gap:24px;align-items:center}
+.reg-content{display:flex;flex-direction:column;gap:16px;align-items:center;width:100%}
+.reg-ill{width:156px;height:147.735px;object-fit:cover}
+.reg-title{font-weight:700;font-size:18px;line-height:22px;color:var(--neutral-100);text-align:center}
+.reg-desc{font-size:16px;line-height:20px;color:var(--neutral-100);text-align:center}
+.reg-accs{display:flex;gap:16px;padding:16px 0;width:100%;overflow:hidden}
+.reg-acc{flex:1 0 0;min-width:1px;height:124px;padding:16px;border-radius:16px;display:flex;flex-direction:column;gap:8px;align-items:center;
+  background:linear-gradient(263.74deg,#f8f8f2 4.21%,#fff4f4 100%);font-size:14px;line-height:18px;color:var(--neutral-100);text-align:center}
+.reg-ic{width:48px;height:48px;border-radius:75px;background:var(--white);border:.75px solid var(--border-default);padding:6px;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden}
+.reg-ic .l36{position:relative;width:36px;height:36px;flex:none}
+.reg-ic .l36 > img{width:100%;height:100%}
+.reg-more{display:flex;gap:4px;align-items:center;justify-content:center;font-size:14px;line-height:18px;color:var(--red)}
+.reg-btn{width:100%;height:48px;border-radius:24px;background:var(--red);color:var(--white);font-weight:500;font-size:18px;line-height:22px;
+  box-shadow:0 6px 14px rgba(238,0,51,.25);transition:transform .15s}
+.reg-btn:active{transform:scale(.97)}
+.run-reg .reg-acc{animation:rise .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.25s + var(--i) * 70ms)}
+
 /* ===== Slot gợi ý ===== */
 .slot{margin:32px 16px 0;display:flex;flex-direction:column;gap:16px}
 .h16{font-weight:700;font-size:16px;line-height:20px;letter-spacing:-.31px;color:var(--neutral-100)}
@@ -184,19 +245,19 @@ p{margin:0}
 .ic-help .box > div{position:absolute;inset:-4.05%}
 .ic-help img{width:100%;height:100%}
 
-/* Tab Tài sản / Phải trả (kiểu xám kính – Figma 266:20926, 269:23257): x64 y140 ở Mặc định → x64 y48 khi cuộn */
+/* Tab Tài sản / Phải trả (Figma 344:33722): x64 y112 ở Mặc định → x64 y48 khi cuộn */
 .tabs{position:absolute;z-index:6;left:0;top:0;
   transform:translate(64px,calc(112px - 64px * var(--p)))}
-.tabs-in{position:relative;width:248px;height:32px;display:flex;border-radius:100px;background:rgba(255,255,255,.75);border:1px solid var(--white);transition:background-color .35s}
-.tabs .pill{position:absolute;left:0;top:0;width:50%;height:100%;border-radius:100px;background:rgba(178,178,178,.2);border:1px solid var(--neutral-05);
+.tabs-in{position:relative;width:248px;height:32px;display:flex;border-radius:100px;background:rgba(255,255,255,.32);border:1px solid var(--white)}
+.tabs .pill{position:absolute;left:0;top:0;width:50%;height:100%;border-radius:100px;background:var(--dark100);border:1px solid var(--neutral-05);
   transition:transform .5s cubic-bezier(.3,1.35,.5,1),background-color .35s}
 .tabs[data-i="1"] .pill{transform:translateX(100%)}
 .tab{position:relative;flex:1 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:14px;color:var(--neutral-60);transition:color .3s}
-.tab.on{font-weight:700;color:var(--neutral-100)}
+.tab.on{font-weight:700;color:var(--white)}
 
 /* Tổng tiền: căn giữa (theo chiều rộng thực) ở Mặc định → x20 ở Scroll */
 .t-label{position:absolute;z-index:6;left:0;top:0;display:flex;align-items:center;gap:4px;
-  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(192px - 100px * var(--p)))}
+  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(176px - 84px * var(--p)))}
 .t-label .tx{font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--neutral-80);white-space:nowrap}
 .eye{position:relative;width:20px;height:20px}
 .eye img{position:absolute;left:50%;top:50%;width:16.667px;height:13.157px;transform:translate(-50%,-50%)}
@@ -204,21 +265,12 @@ p{margin:0}
   transform:translate(-50%,-50%) rotate(-40deg);transition:width .25s cubic-bezier(.2,.8,.2,1)}
 .masked .eye::after{width:19px}
 .t-amount{position:absolute;z-index:6;left:0;top:0;transform-origin:0 0;pointer-events:none;
-  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(220px - 100px * var(--p))) scale(calc(1 - .3125 * var(--p)))}
-
-/* ===== Opt 2 (Figma 313:29933) – tab & khoảng cách tổng tiền ===== */
-/* Tab: nền trắng 32%, pill Dark100% #333, chữ đang chọn trắng */
-.screen[data-opt="2"] .tabs-in{background:rgba(255,255,255,.32)}
-.screen[data-opt="2"] .tabs .pill{background:var(--dark100)}
-.screen[data-opt="2"] .tab.on{color:var(--white)}
-/* Số tiền cách nhãn 12 (y=224), dòng đồng bộ cách số tiền 24 (y=286) */
-.screen[data-opt="2"] .t-amount{transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(224px - 104px * var(--p))) scale(calc(1 - .3125 * var(--p)))}
-.screen[data-opt="2"] .sync-hero{top:286px}
+  transform:translate(calc((187.5px - 50%) * (1 - var(--p)) + 20px * var(--p)),calc(204px - 84px * var(--p))) scale(calc(1 - .3125 * var(--p)))}
 
 /* ===== Màn Phải trả ===== */
 .pane[hidden]{display:none}
-/* Tài sản (Figma "Mặc định - op2" 269:24263): card kính chứa chart bắt đầu ở y=357 */
-.pane-asset{padding-top:38px}
+/* Tài sản (Figma section 305:23325): card kính bắt đầu ở y=312 */
+.pane-asset{padding-top:0}
 
 /* Cảm giác "túm block biểu đồ kéo lên"
    --pull: vận tốc cuộn đã làm mượt (−1…1), --pullAbs: độ lớn, --p: tiến độ thu gọn */
@@ -231,7 +283,7 @@ p{margin:0}
 .chart{transform:translateY(calc(var(--pull) * 7px))}
 .card.grab .card-surface{--pullAbs:.6}
 .card.grab .grabber{width:48px;background:rgba(34,34,34,.32)}
-.pane-debt{padding-top:16px}
+.pane-debt{padding-top:22px}
 .quick{display:flex;gap:12px;margin-left:18px;width:347px}
 .qcard{flex:1 0 0;min-width:1px;display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:12px;text-align:left;
   background:rgba(255,255,255,.8);border:1px solid var(--border-default);transition:transform .15s}
@@ -294,6 +346,8 @@ p{margin:0}
 .panel h2{margin:0;font-size:13px;line-height:16px;font-weight:700;color:var(--neutral-100)}
 .panel .sub{font-size:12px;line-height:16px;color:var(--neutral-60)}
 .seg{display:flex;background:#eef0f3;border-radius:10px;padding:2px}
+.seg[hidden]{display:none}
+#tierNote{max-width:240px}
 .seg button{flex:1;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:600;color:var(--neutral-80);transition:background .2s,color .2s}
 .seg button.on{background:#fff;color:var(--neutral-100);box-shadow:0 1px 2px rgba(0,0,0,.08)}
 .panel .acts{display:flex;gap:6px}
@@ -325,7 +379,7 @@ p{margin:0}
   <div class="screen" id="screen">
 
    <!-- Nền "dải lụa băng giá" -->
-   <div class="bg"><img data-a="bg" alt=""><div class="bg2"><img data-a="bg2" alt=""></div></div>
+   <div class="bg"><img class="silk" data-a="bgSilk" alt=""><img class="tint" data-a="bgTint" alt=""></div>
    <div class="bg-fade"></div>
 
    <!-- ===== Nội dung cuộn ===== -->
@@ -342,12 +396,12 @@ p{margin:0}
      <div id="paneBody">
      <!-- ===== Pane: Tài sản ===== -->
      <div class="pane pane-asset" id="paneAsset">
-     <section class="card">
+     <section class="card" id="assetCard" data-chart="full">
       <div class="card-surface"><div class="blur"></div><div class="glass"></div><i class="grabber"></i></div>
       <div class="card-inner">
 
        <!-- Chart tổng tài sản -->
-       <div class="chart" id="chart">
+       <div class="chart chart-full" id="chart">
         <div class="ring"><img data-a="ellipse2110" alt=""></div>
         <div class="pie">
          <img data-a="tietKiem" alt=""><img data-a="viettelPay" alt=""><img data-a="mobileMoney" alt=""><img data-a="chungChiQuy" alt="">
@@ -412,55 +466,51 @@ p{margin:0}
         </div>
        </div>
 
-       <div class="chart-gap"></div>
-
-       <!-- Danh sách -->
-       <div class="list">
-        <p class="h14 rise" style="--d:.35s;--i:0">Tài sản tài chính</p>
-        <div class="group">
-         <button class="row rise" style="--d:.35s;--i:1">
-          <span class="lbl"><i class="bar" style="background:var(--c-tietkiem)"></i><span class="name">Gửi tiết kiệm</span></span>
-          <span class="rt"><span class="vals">
-            <span class="amt"><span class="n money" data-v="30,000,000">30,000,000</span><span class="d">đ</span></span>
-            <span class="delta up"><span class="money" data-v="+ 1,152,066">+ 1,152,066</span><span>đ</span></span>
-           </span><span class="chev-w"><span class="chev"><img data-a="chevron" alt=""></span></span></span>
-         </button>
-         <button class="row rise" style="--d:.35s;--i:2">
-          <span class="lbl"><i class="bar" style="background:var(--c-tichluy)"></i><span class="name">Tích luỹ</span></span>
-          <span class="rt"><span class="vals">
-            <span class="amt"><span class="n money" data-v="20,000,000">20,000,000</span><span class="d">đ</span></span>
-            <span class="delta no"><span>--</span><span>đ</span></span>
-           </span><span class="chev-w"><span class="chev"><img data-a="chevron" alt=""></span></span></span>
-         </button>
-         <button class="row rise" style="--d:.35s;--i:3">
-          <span class="lbl"><i class="bar" style="background:var(--c-vang)"></i><span class="name">Vàng</span></span>
-          <span class="rt"><span class="vals">
-            <span class="amt"><span class="n money" data-v="10,000,000">10,000,000</span><span class="d">đ</span></span>
-            <span class="delta up"><span class="money" data-v="+ 18,066">+ 18,066</span><span>đ</span></span>
-           </span><span class="chev-w"><span class="chev"><img data-a="chevron" alt=""></span></span></span>
-         </button>
-         <button class="row rise" style="--d:.35s;--i:4">
-          <span class="lbl"><i class="bar" style="background:var(--c-ccq)"></i><span class="name">Chứng chỉ quỹ</span></span>
-          <span class="rt"><span class="vals">
-            <span class="amt"><span class="n money" data-v="2,000,000">2,000,000</span><span class="d">đ</span></span>
-            <span class="delta dn"><span class="money" data-v="- 6,066">- 6,066</span><span>đ</span></span>
-           </span><span class="chev-w"><span class="chev"><img data-a="chevron" alt=""></span></span></span>
-         </button>
-        </div>
-        <div class="src">
-        <p class="h14 rise" style="--d:.35s;--i:5">Nguồn tiền</p>
-        <div class="src-rows">
-        <button class="row c rise" style="--d:.35s;--i:6">
-         <span class="lbl"><i class="bar" style="background:var(--c-tdd)"></i><span class="name">Tiền di động</span></span>
-         <span class="rt"><span class="amt"><span class="n money" data-v="632,000">632,000</span><span class="d">đ</span></span><span class="chev"><img data-a="chevron" alt=""></span></span>
-        </button>
-        <button class="row c rise" style="--d:.35s;--i:7">
-         <span class="lbl"><i class="bar" style="background:var(--c-vtp)"></i><span class="name">ViettelPay</span></span>
-         <span class="rt"><span class="amt"><span class="n money" data-v="0">0</span><span class="d">đ</span></span><span class="chev"><img data-a="chevron" alt=""></span></span>
-        </button>
-        </div>
+       <!-- Chart 100% ViettelPay – Tầng 2 đã nạp tiền (Figma 300:15232, 311×248) -->
+       <div class="chart chart-vtp" id="chartVtp">
+        <div class="ring" style="top:18px"><img data-a="vtpRing" alt=""></div>
+        <div class="pie" style="top:25px"><img data-a="pieVtpFull" alt=""></div>
+        <p class="pct fd" style="left:0;top:34px;--i:0">100%</p>
+        <div class="ln fd" style="left:217.32px;top:54.77px;width:32.362px;transform:rotate(140.58deg);--i:1"><img data-a="vtpConnA" alt=""></div>
+        <div class="ln fd" style="left:49px;top:58.5px;width:30px;transform:rotate(-143.13deg);--i:1"><img data-a="vtpLine" alt=""></div>
+        <div class="ln fd" style="left:121.27px;top:206px;width:17.464px;transform:rotate(-76.76deg);--i:2"><img data-a="vtpConnB" alt=""></div>
+        <div class="ln fd" style="left:57.81px;top:175.75px;width:28px;transform:rotate(143.89deg);--i:3"><img data-a="vtpConnC" alt=""></div>
+        <div class="ln fd" style="left:57.72px;top:46.07px;width:28px;transform:rotate(43.12deg);--i:4"><img data-a="vtpConnD" alt=""></div>
+        <div class="abs pop" style="left:33px;top:29px;width:24.28px;height:24px;--i:0">
+         <div class="abs" style="inset:15.75% 0 4.58% 0"><img class="fill" data-a="vector" alt=""></div>
+         <div class="abs" style="inset:18.39% 3.08% 7.56% 3.33%"><img class="fill" data-a="vector1" alt=""></div>
+         <div class="abs" style="inset:21.07% 6.26% 10.65% 6.86%"><img class="fill" data-a="vector2" alt=""></div>
+         <div class="abs" style="inset:23.71% 9.32% 13.62% 10.2%"><img class="fill" data-a="vector3" alt=""></div>
+         <div class="abs" style="inset:26.35% 12.37% 16.6% 13.53%"><img class="fill" data-a="vector4" alt=""></div>
+         <div class="abs" style="inset:29.19% 16.06% 20.12% 17.76%"><img class="fill" data-a="vector5" alt=""></div>
+         <div class="abs" style="inset:4.33% 6.14% 4.38% 21.12%"><img class="fill" data-a="vector6" alt=""></div>
+         <div class="abs" style="inset:43.55% 16.2% 34.07% 30.86%"><img class="fill" data-a="pay" alt=""></div>
+         <div class="abs" style="inset:33.73% 30.19% 58.86% 30.9%"><img class="fill" data-a="viettel" alt=""></div>
         </div>
        </div>
+
+       <div class="chart-gap"></div>
+
+       <!-- Danh sách (render theo tầng bằng JS) -->
+       <div class="list" id="assetList">
+       </div>
+      </div>
+     </section>
+
+     <!-- Tổng quan tháng 11 (Figma 345:36251) -->
+     <section class="ov">
+      <div class="ov-h"><p class="h16">Tổng quan tháng 11</p><button class="ov-btn" aria-label="Quản lý thu chi"><span class="ov-ic"><span><img data-a="ovArrow" alt=""></span></span></button></div>
+      <div class="ov-cards">
+       <button class="ov-card">
+        <span class="ov-top"><span class="ov-t">Tổng chi</span><span class="chev"><img data-a="chevron" alt=""></span></span>
+        <span class="ov-amt"><span class="n money" data-v="30,000,000">30,000,000</span><span class="d">VND</span></span>
+        <span class="ov-cmp"><span class="ov-trend up"><span class="ov-gi"><span><span><img data-a="graphUp" alt=""></span></span></span><span class="v"><span class="money" data-v="1,152,066">1,152,066</span><span>VND</span></span></span><span class="ov-sub">So với 10/2026</span></span>
+       </button>
+       <button class="ov-card">
+        <span class="ov-top"><span class="ov-t">Tổng thu</span><span class="chev"><img data-a="chevron" alt=""></span></span>
+        <span class="ov-amt"><span class="n money" data-v="1,000,000">1,000,000</span><span class="d">VND</span></span>
+        <span class="ov-cmp"><span class="ov-trend dn"><span class="ov-gi"><span><span><img data-a="graphDown" alt=""></span></span></span><span class="v"><span class="money" data-v="1,100,066">1,100,066</span><span>VND</span></span></span><span class="ov-sub">So với 10/2026</span></span>
+       </button>
       </div>
      </section>
      </div>
@@ -569,6 +619,38 @@ p{margin:0}
     </div>
    </nav>
    <div class="home-ind"></div>
+
+   <!-- Tầng 1: KH chưa có tài khoản → popup Onboarding của VTM -->
+   <div class="reg" id="reg" hidden>
+    <div class="reg-ov"></div>
+    <div class="reg-modal" role="dialog" aria-label="Xác thực thông tin cá nhân">
+     <button class="reg-x" id="regClose" aria-label="Đóng"><span><img data-a="regClose" alt=""></span></button>
+     <div class="reg-c">
+      <div class="reg-content">
+       <img class="reg-ill" data-a="regIll" alt="">
+       <p class="reg-title">Xác thực thông tin cá nhân để<br>sử dụng dịch vụ</p>
+       <p class="reg-desc">Sau khi xác thực, bạn có thể mở được đồng thời 3 tài khoản thanh toán</p>
+       <div class="reg-accs">
+        <div class="reg-acc" style="--i:0"><span class="reg-ic"><span class="l36"><img data-a="vtmLogo" alt=""></span></span><span>Ví Viettel</span></div>
+        <div class="reg-acc" style="--i:1"><span class="reg-ic"><span class="l36"><div class="abs" style="inset:0">
+         <div class="abs" style="inset:15.75% 0 4.58% 0"><img class="fill" data-a="vector" alt=""></div>
+         <div class="abs" style="inset:18.39% 3.08% 7.56% 3.33%"><img class="fill" data-a="vector1" alt=""></div>
+         <div class="abs" style="inset:21.07% 6.26% 10.65% 6.86%"><img class="fill" data-a="vector2" alt=""></div>
+         <div class="abs" style="inset:23.71% 9.32% 13.62% 10.2%"><img class="fill" data-a="vector3" alt=""></div>
+         <div class="abs" style="inset:26.35% 12.37% 16.6% 13.53%"><img class="fill" data-a="vector4" alt=""></div>
+         <div class="abs" style="inset:29.19% 16.06% 20.12% 17.76%"><img class="fill" data-a="vector5" alt=""></div>
+         <div class="abs" style="inset:4.33% 6.14% 4.38% 21.12%"><img class="fill" data-a="vector6" alt=""></div>
+         <div class="abs" style="inset:43.55% 16.2% 34.07% 30.86%"><img class="fill" data-a="pay" alt=""></div>
+         <div class="abs" style="inset:33.73% 30.19% 58.86% 30.9%"><img class="fill" data-a="viettel" alt=""></div>
+        </div></span></span><span>ViettelPay</span></div>
+        <div class="reg-acc" style="--i:2"><span class="reg-ic"><span class="l36"><span class="abs" style="inset:0 11.67%"><img class="fill" data-a="icon" alt=""></span></span></span><span>Tiền di động</span></div>
+       </div>
+       <button class="reg-more">Xem chi tiết <span class="chev"><img data-a="chevronRed" alt=""></span></button>
+      </div>
+      <button class="reg-btn" id="regGo">Xác thực ngay</button>
+     </div>
+    </div>
+   </div>
    <div class="island"></div>
   </div>
  </div>
@@ -581,7 +663,9 @@ p{margin:0}
 </button>
 <div class="panel" id="panel">
  <div><h2>Trung tâm tài chính</h2><div class="sub"><span class="hint-mouse">Cuộn hoặc kéo chuột trong màn hình</span><span class="hint-touch">Vuốt trong màn hình để cuộn</span></div></div>
- <div class="seg" id="optSeg"><button data-o="1" class="on">Opt 1</button><button data-o="2">Opt 2</button></div>
+ <div class="seg" id="tierSeg"><button data-t="1">Tầng 1</button><button data-t="2">Tầng 2</button><button data-t="3" class="on">Tầng 3</button></div>
+ <div class="seg" id="subSeg" hidden><button data-sub="2a" class="on">Chưa nạp tiền</button><button data-sub="2b">Đã nạp tiền</button></div>
+ <div class="sub" id="tierNote"></div>
  <div class="seg" id="seg"><button data-s="0" class="on">Mặc định</button><button data-s="1">Scroll</button></div>
  <div class="acts"><button id="demo">▶ Demo cuộn</button><button id="replay" class="ghost">↺ Intro</button></div>
 </div>
@@ -618,6 +702,16 @@ const A = {
  group2:"ce54b1de-6b39-4ea6-bc4a-dd1fb6caa222.svg", shape6:"100e94a3-9742-4c8f-9c32-4f1966718509.svg",
  ellipse2116:"79218e4f-dd52-4366-b6a2-95d4b63d563a.svg", group3:"7df558f9-b6b8-4503-b465-6ec32016698d.svg",
  chevronRed:"a74afe5e-deb1-4479-bb75-4afd8b1e3da8.svg", home:"707d24ac-3691-4088-b59b-cbc6b7b2ae7d.svg",
+ /* Bản chốt – section Tài sản 305:23325 */
+ bgSilk:"151235c0-956c-4933-862c-a09d415700db.png", bgTint:"abd7a0dd-91c9-4d8a-b705-094cfe6c5e97.png",
+ vtpRing:"f6300f86-9ab3-4f03-bae7-ef856490209d.svg", pieVtpFull:"ccafc344-0e34-482f-854e-5313e39467aa.svg",
+ vtpConnA:"6e5c98fc-cc45-466f-b12e-9b70f21654ac.svg", vtpLine:"47c5cbaf-c351-4bb9-b859-4b8625b1ba36.svg",
+ vtpConnB:"4564f6fc-aa70-4544-a50c-a91d86906bab.svg", vtpConnC:"5575ba91-2c9d-4234-8849-03990abcb870.svg",
+ vtpConnD:"45fdc125-a0aa-4559-9508-6266838a7452.svg", ovArrow:"90f6a3cb-768b-4daf-9cad-a8ca6e8c9552.svg",
+ graphUp:"5256c31e-0c59-43d6-950f-d8d490cfe132.svg", graphDown:"cb68102e-42b3-43aa-b35f-945862c55ccb.svg",
+ /* Tầng 1 – RegIntro (file Onboarding SQUnKnAEiYIgpVPbqxuPyE) */
+ regClose:"90331beb-d2c6-4462-b993-a391ef3fff9a.svg", regIll:"9074620c-30a3-4fc7-a83e-c18f007691fd.png",
+ vtmLogo:"ff87a912-80fb-45b5-84b8-4f7b0a42c6a3.svg",
  /* Opt 2 – nền (313:29935) */
  bg2:"c9bbe800-ae71-4766-8888-1cc0ded11315.png",
  /* Màn Phải trả (node 269:23243) */
@@ -626,7 +720,9 @@ const A = {
  debtGlow1:"0838a960-9e26-4c64-bcb5-a7dc6afa3969.svg", debtIcon1:"6311189e-59d6-4298-a29c-f0d7316c9416.svg"
 };
 const ext = f => f.slice(f.lastIndexOf("."));
+let USE_LOCAL = false;
 function applyAssets(local){
+  USE_LOCAL = local;
   document.querySelectorAll("img[data-a]").forEach(img=>{
     const k = img.dataset.a, f = A[k]; if(!f) return;
     img.draggable = false;
@@ -645,9 +741,9 @@ addEventListener("resize", fit); fit();
 /* ===== Scroll → --p (0 = Mặc định, 1 = Scroll) ===== */
 const screen = document.getElementById("screen"), sc = document.getElementById("scroller"), tabbar = document.getElementById("tabbar");
 /* Quãng cuộn để thu gọn header:
-   Tài sản: card từ y=356 (Mặc định) lên y=184 (Scroll) = 172
+   Tài sản: card từ y=312 (Mặc định) lên y=184 (Scroll) = 128
    Phải trả: 2 thẻ từ y=334 lên y=184 (ngay dưới header 162 + 22, như card Tài sản) = 150 */
-const COLL = [172, 150];
+const COLL = [128, 150];
 const TABS = [
   { label: "Tổng tài sản",   value: 52000000 },
   { label: "Khoản phải trả", value: 2152000 }
@@ -884,18 +980,111 @@ document.getElementById("demo").addEventListener("click", async () => {
   await animateScroll(C(), 1100); await wait(700);
   await animateScroll(0, 900);
 });
-/* ===== Phương án Opt 1 / Opt 2 (?opt=2) ===== */
-const optSeg = document.getElementById("optSeg");
-function setOpt(o, push){
-  screen.dataset.opt = o;
-  optSeg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.o === o));
-  if (push) {
-    const u = new URL(location.href); o === "2" ? u.searchParams.set("opt", "2") : u.searchParams.delete("opt");
-    try { history.replaceState(null, "", u); } catch (e) {}
+/* ===== 3 tầng khách hàng (Figma section "Tài sản" 305:23325) – ?tang=1|2a|2b|3 =====
+   Tầng 1: chưa có tài khoản → popup Onboarding VTM (RegIntro) trên màn 0đ
+   Tầng 2: có tài khoản, chưa có tiền – 2a chưa nạp (ẩn chart), 2b đã nạp (chart 100% ViettelPay)
+   Tầng 3: có tiền + ít nhất 1 SPTC                                                                 */
+const ASSETS = [
+  { name: "Gửi tiết kiệm", c: "--c-tietkiem", cta: "Gửi ngay",      v: "30,000,000", d: "+ 1,152,066", dc: "up" },
+  { name: "Tích luỹ",      c: "--c-tichluy",  cta: "Nạp tiền ngay", v: "20,000,000", d: null,          dc: "no" },
+  { name: "Vàng",          c: "--c-vang",     cta: "Mua ngay",      v: "10,000,000", d: "+ 18,066",    dc: "up" },
+  { name: "Chứng chỉ quỹ", c: "--c-ccq",      cta: "Mua ngay",      v: "2,000,000",  d: "- 6,066",     dc: "dn" }
+];
+const VTP = ["ViettelPay", "--c-vtp"], TDD = ["Tiền di động", "--c-tdd"];
+const TIERS = {
+  "1":  { total: 0,        chart: "none", owned: false, src: [[...VTP, "0"], [...TDD, null]], note: "Tầng 1: KH chưa có tài khoản → luồng Onboarding hiện tại của VTM" },
+  "2a": { total: 0,        chart: "none", owned: false, src: [[...VTP, "0"], [...TDD, null]], note: "Tầng 2: Đã có tài khoản, chưa có tiền (chưa nạp tiền) – ẩn chart" },
+  "2b": { total: 625000,   chart: "vtp",  owned: false, src: [[...VTP, "625,000"], [...TDD, null]], note: "Tầng 2: Đã có tài khoản, đã nạp tiền vào nguồn tiền – hiện chart" },
+  "3":  { total: 52000000, chart: "full", owned: true,  src: [[...TDD, "632,000"], [...VTP, "0"]], note: "Tầng 3: Đã có tài khoản, đã có tiền, có ít nhất 1 SPTC" }
+};
+const chevHTML = '<span class="chev-w"><span class="chev"><img data-a="chevron" alt=""></span></span>';
+const money = v => `<span class="n money" data-v="${v}">${masked ? "******" : v}</span>`;
+function renderList(t){
+  let i = 0;
+  const rows = ASSETS.map(a => {
+    const lbl = `<span class="lbl"><i class="bar" style="background:var(${a.c})"></i><span class="name">${a.name}</span></span>`;
+    const rt = t.owned
+      ? `<span class="rt"><span class="vals"><span class="amt">${money(a.v)}<span class="d">đ</span></span>` +
+        (a.d ? `<span class="delta ${a.dc}"><span class="money" data-v="${a.d}">${masked ? "******" : a.d}</span><span>đ</span></span>` : `<span class="delta no"><span>--</span><span>đ</span></span>`) +
+        `</span>${chevHTML}</span>`
+      : `<span class="rt"><span class="cta">${a.cta}</span>${chevHTML}</span>`;
+    return `<button class="row rise${t.owned ? "" : " cta-row"}" style="--d:.15s;--i:${++i}">${lbl}${rt}</button>`;
+  }).join("");
+  const src = t.src.map(([n, c, v]) => `<button class="row c rise" style="--d:.15s;--i:${++i + 1}"><span class="lbl"><i class="bar" style="background:var(${c})"></i><span class="name">${n}</span></span>` +
+    (v === null ? `<span class="rt"><span class="cta">Kích hoạt ngay</span><span class="chev"><img data-a="chevron" alt=""></span></span>`
+                : `<span class="rt"><span class="amt">${money(v)}<span class="d">đ</span></span><span class="chev"><img data-a="chevron" alt=""></span></span>`) + `</button>`).join("");
+  document.getElementById("assetList").innerHTML =
+    `<p class="h14 rise" style="--d:.15s;--i:0">Tài sản tài chính</p><div class="group">${rows}</div>` +
+    `<div class="src"><p class="h14 rise" style="--d:.15s;--i:${i + 1}">Nguồn tiền</p><div class="src-rows">${src}</div></div>`;
+  applyAssets(USE_LOCAL);
+}
+const reg = document.getElementById("reg");
+let regT;
+function showReg(on){
+  clearTimeout(regT);
+  if (on) {
+    reg.hidden = false; void reg.offsetWidth;
+    reg.classList.add("show"); reg.classList.remove("run-reg"); void reg.offsetWidth; reg.classList.add("run-reg");
+  } else {
+    reg.classList.remove("show");
+    regT = setTimeout(() => reg.hidden = true, 450);
   }
 }
-optSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setOpt(b.dataset.o, true)));
-setOpt(new URLSearchParams(location.search).get("opt") === "2" ? "2" : "1", false);
+document.getElementById("regClose").addEventListener("click", () => showReg(false));
+reg.querySelector(".reg-ov").addEventListener("click", () => showReg(false));
+document.getElementById("regGo").addEventListener("click", () => { showReg(false); setTimeout(() => setTier("2a", true), 350); });
+
+const tierSeg = document.getElementById("tierSeg"), subSeg = document.getElementById("subSeg"), tierNote = document.getElementById("tierNote");
+let tier = "3";
+function syncTierUI(){
+  const top = tier[0];
+  tierSeg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.t === top));
+  subSeg.hidden = top !== "2";
+  subSeg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.sub === tier));
+  tierNote.textContent = TIERS[tier].note;
+}
+function applyTierNow(){
+  const t = TIERS[tier];
+  TABS[0].value = t.total;
+  document.getElementById("assetCard").dataset.chart = t.chart;
+  renderList(t);
+}
+function setTier(k, animate){
+  if (!TIERS[k]) k = "3";
+  const changed = k !== tier;
+  tier = k; syncTierUI();
+  const u = new URL(location.href); k === "3" ? u.searchParams.delete("tang") : u.searchParams.set("tang", k);
+  try { history.replaceState(null, "", u); } catch (e) {}
+  if (!animate) { applyTierNow(); return; }
+  if (k !== "1") showReg(false);
+  // luôn về tab Tài sản, đầu trang
+  if (tab !== 0) {
+    tab = 0; tabs.dataset.i = 0; screen.dataset.tab = 0;
+    tabs.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x.dataset.t === "0"));
+    panes.forEach((pn, j) => pn.hidden = j !== 0);
+    totalLabel.textContent = TABS[0].label;
+  }
+  const out = paneBody.animate([{ opacity: 1 }, { opacity: 0, transform: "translateY(10px)" }], { duration: 160, fill: "forwards" });
+  out.finished.then(() => {
+    applyTierNow();
+    sc.scrollTop = 0; tabbar.classList.remove("hide"); update();
+    out.cancel();
+    paneBody.animate([{ opacity: 0, transform: "translateY(16px)" }, { opacity: 1, transform: "none" }], { duration: 380, easing: "cubic-bezier(.2,.8,.2,1)" });
+    screen.classList.remove("run"); void screen.offsetWidth; screen.classList.add("run");
+    if (changed) { const s = getSeen(); delete s[0]; memSeen = s; try { sessionStorage.setItem(SEEN_KEY, JSON.stringify(s)); } catch (e) {} }
+    maybeCount(false, 900, 120);
+    if (k === "1") regT = setTimeout(() => showReg(true), 700);
+  });
+}
+tierSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+  const t = b.dataset.t;
+  setTier(t === "2" ? (tier[0] === "2" ? tier : "2a") : t, true);
+}));
+subSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setTier(b.dataset.sub, true)));
+tier = new URLSearchParams(location.search).get("tang") || "3";
+if (!TIERS[tier]) tier = "3";
+syncTierUI(); applyTierNow();
+if (tier === "1") setTimeout(() => showReg(true), 1200);
 
 /* ===== Bật/tắt bảng điều khiển (điện thoại) ===== */
 const panel = document.getElementById("panel"), pt = document.getElementById("panelToggle");
