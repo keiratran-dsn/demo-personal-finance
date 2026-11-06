@@ -249,19 +249,10 @@ p{margin:0}
 .tabs{position:absolute;z-index:6;left:0;top:0;
   transform:translate(64px,calc(112px - 64px * var(--p)))}
 .tabs-in{position:relative;width:248px;height:32px;display:flex;border-radius:100px;background:rgba(255,255,255,.32);border:1px solid var(--white)}
-.tabs .pill{position:absolute;z-index:0;left:0;top:0;width:50%;height:100%;border-radius:100px;pointer-events:none;
-  background:rgba(178,178,178,.2);border:1px solid var(--neutral-05);transform-origin:50% 50%;
-  transition:background-color .09s,border-color .09s,box-shadow .12s}
-/* Liquid glass (theo video): khi đổi tab, thumb thành thấu kính trong suốt, nổi trên chữ rồi trượt sang */
-.tabs .pill::before{content:"";position:absolute;inset:-1px;border-radius:inherit;opacity:0;transition:opacity .09s;
-  background:rgba(255,255,255,.06);
-  -webkit-backdrop-filter:saturate(1.5) brightness(1.04);backdrop-filter:saturate(1.5) brightness(1.04);
-  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.95),inset 0 1.5px 1px -.5px rgba(255,255,255,.95),inset 0 -1.5px 1px -.5px rgba(255,255,255,.8),
-    inset 0 0 0 1px rgba(0,0,0,.035)}
-.lg-refract .tabs .pill::before{-webkit-backdrop-filter:url(#lensRefract) saturate(1.5) brightness(1.04);backdrop-filter:url(#lensRefract) saturate(1.5) brightness(1.04)}
-.tabs .pill.glass{z-index:2;background-color:rgba(178,178,178,0);border-color:transparent;box-shadow:0 3px 12px rgba(0,0,0,.1),0 0 0 .5px rgba(0,0,0,.05)}
-.tabs .pill.glass::before{opacity:1}
-.tab{position:relative;flex:1 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:14px;color:var(--neutral-60);transition:color .2s}
+.tabs .pill{position:absolute;left:0;top:0;width:50%;height:100%;border-radius:100px;background:rgba(178,178,178,.2);border:1px solid var(--neutral-05);
+  transition:transform .5s cubic-bezier(.3,1.35,.5,1)}
+.tabs[data-i="1"] .pill{transform:translateX(100%)}
+.tab{position:relative;flex:1 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:14px;color:var(--neutral-60);transition:color .3s}
 .tab.on{font-weight:700;color:var(--neutral-100)}
 
 /* Tổng tiền: căn giữa (theo chiều rộng thực) ở Mặc định → x20 ở Scroll */
@@ -757,10 +748,6 @@ p{margin:0}
      <button class="tab on" data-t="0">Tài sản</button>
      <button class="tab" data-t="1">Phải trả</button>
     </div>
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="lensRefract" filterUnits="userSpaceOnUse" x="0" y="0" width="125" height="32" color-interpolation-filters="sRGB">
-     <feImage id="lensMap" x="0" y="0" width="125" height="32" preserveAspectRatio="none" result="map"/>
-     <feDisplacementMap in="SourceGraphic" in2="map" scale="18" xChannelSelector="R" yChannelSelector="G"/>
-    </filter></svg>
    </div>
 
    <div class="t-label"><span class="tx drop" id="totalLabel" style="--d:.2s">Tổng tài sản</span><button class="eye drop" id="eye" style="--d:.2s" aria-label="Ẩn/hiện số dư"><img data-a="show" alt=""></button></div>
@@ -1260,54 +1247,6 @@ const tabs = document.getElementById("tabs");
 const paneBody = document.getElementById("paneBody"), panes = [document.getElementById("paneAsset"), document.getElementById("paneDebt")];
 const totalLabel = document.getElementById("totalLabel"), amountIn = document.querySelector(".t-amount-in");
 let switching = false;
-/* Thumb kiểu Liquid Glass (theo video, ~0,5s): pill xám → thấu kính trong suốt phình ra → trượt, vượt nhẹ → co lại thành pill xám */
-const thumb = tabs.querySelector(".pill"), tabsBox = tabs.querySelector(".tabs-in");
-let thumbX = 0, thumbT = 0;
-/* Khúc xạ thật ở mép kính: chỉ Chromium hỗ trợ backdrop-filter:url(); Safari/iOS/Firefox giữ kính trong */
-(function lensRefraction(){
-  const brands = navigator.userAgentData?.brands || [];
-  if (!brands.some(b => /Chromium/.test(b.brand))) return;
-  const W = 125, H = 32, k = 2, R = H / 2, bevel = 7;
-  const c = document.createElement("canvas"); c.width = W * k; c.height = H * k;
-  const g = c.getContext("2d"), img = g.createImageData(c.width, c.height);
-  for (let py = 0; py < c.height; py++) for (let px = 0; px < c.width; px++) {
-    const x = (px + .5) / k, y = (py + .5) / k;
-    // khoảng cách tới mép của hình viên thuốc, và pháp tuyến hướng ra ngoài
-    const cx = Math.min(Math.max(x, R), W - R), dx = x - cx, dy = y - H / 2;
-    const len = Math.hypot(dx, dy) || 1, d = R - len;
-    let ox = 0, oy = 0;
-    if (d >= 0 && d < bevel) { const t = 1 - d / bevel, m = t * t * (3 - 2 * t); ox = dx / len * m; oy = dy / len * m; }
-    const i = (py * c.width + px) * 4;
-    img.data[i] = 128 + ox * 127; img.data[i + 1] = 128 + oy * 127; img.data[i + 2] = 128; img.data[i + 3] = 255;
-  }
-  g.putImageData(img, 0, 0);
-  document.getElementById("lensMap").setAttribute("href", c.toDataURL());
-  document.documentElement.classList.add("lg-refract");
-})();
-function moveThumb(i, animate){
-  const to = i * (tabsBox.clientWidth / 2), from = thumbX;
-  thumbX = to;
-  thumb.getAnimations().forEach(a => a.cancel());
-  thumb.style.transform = `translateX(${to}px)`;
-  clearTimeout(thumbT);
-  if (!animate || to === from) { thumb.classList.remove("glass"); return; }
-  const d = to - from, T = 520, ease = "cubic-bezier(.33,.7,.3,1)";
-  thumbT = setTimeout(() => {
-    thumb.classList.add("glass");
-    thumbT = setTimeout(() => thumb.classList.remove("glass"), T * .66);
-  }, 45);
-  thumb.animate([
-    { transform:`translateX(${from}px) scale(1,1)` },
-    { transform:`translateX(${from + d * .03}px) scale(1.12,1.16)`, offset:.13 },
-    { transform:`translateX(${from + d * .7}px) scale(1.22,1.16)`, offset:.48 },
-    { transform:`translateX(${to + d * .045}px) scale(1.15,1.15)`, offset:.68 },
-    { transform:`translateX(${to}px) scale(1.02,1.03)`, offset:.86 },
-    { transform:`translateX(${to}px) scale(1,1)` }
-  ], { duration:T, easing:ease });
-  tabsBox.animate([
-    { transform:"scale(1)" }, { transform:"scale(1.02)", offset:.2 }, { transform:"scale(1.02)", offset:.66 }, { transform:"scale(1)" }
-  ], { duration:T, easing:ease });
-}
 function switchTab(i){
   if (i === tab || switching) return;
   switching = true;
@@ -1315,7 +1254,6 @@ function switchTab(i){
   tab = i;
   tabs.dataset.i = i; screen.dataset.tab = i;
   tabs.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", +x.dataset.t === i));
-  moveThumb(i, true);
   // 1) nội dung + tiêu đề số tiền trượt ra
   const ease = "cubic-bezier(.2,.8,.2,1)";
   const out = paneBody.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: `translateX(${-dir * 28}px)` }],
@@ -1503,7 +1441,7 @@ function setTier(k, animate){
   if (k !== "1") showReg(false);
   // luôn về tab Tài sản, đầu trang
   if (tab !== 0) {
-    tab = 0; tabs.dataset.i = 0; screen.dataset.tab = 0; moveThumb(0, false);
+    tab = 0; tabs.dataset.i = 0; screen.dataset.tab = 0;
     tabs.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x.dataset.t === "0"));
     panes.forEach((pn, j) => pn.hidden = j !== 0);
     totalLabel.textContent = TABS[0].label;
