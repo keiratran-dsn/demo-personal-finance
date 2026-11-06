@@ -515,6 +515,41 @@ p{margin:0}
 
 /* Nhịp xuất hiện khi mở màn */
 .sv .st{will-change:auto}
+
+/* ===== Quản lý thu chi (Figma 356:51325) ===== */
+@property --qsw{syntax:'<angle>';inherits:false;initial-value:360deg}
+.tc-bg{position:absolute;inset:0;background:linear-gradient(180deg,#F5ECFD 0%,rgba(255,255,255,0) 42.98%),var(--neutral-02)}
+.tc-month{position:absolute;z-index:4;left:16px;top:100px;width:343px;height:36px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-radius:100px;background:rgba(255,255,255,.6);border:1px solid #fff}
+.tc-month b{font-size:14px;line-height:18px;font-weight:700;letter-spacing:-.16px;color:var(--neutral-100);display:inline-block}
+.tc-month button{transition:opacity .2s,transform .15s}
+.tc-month button:active{transform:scale(.85)}
+.tc-month button:disabled{opacity:.25;cursor:default}
+.tc-wrap{position:absolute;left:16px;top:159px;width:343px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.04))}
+.tc-tabs{position:relative;height:43px;border:1px solid #fff;border-bottom:0;border-radius:24px 24px 0 0;overflow:hidden;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.tc-shape{position:absolute;left:-1px;top:-1px;width:343px;height:44px;overflow:visible}
+.tc-tab{position:relative;z-index:1;height:100%;padding:0 6px;margin:0 -6px;font-size:13px;line-height:16px;font-weight:510;letter-spacing:-.08px;color:var(--neutral-60);transition:color .25s}
+.tc-tab.on{font-weight:700;color:var(--neutral-100)}
+.tc-div{position:relative;z-index:1;width:1px;background:var(--border-default);transition:opacity .25s}
+.tc-card{background:#fff;border-radius:0 0 24px 24px;padding:16px 16px 32px;display:flex;flex-direction:column;gap:20px}
+.tc-chart{position:relative;width:311px;height:208px}
+.tc-chart svg{position:absolute;left:50%;top:calc(50% - .5px);width:185px;height:185px;transform:translate(-50%,-50%)}
+.tc-chart .segs{-webkit-mask:conic-gradient(#000 var(--qsw),transparent 0);mask:conic-gradient(#000 var(--qsw),transparent 0)}
+.tc-chart.sweep .segs{animation:tcSweep .9s cubic-bezier(.3,.7,.2,1) both}
+@keyframes tcSweep{from{--qsw:0deg}to{--qsw:360deg}}
+.tc-empty{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-size:13px;line-height:16px;color:var(--neutral-60)}
+.tc-tbl{display:flex;flex-direction:column;gap:20px}
+.tc-r{display:flex;align-items:center;gap:8px;font-size:14px;line-height:18px;letter-spacing:-.16px}
+.tc-r > span{width:92px;flex:none;text-align:right}
+.tc-r .nm{flex:1 0 0;min-width:1px;width:auto;display:flex;align-items:center;gap:8px;text-align:left;font-weight:510;color:var(--neutral-100)}
+.tc-r .nm i{width:4px;height:20px;border-radius:2px;flex:none}
+.tc-r .pv{color:var(--neutral-80)}
+.tc-r .cv{font-weight:510;color:var(--neutral-100)}
+.tc-r.hd{font-size:12px;line-height:14px;letter-spacing:0;font-weight:510;color:var(--neutral-60)}
+.tc-r.hd .nm{font-weight:510;color:var(--neutral-60)}
+.tc-r.tt .nm{font-weight:700}
+.tc-r.tt .pv{font-weight:510}
+.tc-r.tt .cv{font-weight:700}
+.tc-line{height:1px;background:var(--neutral-05)}
 </style>
 </head>
 <body>
@@ -943,6 +978,38 @@ p{margin:0}
     <div class="home-ind"></div>
    </section>
 
+
+   <!-- Quản lý thu chi (Figma 356:51325 · Chi; Thu và Đầu tư dựng theo cùng khuôn) -->
+   <section class="sv" id="svTc" aria-label="Quản lý thu chi">
+    <div class="tc-bg"></div>
+    <header class="sv-nav">
+     <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="abs" data-a="battery" alt="" style="right:14.34px;top:17.33px;width:24.328px;height:11.333px">
+    <img class="abs" data-a="wifi" alt="" style="right:43.67px;top:17.33px;width:15.333px;height:11px">
+    <img class="abs" data-a="cellular" alt="" style="right:64px;top:17.67px;width:17px;height:10.667px">
+   </div>
+     <div class="sv-row"><button class="ic24 ic-back" data-back aria-label="Quay lại"><span class="box"><img data-a="arrowLeft" alt=""></span></button><h2 class="sv-title">Quản lý thu chi</h2></div>
+    </header>
+    <div class="tc-month st">
+     <button class="i16" id="tcPrev" aria-label="Tháng trước"><span class="rot" style="width:5.849px;height:10.667px"><img data-a="tcL" alt="" style="width:10.667px;height:5.849px;transform:rotate(90deg)"></span></button>
+     <b id="tcMonth">Tháng 10/2026</b>
+     <button class="i16" id="tcNext" aria-label="Tháng sau"><span class="rot" style="width:5.849px;height:10.667px"><img data-a="tcR" alt="" style="width:10.667px;height:5.849px"></span></button>
+    </div>
+    <div class="tc-wrap st">
+     <div class="tc-tabs" id="tcTabs">
+      <svg class="tc-shape" viewBox="0 0 343 44" preserveAspectRatio="none"><path id="tcShape" fill="#fff"/></svg>
+      <button class="tc-tab on" data-k="0">Chi</button><i class="tc-div" style="height:14px"></i>
+      <button class="tc-tab" data-k="1">Thu</button><i class="tc-div" style="height:24px"></i>
+      <button class="tc-tab" data-k="2">Đầu tư</button>
+     </div>
+     <div class="tc-card">
+      <div class="tc-chart" id="tcChart"></div>
+      <div class="tc-tbl" id="tcTbl"></div>
+     </div>
+    </div>
+    <div class="home-ind"></div>
+   </section>
    <!-- Quản lý khoản vay cá nhân (Figma 345:43595 · mini app Hub vay) -->
    <section class="sv modal" id="svLoan" aria-label="Quản lý khoản vay cá nhân">
     <div class="sv-sc" id="hubSc">
@@ -1665,6 +1732,114 @@ bsOv.addEventListener("click", () => bsShow(false));
 const hubSc = document.getElementById("hubSc"), hubNav = document.getElementById("hubNav"), hubLoans = document.getElementById("hubLoans");
 hubSc.addEventListener("scroll", () => hubNav.classList.toggle("solid", hubSc.scrollTop > 6), { passive:true });
 dragScroll(hubSc, "y"); dragScroll(hubLoans, "x");
+
+/* ===== Quản lý thu chi ===== */
+Object.assign(A, { tcL:"49642c77-9857-4ebd-9444-e0a0dc0c6209.svg", tcR:"9f94bbe0-b700-4427-95ca-00055788ac68.svg" });
+/* Số liệu theo tháng [8,9,10,11]. Chi tháng 9–10 lấy đúng Figma; Thu, Đầu tư và các tháng còn lại là số giả định */
+const TC = [
+ { total:"Tổng chi", rows:[
+   ["Chuyển tiền", "#F86571", [31450000, 52969322, 24120000, 29150000]],
+   ["Viễn thông",  "#BDA0F1", [200000, 200000, 200000, 250000]],
+   ["Bảo hiểm",    "#F3B05D", [28800, 28800, 0, 600000]] ] },
+ { total:"Tổng thu", rows:[
+   ["Nhận tiền",    "#6EC9AA", [1800000, 1000000, 1200000, 500000]],
+   ["Hoàn tiền",    "#96A3EA", [420000, 380000, 480066, 260000]],
+   ["Lãi tích luỹ", "#F9D775", [350000, 330000, 420000, 240000]] ] },
+ { total:"Tổng đầu tư", rows:[
+   ["Gửi tiết kiệm", "#F86571", [2000000, 3000000, 5000000, 5000000]],
+   ["Tích luỹ",      "#F3B05D", [1000000, 2000000, 2000000, 3000000]],
+   ["Vàng",          "#F9D775", [0, 0, 1500000, 1800000]],
+   ["Chứng chỉ quỹ", "#6EC9AA", [500000, 500000, 1000000, 1200000]] ] }
+];
+const TC_M0 = 8, TC_MAX = 11;
+let tcTab = 0, tcM = 10, tcPos = null, tcRaf = 0;
+const tcFmt = n => n.toLocaleString("en-US");
+const tcPad = m => String(m).padStart(2, "0") + "/2026";
+
+/* Hình tab "kẹp hồ sơ": mặt trên phẳng [a,b], hai bên uốn cong xuống thân thẻ */
+const TC_POS = [[0, 99], [113, 209], [244, 343]], TC_F = 28;
+function tcPath([a, b]){
+  const H = 44, f = TC_F, r = 6;
+  return `M${a - f},${H} C${a - f * .42},${H} ${a - f * .5},0 ${a + r * .2},0 L${b - r * .2},0 C${b + f * .5},0 ${b + f * .42},${H} ${b + f},${H} Z`;
+}
+function tcShapeTo(k, animate){
+  const el = document.getElementById("tcShape"), to = TC_POS[k];
+  cancelAnimationFrame(tcRaf);
+  if (!animate || !tcPos) { tcPos = to.slice(); el.setAttribute("d", tcPath(tcPos)); return; }
+  const from = tcPos.slice(), t0 = performance.now(), T = 520;
+  const spring = t => 1 - Math.exp(-7 * t) * Math.cos(9 * t);   // trượt có nảy nhẹ
+  (function step(now){
+    const t = Math.min(1, (now - t0) / T), e = t === 1 ? 1 : spring(t);
+    tcPos = [from[0] + (to[0] - from[0]) * e, from[1] + (to[1] - from[1]) * e];
+    el.setAttribute("d", tcPath(tcPos));
+    if (t < 1) tcRaf = requestAnimationFrame(step);
+  })(t0);
+}
+
+function tcDonut(rows, mi){
+  const vals = rows.map(r => r[2][mi]), sum = vals.reduce((a, b) => a + b, 0);
+  const cx = 92.5, cy = 92.5, R = 87, r = 50;
+  const pt = (rad, a) => [cx + rad * Math.sin(a), cy - rad * Math.cos(a)];
+  let a0 = 0, segs = "";
+  const live = rows.map((rw, i) => [rw[1], vals[i]]).filter(x => x[1] > 0);
+  live.forEach(([c, v]) => {
+    const da = v / sum * Math.PI * 2, a1 = a0 + da;
+    if (live.length === 1) segs += `<circle cx="${cx}" cy="${cy}" r="${(R + r) / 2}" fill="none" stroke="${c}" stroke-width="${R - r}"/>`;
+    else {
+      const big = da > Math.PI ? 1 : 0, [x0, y0] = pt(R, a0), [x1, y1] = pt(R, a1), [x2, y2] = pt(r, a1), [x3, y3] = pt(r, a0);
+      segs += `<path d="M${x0},${y0} A${R},${R} 0 ${big} 1 ${x1},${y1} L${x2},${y2} A${r},${r} 0 ${big} 0 ${x3},${y3} Z" fill="${c}" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>`;
+    }
+    a0 = a1;
+  });
+  return `<svg viewBox="0 0 185 185"><circle cx="${cx}" cy="${cy}" r="92.5" fill="#F4F5FA"/><circle cx="${cx}" cy="${cy}" r="${r - 1}" fill="#EEF0F7"/><g class="segs">${segs}</g></svg>` +
+    (sum ? "" : `<p class="tc-empty">Chưa có giao dịch trong tháng</p>`);
+}
+
+function tcRender(animate){
+  const d = TC[tcTab], mi = tcM - TC_M0, pi = mi - 1;
+  const chart = document.getElementById("tcChart"), tbl = document.getElementById("tcTbl");
+  chart.classList.remove("sweep"); chart.innerHTML = tcDonut(d.rows, mi);
+  void chart.offsetWidth; chart.classList.add("sweep");
+  const tot = i => d.rows.reduce((s, r) => s + r[2][i], 0);
+  tbl.innerHTML =
+    `<div class="tc-r hd"><span class="nm">Loại giao dịch</span><span>${tcPad(tcM - 1)} (đ)</span><span>${tcPad(tcM)} (đ)</span></div>` +
+    d.rows.map(r => `<div class="tc-r"><span class="nm"><i style="background:${r[1]}"></i>${r[0]}</span><span class="pv">${tcFmt(r[2][pi])}</span><span class="cv">${tcFmt(r[2][mi])}</span></div>`).join("") +
+    `<i class="tc-line"></i><div class="tc-r tt"><span class="nm">${d.total}</span><span class="pv">${tcFmt(tot(pi))}</span><span class="cv">${tcFmt(tot(mi))}</span></div>`;
+  if (animate) [...tbl.children].forEach((el, i) => el.animate(
+    [{ opacity:0, transform:"translateY(8px)" }, { opacity:1, transform:"none" }],
+    { duration:380, delay:80 + i * 40, easing:"cubic-bezier(.2,.8,.2,1)", fill:"backwards" }));
+  document.getElementById("tcMonth").textContent = "Tháng " + tcPad(tcM);
+  document.getElementById("tcPrev").disabled = tcM - 1 <= TC_M0;
+  document.getElementById("tcNext").disabled = tcM >= TC_MAX;
+}
+
+function tcSetTab(k, animate){
+  tcTab = k;
+  document.querySelectorAll("#tcTabs .tc-tab").forEach(b => b.classList.toggle("on", +b.dataset.k === k));
+  document.querySelectorAll("#tcTabs .tc-div").forEach((dv, i) => dv.style.opacity = (k === i || k === i + 1) ? 0 : 1);
+  tcShapeTo(k, animate);
+  tcRender(animate);
+}
+document.querySelectorAll("#tcTabs .tc-tab").forEach(b => b.addEventListener("click", () => { if (+b.dataset.k !== tcTab) tcSetTab(+b.dataset.k, true); }));
+function tcMonth(step){
+  const n = tcM + step; if (n - 1 < TC_M0 || n > TC_MAX) return;
+  tcM = n;
+  const lb = document.getElementById("tcMonth");
+  lb.animate([{ opacity:0, transform:`translateX(${step * 12}px)` }, { opacity:1, transform:"none" }], { duration:300, easing:"cubic-bezier(.2,.8,.2,1)" });
+  tcRender(true);
+}
+document.getElementById("tcPrev").addEventListener("click", () => tcMonth(-1));
+document.getElementById("tcNext").addEventListener("click", () => tcMonth(1));
+
+/* Điểm vào: mũi tên "Tổng quan tháng 11" → Chi; thẻ Tổng chi → Chi; thẻ Tổng thu → Thu */
+function tcOpen(k){ tcM = 10; tcSetTab(k, false); svOpen("svTc"); }
+document.querySelectorAll(".ov").forEach(ov => {
+  ov.querySelector(".ov-btn")?.addEventListener("click", () => tcOpen(0));
+  const cards = ov.querySelectorAll(".ov-card");
+  cards[0]?.addEventListener("click", () => tcOpen(0));
+  cards[1]?.addEventListener("click", () => tcOpen(1));
+});
+tcSetTab(0, false);
 </script>
 </body>
 </html>

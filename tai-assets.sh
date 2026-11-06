@@ -148,5 +148,7 @@ curl -fsSL -o "public/assets/hClip.svg" "https://www.figma.com/api/mcp/asset/3a0
 curl -fsSL -o "public/assets/hTime.svg" "https://www.figma.com/api/mcp/asset/45216d27-9db5-4d0a-b7d6-2a9c2bd8245e.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/hFaq.svg" "https://www.figma.com/api/mcp/asset/dbb747ee-2d57-48b5-9e69-ec02c939e8ad.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/hCall.svg" "https://www.figma.com/api/mcp/asset/b2dfb1a9-3d77-45ff-b7c4-54aa3dff4e21.svg" && ok=$((ok+1))
-echo "Asset tải được: $ok/145"
+curl -fsSL -o "public/assets/tcL.svg" "https://www.figma.com/api/mcp/asset/49642c77-9857-4ebd-9444-e0a0dc0c6209.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/tcR.svg" "https://www.figma.com/api/mcp/asset/9f94bbe0-b700-4427-95ca-00055788ac68.svg" && ok=$((ok+1))
+echo "Asset tải được: $ok/147"
 exit 0
