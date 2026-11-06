@@ -369,6 +369,152 @@ p{margin:0}
   .panel.open{opacity:1;transform:none;pointer-events:auto}
   .panel .hint-mouse{display:none} .panel .hint-touch{display:inline}
 }
+
+/* ===== Màn con: Sản phẩm, Câu hỏi thường gặp, Quản lý vay, Thanh toán tự động ===== */
+.sv{position:absolute;inset:0;z-index:17;overflow:hidden;background:var(--neutral-02);visibility:hidden;transform:translateX(100%);touch-action:pan-y}
+.sv.open{visibility:visible}
+.sv:not(.modal){box-shadow:-12px 0 32px rgba(0,0,0,.12)}
+.sv-dim{position:absolute;inset:0;z-index:16;background:#000;opacity:0;pointer-events:none}
+.sv-sc{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;overscroll-behavior:contain}
+.sv-sc::-webkit-scrollbar{display:none}
+.sv .statusbar{z-index:6}
+.sv-nav{position:absolute;z-index:5;left:0;top:0;width:375px;height:84px}
+.sv-row{position:absolute;left:0;top:44px;width:375px;height:40px;padding:4px 20px;display:flex;align-items:center}
+.sv-row button{transition:transform .15s}
+.sv-row button:active{transform:scale(.88)}
+.sv-title{position:absolute;left:50%;top:9px;width:247px;transform:translateX(-50%);margin:0;text-align:center;font-size:16px;line-height:20px;font-weight:700;color:var(--neutral-100);pointer-events:none}
+
+/* Sản phẩm */
+.pv-bg{position:absolute;inset:0;background:linear-gradient(180deg,#F5ECFD 0%,rgba(255,255,255,0) 23.83%),var(--neutral-02)}
+.ptabs{position:absolute;z-index:4;left:0;top:100px;width:375px;height:46px;display:flex}
+.ptabs button{flex:1 0 0;padding:12px 8px;font-size:16px;line-height:20px;font-weight:510;letter-spacing:-.31px;color:var(--neutral-60);transition:color .25s}
+.ptabs button.on{color:var(--red)}
+.ptrack{position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--border-default)}
+.pind{position:absolute;left:0;bottom:0;width:187.5px;height:2px;background:var(--red);will-change:transform}
+.pager{touch-action:pan-x pan-y;position:absolute;left:0;top:146px;bottom:0;width:375px;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior:contain}
+.pager::-webkit-scrollbar{display:none}
+.page{flex:0 0 375px;scroll-snap-align:start;padding:28px 20px 0}
+.svc-list{width:343px;display:flex;flex-direction:column;gap:24px}
+.svc{display:flex;align-items:center;gap:8px;width:100%;text-align:left;font-size:16px;line-height:20px;font-weight:510;letter-spacing:-.31px;color:var(--neutral-100);transition:transform .15s}
+.svc:active{transform:scale(.97)}
+.i48{position:relative;flex:none;width:48px;height:48px;overflow:hidden}
+.i48.free{overflow:visible}
+
+/* Câu hỏi thường gặp */
+.faq-bg{position:absolute;inset:0;background:#fff}
+.faq{position:absolute;left:16px;top:112px;width:343px;display:flex;flex-direction:column;gap:18px}
+.faq-it{display:flex;flex-direction:column;gap:12px}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;text-align:left;font-size:16px;line-height:20px;color:var(--neutral-100)}
+.faq-q span:first-child{max-width:269px}
+.faq-chev{position:relative;flex:none;width:18px;height:18px;transform:rotate(90deg);transition:transform .35s cubic-bezier(.32,.72,0,1)}
+.faq-it.open .faq-chev{transform:rotate(-90deg)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.32,.72,0,1)}
+.faq-it.open .faq-a{grid-template-rows:1fr}
+.faq-a > div{overflow:hidden}
+.faq-a p{padding-bottom:2px;font-size:14px;line-height:18px;color:var(--neutral-80);opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .35s}
+.faq-it.open .faq-a p{opacity:1;transform:none;transition-delay:.08s}
+.faq-line{position:relative;height:0;width:100%}
+.faq-line img{position:absolute;left:0;right:0;top:-1px;width:100%;height:1px}
+
+/* Thanh toán tự động */
+.bl-shot{position:absolute;left:0;top:0;width:374.916px;height:812px;object-fit:cover}
+.bl-top{position:absolute;left:0;top:0;width:375px;height:88px;background:#fff}
+.bl-div{position:absolute;left:0;top:88px;width:375px;height:1px;background:var(--border-default)}
+.bl-back{position:absolute;z-index:6;left:8px;top:50px;width:32px;height:32px;transition:transform .15s}
+.bl-back:active{transform:scale(.88)}
+.bl-title{position:absolute;left:16px;top:56px;width:343px;margin:0;text-align:center;font-size:16px;line-height:20px;font-weight:700;color:var(--neutral-100)}
+.bl-create{position:absolute;left:16px;top:716px;width:343px;height:48px;border-radius:100px;transition:background .15s,transform .15s}
+.bl-create:active{background:rgba(0,0,0,.12);transform:scale(.98)}
+.bs-ov{position:absolute;inset:0;z-index:9;background:rgba(0,0,0,.6);opacity:0;pointer-events:none}
+.bs-ov.on{pointer-events:auto}
+.bs{position:absolute;z-index:10;left:0;top:216px;width:375px;height:596px;transform:translateY(100%);touch-action:none}
+.bs-base{position:absolute;left:0;right:0;top:12px;bottom:0;background:#fff;border-radius:16px 16px 0 0}
+.bs-grab{position:absolute;left:171px;top:0;width:32px;height:4px;border-radius:2px;background:#fff;opacity:.5}
+.bs-title{position:absolute;left:16px;top:28px;width:343px;text-align:center;font-size:18px;line-height:22px;font-weight:700;color:var(--neutral-100)}
+.bs-div{position:absolute;left:0;width:375px;height:1px;background:var(--border-default)}
+.bs-row{position:absolute;left:0;width:375px;height:72px;padding:0 16px;display:flex;align-items:center;gap:16px;text-align:left;font-size:16px;line-height:20px;color:var(--neutral-80);transition:background .15s}
+.bs-row:active{background:var(--neutral-05)}
+.i40{position:relative;flex:none;width:40px;height:40px;overflow:hidden}
+.bs-arr{position:absolute;left:333px;top:28px;width:16px;height:16px}
+
+/* Quản lý khoản vay cá nhân (mini app, mở dạng modal) */
+.sv.modal{transform:translateY(100%)}
+.hub{position:relative;min-height:1074px;overflow:hidden;background:var(--neutral-02)}
+.hub-pat{position:absolute;left:0;top:-13px;width:375px;height:748px;overflow:hidden;pointer-events:none}
+.hub-pat img{position:absolute;left:-.02%;top:0;width:100.04%;height:108.42%}
+.hub-c{position:relative;margin:0 16px;padding:112px 0 79px;display:flex;flex-direction:column;gap:36px}
+.hub-top,.hub-bot{display:flex;flex-direction:column;gap:24px}
+.hub-hi{position:relative;width:343px;height:82px;border-radius:16px;border:1px solid #fff;box-shadow:9.25px 12px 12px rgba(255,223,220,.13)}
+.hub-hi::before{content:"";position:absolute;inset:0;border-radius:16px;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);background:linear-gradient(168deg,rgba(255,255,255,.4) 11.77%,rgba(248,250,255,.9) 27.68%,rgba(245,248,255,.9) 77.1%,rgba(255,255,255,.2) 98.3%)}
+.hub-hi::after{content:"";position:absolute;inset:0;border-radius:16px;box-shadow:inset -1px -3.25px 9.075px #fff,inset .75px 3px 7.7px rgba(255,213,209,.43)}
+.hub-hi-t{position:absolute;z-index:1;left:16px;top:20px;width:311px;display:flex;flex-direction:column;gap:4px}
+.hub-hi-t b{font-size:16px;line-height:20px;color:var(--neutral-100)}
+.hub-hi-t span{font-size:14px;line-height:18px;color:var(--neutral-80)}
+.hub-mascot{position:absolute;z-index:2;left:265px;top:-26px;width:83px;height:77px;overflow:hidden;transform:scaleX(-1);animation:hubBob 3.2s ease-in-out infinite}
+.hub-mascot img{position:absolute;left:0;top:0;width:277.78%;height:100%}
+@keyframes hubBob{0%,100%{translate:0 0}50%{translate:0 -4px}}
+.hub-sec{display:flex;flex-direction:column;gap:16px}
+.hub-h{display:flex;align-items:center;justify-content:space-between}
+.hub-h b{font-size:18px;line-height:22px;color:var(--neutral-100)}
+.hub-all{display:flex;align-items:center;gap:4px;font-size:14px;line-height:18px;color:var(--neutral-100)}
+.i20,.i16{position:relative;flex:none;width:20px;height:20px}
+.i16{width:16px;height:16px}
+.rot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center}
+.rot img{flex:none;transform:rotate(-90deg)}
+.hub-loans{touch-action:pan-x pan-y;display:flex;gap:12px;margin:-14px -16px -20px;padding:14px 16px 20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.hub-loans::-webkit-scrollbar{display:none}
+.loan{flex:0 0 320px;scroll-snap-align:center;padding:16px;border-radius:16px;border:1px solid #fff;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.04);display:flex;flex-direction:column;align-items:center;gap:24px}
+.loan-in{width:100%;display:flex;flex-direction:column;gap:12px}
+.loan-hd{display:flex;align-items:center;justify-content:space-between}
+.loan-br{display:flex;align-items:center;gap:12px;font-size:16px;line-height:20px;font-weight:700;color:var(--neutral-100)}
+.loan-ic{position:relative;width:40px;height:40px;border-radius:6.667px;border:.833px solid var(--neutral-05);background:#fff}
+.loan-ic img{position:absolute;left:7.5px;top:13.3px;width:25px;height:13.4px;object-fit:contain}
+.badge{padding:2px 4px;border-radius:8px;font-size:10px;line-height:12px;font-weight:700;color:#fff;background:var(--green)}
+.badge.gold{background:#FFBE41}
+.loan-dash{height:1px;border-top:1px dashed var(--border-default)}
+.loan-rows{display:flex;flex-direction:column;gap:8px}
+.loan-r{display:flex;align-items:center;justify-content:space-between;font-size:13px;line-height:16px;letter-spacing:-.08px;color:var(--neutral-60)}
+.loan-r b{font-size:14px;line-height:18px;font-weight:510;letter-spacing:-.16px;color:var(--neutral-80)}
+.loan-v{display:flex;align-items:flex-end;color:var(--neutral-100)}
+.loan-v b{font-size:20px;line-height:24px;font-weight:700;letter-spacing:-.45px;color:var(--neutral-100)}
+.loan-v i{font-style:normal;font-size:18px;line-height:22px;width:10px}
+.loan-btn{width:120px;height:32px;border-radius:37px;background:var(--red);color:#fff;font-size:14px;line-height:18px;font-weight:500;filter:drop-shadow(0 4px 6px rgba(238,0,51,.25));transition:transform .15s}
+.loan-btn:active{transform:scale(.95)}
+.hub-prod{display:flex;flex-direction:column;gap:16px;height:296px}
+.hub-main{position:relative;width:343px;height:258px}
+.hub-arc{position:absolute;left:50%;top:58px;width:375px;height:132px;transform:translateX(-50%)}
+.hub-arc > span{position:absolute;inset:-49.24% -29.2% -57.58% -29.2%}
+.hub-big{position:absolute;left:calc(50% - .5px);top:0;width:136px;height:136px;transform:translateX(-50%)}
+.hub-big > span{position:absolute;inset:-5.88% -11.76% -17.65% -11.76%}
+.hub-big-c{position:absolute;left:30px;top:16px;width:76px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.hub-big-ic{width:64px;height:64px;border-radius:22.261px;background:#fff;filter:drop-shadow(0 5.565px 8.348px rgba(190,60,95,.08));display:flex;align-items:center;justify-content:center}
+.hub-big-ic span{width:61.217px;height:61.217px;border-radius:50%;background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hub-big-ic img{width:48.464px;height:48.464px;object-fit:cover}
+.hub-big-c b{height:32px;font-size:13px;line-height:16px;color:var(--red);text-align:center}
+.hub-it{position:absolute;width:76px;display:flex;flex-direction:column;align-items:center;gap:8px;transform:translateX(-50%);font-size:12px;line-height:14px;font-weight:510;color:var(--neutral-80);text-align:center}
+.hub-it-ic{position:relative;width:40px;height:40px;border-radius:13.913px;background:#fff;filter:drop-shadow(0 3.478px 5.217px rgba(190,60,95,.08));display:flex;align-items:center;justify-content:center}
+.hub-det{position:absolute;left:0;top:146.97px;width:343px;height:110.035px}
+.hub-det > span{position:absolute;inset:-7.27% -4.66% -21.81% -4.66%}
+.hub-det-c{position:absolute;left:0;top:155px;width:343px;height:102px;overflow:hidden}
+.hub-det-t{position:absolute;left:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:18px;white-space:nowrap;color:var(--neutral-60)}
+.hub-det-t b{color:var(--neutral-100)}
+.hub-ill{position:absolute;left:219px;top:-6px;width:123px;height:123px}
+.hub-tool{padding:16px;border-radius:16px;border:1px solid var(--neutral-05);background:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.04));display:flex;justify-content:space-between}
+.hub-t{width:73px;padding-top:8px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;line-height:14px;font-weight:510;color:var(--neutral-80);text-align:center;transition:transform .15s}
+.hub-t:active{transform:scale(.92)}
+.hub-t > span:last-child{height:36px}
+.ic32{position:relative;width:32px;height:32px}
+.hub-nav{position:absolute;z-index:5;left:0;top:0;width:375px;height:88px;transition:background .3s,box-shadow .3s}
+.hub-nav.solid{background:rgba(255,255,255,.72);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.hub-row{position:absolute;left:0;top:44px;width:375px;height:40px;padding:4px 16px;display:flex;align-items:center;gap:12px}
+.hub-row b{flex:1 0 0;min-width:1px;font-size:16px;line-height:20px;color:var(--neutral-100);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hub-act{display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-radius:100px;border:.5px solid var(--neutral-05);background:rgba(240,240,240,.65);backdrop-filter:blur(1px)}
+.hub-act button{transition:transform .15s}
+.hub-act button:active{transform:scale(.85)}
+.hub-act i{width:1px;height:16px;border-radius:100px;background:var(--neutral-80)}
+
+/* Nhịp xuất hiện khi mở màn */
+.sv .st{will-change:auto}
 </style>
 </head>
 <body>
@@ -651,6 +797,242 @@ p{margin:0}
      </div>
     </div>
    </div>
+
+   <!-- ===== Màn con (push/pop) ===== -->
+   <div class="sv-dim" id="svDim"></div>
+
+   <!-- Sản phẩm (Figma 321:32476 + 345:34683) -->
+   <section class="sv" id="svProducts" aria-label="Sản phẩm">
+    <div class="pv-bg"></div>
+    <header class="sv-nav">
+     <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="abs" data-a="battery" alt="" style="right:14.34px;top:17.33px;width:24.328px;height:11.333px">
+    <img class="abs" data-a="wifi" alt="" style="right:43.67px;top:17.33px;width:15.333px;height:11px">
+    <img class="abs" data-a="cellular" alt="" style="right:64px;top:17.67px;width:17px;height:10.667px">
+   </div>
+     <div class="sv-row"><button class="ic24 ic-back" data-back aria-label="Quay lại"><span class="box"><img data-a="arrowLeft" alt=""></span></button><h2 class="sv-title">Sản phẩm</h2></div>
+    </header>
+    <div class="ptabs" id="prodTabs"><button class="on">Tài chính - Bảo hiểm</button><button>Thanh toán</button><i class="ptrack"></i><i class="pind" id="prodInd"></i></div>
+    <div class="pager" id="prodPager">
+     <div class="page"><div class="svc-list">
+      <button class="svc st"><span class="i48">
+       <span class="abs" style="left:0;top:0;width:47.447px;height:47.447px"><img class="fill" data-a="pS1" alt=""></span>
+       <span class="abs" style="left:10.55px;top:13.18px;width:26.359px;height:26.359px"><span class="abs" style="inset:-50%"><img class="fill" data-a="pE1" alt=""></span></span>
+       <span class="abs" style="left:calc(50% - .29px);top:21.75%;bottom:24.12%;width:25.679px;transform:translateX(-50%);opacity:.8;overflow:hidden"><span class="abs" style="inset:8.41% 3.56% -.57% 1.3%"><img class="fill" data-a="pL1" alt=""></span></span>
+      </span><span>Đầu tư chứng khoán</span></button>
+      <button class="svc st"><span class="i48">
+       <img class="fill" data-a="pS2" alt="">
+       <span class="abs" style="left:10.67px;top:13.33px;width:26.667px;height:26.667px"><span class="abs" style="inset:-50%"><img class="fill" data-a="pE2" alt=""></span></span>
+       <span class="abs" style="inset:18.56% 18.94% 16.04% 21.06%"><img class="fill" data-a="pG2" alt=""></span>
+      </span><span>Tài khoản tích luỹ</span></button>
+      <button class="svc st"><span class="i48">
+       <span class="abs" style="left:0;top:0;width:47.447px;height:47.447px"><img class="fill" data-a="pS1" alt=""></span>
+       <span class="abs" style="left:10.55px;top:13.18px;width:26.359px;height:26.359px"><span class="abs" style="inset:-50%"><img class="fill" data-a="pE1" alt=""></span></span>
+       <span class="abs" style="inset:23.99% 19.28% 21.47% 21.42%"><img class="fill" data-a="pG3" alt=""></span>
+      </span><span>Chứng chỉ quỹ</span></button>
+      <button class="svc st"><span class="i48">
+       <img class="fill" data-a="pS4" alt="">
+       <span class="abs" style="left:10.67px;top:13.33px;width:26.667px;height:26.667px"><span class="abs" style="inset:-50%"><img class="fill" data-a="pE4" alt=""></span></span>
+       <span class="abs" style="inset:20.44% 19.75% 17.91% 21.88%"><img class="fill" data-a="pI4" alt=""></span>
+      </span><span>Mua bảo hiểm</span></button>
+      <button class="svc st"><span class="i48">
+       <img class="fill" data-a="pS4" alt="">
+       <span class="abs" style="left:10.67px;top:13.33px;width:26.667px;height:26.667px"><span class="abs" style="inset:-50%"><img class="fill" data-a="pE4" alt=""></span></span>
+       <span class="abs" style="inset:56.11% 17.68% 20.61% 19.82%"><img class="fill" data-a="pV5" alt=""></span>
+       <span class="abs" style="inset:23.13% 28.36% 41.92% 34.2%"><img class="fill" data-a="pU5" alt=""></span>
+      </span><span>Vay tiền mặt</span></button>
+     </div></div>
+     <div class="page"><div class="svc-list">
+      <button class="svc st"><span class="i48 free">
+       <span class="abs" style="inset:0 -5.56% -11.11% -5.55%"><img class="fill" data-a="qS1" alt=""></span>
+       <span class="abs" style="inset:18.75% 26.75% 33.17% 26.75%"><img class="fill" data-a="qG1a" alt=""></span>
+       <span class="abs" style="inset:70.67% 40.35% 18.75% 40.18%"><img class="fill" data-a="qG1b" alt=""></span>
+      </span><span>Tiền điện</span></button>
+      <button class="svc st"><span class="i48 free">
+       <span class="abs" style="inset:0 -5.56% -11.11% -5.55%"><img class="fill" data-a="qS2" alt=""></span>
+       <span class="abs" style="inset:18.77% 23.7% 18.78% 23.7%"><img class="fill" data-a="qG2" alt=""></span>
+      </span><span>Tiền nước</span></button>
+      <button class="svc st"><span class="i48 free">
+       <span class="abs" style="inset:0 -5.56% -11.11% -5.55%"><img class="fill" data-a="qS2" alt=""></span>
+       <span class="abs" style="inset:16.67% 22.92%"><img class="fill" data-a="qG3" alt=""></span>
+      </span><span>Di động Viettel</span></button>
+      <button class="svc st"><span class="i48">
+       <img class="fill" data-a="qS4" alt="">
+       <span class="abs" style="left:10.67px;top:13.33px;width:26.667px;height:26.667px"><span class="abs" style="inset:-50%"><img class="fill" data-a="qE4" alt=""></span></span>
+       <span class="abs" style="inset:25.69% 17.68% 23.17% 19.82%"><img class="fill" data-a="qI4" alt=""></span>
+      </span><span>Điện thoại cố định Viettel</span></button>
+      <button class="svc st"><span class="i48">
+       <span class="abs" style="left:10.67px;top:13.33px;width:26.667px;height:26.667px"><span class="abs" style="inset:-50%"><img class="fill" data-a="qE5" alt=""></span></span>
+       <img class="fill" data-a="qS4" alt="">
+       <span class="abs" style="inset:70.57% 24.87% 20.2% 26.59%"><img class="fill" data-a="qVt5" alt=""></span>
+       <span class="abs" style="top:20.19%;bottom:34.59%;left:25%;right:24.72%"><img class="fill" data-a="qI5" alt=""></span>
+      </span><span>Internet &amp; Truyền hình Viettel</span></button>
+     </div></div>
+    </div>
+    <div class="home-ind"></div>
+   </section>
+
+   <!-- Câu hỏi thường gặp (Figma 345:48665) -->
+   <section class="sv" id="svFaq" aria-label="Câu hỏi thường gặp">
+    <div class="faq-bg"></div>
+    <div class="sv-sc">
+     <div class="faq" id="faqList">
+      <div class="faq-it st">
+       <button class="faq-q"><span>Cố vấn đầu tư hoạt động như thế nào?</span><span class="faq-chev"><span class="abs" style="inset:16.66% 32.84% 16.67% 29.17%"><img class="fill" data-a="fChev" alt=""></span></span></button>
+       <div class="faq-a"><div><p>Cố vấn đầu tư xem tài sản, thu chi và mức chấp nhận rủi ro của bạn, rồi gợi ý cách phân bổ vào gửi tiết kiệm, tích luỹ, vàng hoặc chứng chỉ quỹ. Bạn vẫn là người quyết định có đầu tư hay không.</p></div></div>
+       <div class="faq-line"><img data-a="fLine" alt=""></div>
+      </div>
+      <div class="faq-it st">
+       <button class="faq-q"><span>Tính năng Thu chi hoạt động như thế nào?</span><span class="faq-chev"><span class="abs" style="inset:16.66% 32.84% 16.67% 29.17%"><img class="fill" data-a="fChev" alt=""></span></span></button>
+       <div class="faq-a"><div><p>Thu chi tự tổng hợp giao dịch từ Ví Viettel, ViettelPay và Tiền di động, chia theo nhóm và so sánh với tháng trước để bạn thấy tiền đang đi đâu.</p></div></div>
+       <div class="faq-line"><img data-a="fLine" alt=""></div>
+      </div>
+      <div class="faq-it st">
+       <button class="faq-q"><span>Tôi có thể nhập các khoản thu chi bằng cách nào?</span><span class="faq-chev"><span class="abs" style="inset:16.66% 32.84% 16.67% 29.17%"><img class="fill" data-a="fChev" alt=""></span></span></button>
+       <div class="faq-a"><div><p>Giao dịch qua Viettel Money được ghi nhận tự động. Khoản chi bằng tiền mặt hay tài khoản khác, bạn bấm Thêm giao dịch rồi nhập số tiền, nhóm và ngày.</p></div></div>
+       <div class="faq-line"><img data-a="fLine" alt=""></div>
+      </div>
+     </div>
+    </div>
+    <header class="sv-nav" style="background:rgba(255,255,255,.05)">
+     <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="abs" data-a="battery" alt="" style="right:14.34px;top:17.33px;width:24.328px;height:11.333px">
+    <img class="abs" data-a="wifi" alt="" style="right:43.67px;top:17.33px;width:15.333px;height:11px">
+    <img class="abs" data-a="cellular" alt="" style="right:64px;top:17.67px;width:17px;height:10.667px">
+   </div>
+     <div class="sv-row"><button class="ic24 ic-back" data-back aria-label="Quay lại"><span class="box"><img data-a="arrowLeft" alt=""></span></button><h2 class="sv-title">Câu hỏi thường gặp</h2></div>
+    </header>
+    <div class="home-ind"></div>
+   </section>
+
+   <!-- Danh mục thanh toán tự động (Figma 306:24056 → 306:24424) -->
+   <section class="sv" id="svBills" aria-label="Danh mục thanh toán tự động">
+    <img class="bl-shot" data-a="bShot" alt="">
+    <div class="bl-top"></div>
+    <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="abs" data-a="battery" alt="" style="right:14.34px;top:17.33px;width:24.328px;height:11.333px">
+    <img class="abs" data-a="wifi" alt="" style="right:43.67px;top:17.33px;width:15.333px;height:11px">
+    <img class="abs" data-a="cellular" alt="" style="right:64px;top:17.67px;width:17px;height:10.667px">
+   </div>
+    <button class="bl-back" data-back aria-label="Quay lại"><span class="abs" style="inset:26% 20.24% 26.03% 20.27%"><img class="fill" data-a="bBack" alt=""></span></button>
+    <h2 class="bl-title">Danh mục thanh toán tự động</h2>
+    <i class="bl-div"></i>
+    <button class="bl-create" id="blCreate" aria-label="Tạo thanh toán tự động"></button>
+    <div class="bs-ov" id="bsOv"></div>
+    <div class="bs" id="bs" role="dialog" aria-label="Chọn dịch vụ thanh toán tự động">
+     <i class="bs-base"></i><i class="bs-grab"></i>
+     <p class="bs-title">Chọn dịch vụ thanh toán tự động</p>
+     <i class="bs-div" style="top:66px"></i>
+     <button class="bs-row" style="top:67px"><span class="i40"><img class="fill" data-a="bD" alt=""><span class="abs" style="inset:21.43% 28.88% 34.62% 28.6%"><img class="fill" data-a="bDa" alt=""></span><span class="abs" style="inset:68.9% 41.32% 21.43% 40.88%"><img class="fill" data-a="bDb" alt=""></span></span>Tiền điện<span class="bs-arr"><span class="abs" style="inset:25% 35.77% 25% 35.73%"><img class="fill" data-a="bArr" alt=""></span></span></button>
+     <i class="bs-div" style="top:139px"></i>
+     <button class="bs-row" style="top:140px"><span class="i40"><img class="fill" data-a="bN" alt=""><span class="abs" style="inset:23.26% 28.13% 23.21% 26.79%"><img class="fill" data-a="bNa" alt=""></span></span>Tiền nước<span class="bs-arr"><span class="abs" style="inset:25% 35.77% 25% 35.73%"><img class="fill" data-a="bArr" alt=""></span></span></button>
+     <i class="bs-div" style="top:212px"></i>
+     <button class="bs-row" style="top:213px"><span class="i40"><img class="fill" data-a="bN" alt=""><span class="abs" style="inset:21.43% 29.86% 21.43% 30.36%"><img class="fill" data-a="bPre" alt=""></span></span>Di động trả trước Viettel<span class="bs-arr"><span class="abs" style="inset:25% 35.77% 25% 35.73%"><img class="fill" data-a="bArr" alt=""></span></span></button>
+     <i class="bs-div" style="top:285px"></i>
+     <button class="bs-row" style="top:286px"><span class="i40"><img class="fill" data-a="bPost" alt=""><span class="abs" style="inset:21.43% 17.42% 21.43% 16.06%"><img class="fill" data-a="bPosti" alt=""></span></span>Di động trả sau Viettel<span class="bs-arr"><span class="abs" style="inset:25% 35.77% 25% 35.73%"><img class="fill" data-a="bArr" alt=""></span></span></button>
+     <i class="bs-div" style="top:358px"></i>
+     <button class="bs-row" style="top:359px"><span class="i40"><img class="fill" data-a="bFix" alt=""><span class="abs" style="inset:26.79% 21.43% 26.46% 21.43%"><img class="fill" data-a="bFixi" alt=""></span></span>Điện thoại cố định Viettel<span class="bs-arr"><span class="abs" style="inset:25% 35.77% 25% 35.73%"><img class="fill" data-a="bArr" alt=""></span></span></button>
+     <i class="bs-div" style="top:431px"></i>
+     <button class="bs-row" style="top:432px"><span class="i40"><img class="fill" data-a="bNet" alt=""><span class="abs" style="inset:67.86% 26.75% 23.3% 26.79%"><img class="fill" data-a="bNetv" alt=""></span><span class="abs" style="top:19.64%;bottom:37.04%;left:25%;right:26.61%"><img class="fill" data-a="bNeti" alt=""></span></span>Internet Viettel<span class="bs-arr"><span class="abs" style="inset:25% 35.77% 25% 35.73%"><img class="fill" data-a="bArr" alt=""></span></span></button>
+     <i class="bs-div" style="top:504px"></i>
+     <button class="bs-row" style="top:505px"><span class="i40"><span class="abs" style="inset:18.75% 18.75% 18.75% 15.63%"><img class="fill" data-a="bHisi" alt=""></span><img class="fill" data-a="bHis" alt=""></span>Tạo từ lịch sử hoặc giao dịch mẫu<span class="bs-arr"><span class="abs" style="inset:25% 35.77% 25% 35.73%"><img class="fill" data-a="bArr" alt=""></span></span></button>
+    </div>
+    <div class="home-ind"></div>
+   </section>
+
+   <!-- Quản lý khoản vay cá nhân (Figma 345:43595 · mini app Hub vay) -->
+   <section class="sv modal" id="svLoan" aria-label="Quản lý khoản vay cá nhân">
+    <div class="sv-sc" id="hubSc">
+     <div class="hub">
+      <div class="hub-pat"><img data-a="hPattern" alt=""></div>
+      <div class="hub-c">
+       <div class="hub-top">
+        <div class="hub-hi st">
+         <div class="hub-hi-t"><b>Chào buổi sáng Ngụy Đình Lân,</b><span>Chúc bạn một ngày tốt lành nhé!</span></div>
+         <div class="hub-mascot"><img data-a="hMascot" alt=""></div>
+        </div>
+        <div class="hub-sec st">
+         <div class="hub-h"><b>Khoản vay của bạn</b><button class="hub-all">Xem tất cả<span class="i20"><span class="rot" style="width:7.312px;height:13.333px"><img data-a="hStroke" alt="" style="width:13.333px;height:7.312px"></span></span></button></div>
+         <div class="hub-loans" id="hubLoans">
+          <div class="loan">
+           <div class="loan-in">
+            <div class="loan-hd"><span class="loan-br"><span class="loan-ic"><img data-a="hCake" alt=""></span>Cake</span><span class="badge">Đã giải ngân</span></div>
+            <i class="loan-dash"></i>
+            <div class="loan-rows">
+             <div class="loan-r"><span>Gói vay</span><span class="loan-v"><b>20.000.000</b><i>đ</i></span></div>
+             <div class="loan-r"><span>Mã hợp đồng</span><b>1234ABCD</b></div>
+             <div class="loan-r"><span>Ngày đăng ký</span><b>22/12/2026</b></div>
+            </div>
+           </div>
+           <button class="loan-btn">Thanh toán</button>
+          </div>
+          <div class="loan">
+           <div class="loan-in">
+            <div class="loan-hd"><span class="loan-br"><span class="loan-ic"><img data-a="hCake" alt=""></span>Cake</span><span class="badge gold">Chờ hoàn thành</span></div>
+            <i class="loan-dash"></i>
+            <div class="loan-rows">
+             <div class="loan-r"><span>Gói vay</span><span class="loan-v"><b>20.000.000</b><i>đ</i></span></div>
+             <div class="loan-r"><span>Mã hợp đồng</span><b>1234ABCD</b></div>
+             <div class="loan-r"><span>Ngày đăng ký</span><b>22/12/2026</b></div>
+            </div>
+           </div>
+           <button class="loan-btn">Tiếp tục</button>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="hub-bot">
+        <div class="hub-prod st">
+         <div class="hub-h"><b>Các sản phẩm khác</b><button class="hub-all">Xem tất cả<span class="i16"><span class="rot" style="width:5.849px;height:10.667px"><img data-a="hArr3" alt="" style="width:10.667px;height:5.849px"></span></span></button></div>
+         <div class="hub-main">
+          <div class="hub-arc"><span><img class="fill" data-a="hArc" alt=""></span></div>
+          <div class="hub-big"><span><img class="fill" data-a="hBg" alt=""></span>
+           <div class="hub-big-c"><div class="hub-big-ic"><span><img data-a="hFe" alt=""></span></div><b>Vay tiền mặt</b></div>
+          </div>
+          <div class="hub-it" style="left:calc(50% - 106.5px);top:46.57px"><span class="hub-it-ic"><img data-a="hDay" alt="" style="width:29.348px;height:20.87px;mix-blend-mode:darken;object-fit:cover"></span>Vay nhanh trong ngày</div>
+          <div class="hub-it" style="left:calc(50% + 106.5px);top:46.57px"><span class="hub-it-ic"><img data-a="hMbv" alt="" style="width:30.349px;height:12.174px;object-fit:cover"></span>Vay nhanh siêu hời</div>
+          <div class="hub-it" style="left:calc(50% - 182.5px);top:64px;white-space:nowrap"><span class="hub-it-ic"><img data-a="hEasy" alt="" style="width:26.902px;height:19.13px;mix-blend-mode:darken;object-fit:cover"></span>Easy Vay</div>
+          <div class="hub-it" style="left:calc(50% + 182.5px);top:64px;white-space:nowrap"><span class="hub-it-ic"><span style="width:38.261px;height:38.261px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img data-a="hHome" alt="" style="width:27.101px;height:27.101px;object-fit:contain"></span></span>Home Credit</div>
+          <div class="hub-det"><span><img class="fill" data-a="hBg1" alt=""></span></div>
+          <div class="hub-det-c">
+           <div class="hub-det-t"><span>Hạn mức vay: <b>tới 100.000.000đ</b></span><span>Kỳ hạn vay: <b>tới 36 tháng</b></span><span>Lãi suất vay: <b>từ 1,42 %/tháng</b></span></div>
+           <div class="hub-ill"><span class="abs" style="inset:0 3.57% 10.86% 3.57%"><img class="fill" data-a="hIll1" alt="" style="object-fit:cover"></span><span class="abs" style="inset:12.5% 8.93% 12.77% 8.93%"><img class="fill" data-a="hIll2" alt="" style="object-fit:cover"></span></div>
+          </div>
+         </div>
+        </div>
+        <div class="hub-sec st">
+         <div class="hub-h"><b>Tiện ích &amp; Hỗ trợ</b></div>
+         <div class="hub-tool">
+          <button class="hub-t"><span class="ic32"><img class="fill" data-a="hPh" alt=""><span class="abs" style="left:5px;top:5px;width:22px;height:22px"><img class="fill" data-a="hClip" alt=""></span></span><span>Gợi ý<br>khoản vay</span></button>
+          <button class="hub-t"><span class="ic32"><img class="fill" data-a="hPh" alt=""><span class="abs" style="left:5px;top:5px;width:22px;height:22px"><span class="abs" style="inset:8.33%"><img class="fill" data-a="hTime" alt=""></span></span></span><span>Lịch sử vay</span></button>
+          <button class="hub-t"><span class="ic32"><img class="fill" data-a="hFaq" alt=""></span><span>Câu hỏi thường gặp</span></button>
+          <button class="hub-t"><span class="ic32"><img class="fill" data-a="hPh" alt=""><span class="abs" style="left:5.36px;top:5.23px;width:22px;height:22px;overflow:hidden;border-radius:3.929px"><span class="abs" style="left:calc(50% - .32px);top:calc(50% - .21px);width:21.353px;height:21.353px;transform:translate(-50%,-50%)"><img class="fill" data-a="hCall" alt=""></span></span></span><span>Tổng đài<br>hỗ trợ</span></button>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <header class="hub-nav" id="hubNav">
+     <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="abs" data-a="battery" alt="" style="right:14.34px;top:17.33px;width:24.328px;height:11.333px">
+    <img class="abs" data-a="wifi" alt="" style="right:43.67px;top:17.33px;width:15.333px;height:11px">
+    <img class="abs" data-a="cellular" alt="" style="right:64px;top:17.67px;width:17px;height:10.667px">
+   </div>
+     <div class="hub-row"><b>Quản lý khoản vay cá nhân</b>
+      <div class="hub-act">
+       <button class="i20" aria-label="Thêm"><span class="abs" style="inset:46.93% 22.09% 46.82% 21.55%"><span class="abs" style="inset:-50% -5.59%"><img class="fill" data-a="hMore" alt=""></span></span></button>
+       <i></i>
+       <button class="i20" data-back aria-label="Đóng"><span class="abs" style="inset:49.48% 28.13% 28.65% 28.13%;transform:rotate(180deg)"><span class="abs" style="inset:-14.29% -7.14%"><img class="fill" data-a="hDn2" alt=""></span></span><span class="abs" style="inset:28.65% 28.13% 49.48% 28.13%"><span class="abs" style="inset:-14.29% -7.14%"><img class="fill" data-a="hDn3" alt=""></span></span></button>
+      </div>
+     </div>
+    </header>
+    <div class="home-ind"></div>
+   </section>
    <div class="island"></div>
   </div>
  </div>
@@ -1093,6 +1475,196 @@ pt.addEventListener("click", e => { e.stopPropagation(); setPanel(!panel.classLi
 document.addEventListener("click", e => { if (panel.classList.contains("open") && !panel.contains(e.target)) setPanel(false); });
 
 intro();
+
+/* ===== Màn con: điều hướng push/pop ===== */
+Object.assign(A, {
+ pS1:"f7850bea-5843-499c-b56f-1351f51ca6f3.svg", pE1:"9c6467bf-7d61-46d9-968a-875575e80403.svg", pL1:"199ea4fa-791b-40ed-91b2-6c944fdd3f60.svg",
+ pS2:"68330042-9bba-4679-91c4-ffb7818db3d0.svg", pE2:"17897b6e-6f91-4956-aef6-f8756ca1546d.svg", pG2:"931cebad-1804-41a3-a741-ee3db9bbc685.svg",
+ pG3:"cc94c64f-e6ad-4b92-91a5-21ac050ef86d.svg", pS4:"1ed8431e-1900-451d-8635-14b79f972b03.svg", pE4:"dd52a0f3-efe2-451b-ae90-563eb9dc9bfa.svg",
+ pI4:"dbf98585-dd5d-42c3-bc90-3a023bbb294b.svg", pV5:"02a54c82-e3b3-4e31-9983-22e93a39e498.svg", pU5:"55530aa8-69b9-4caa-859f-60ef093fc429.svg",
+ qS1:"bf8f8588-a68f-44b3-aea5-590fadbd67be.svg", qG1a:"bcc75b36-9f5f-41a2-b5fc-95938a40e5e3.svg", qG1b:"0f492b4b-f3e0-4e8c-8388-32c347e1b0ce.svg",
+ qS2:"d41d3bba-6079-4b52-b934-fe5aa92039e4.svg", qG2:"ffd10121-2830-4f35-9c08-79b9d2f7c62c.svg", qG3:"fd8273b1-dd60-4bed-8dce-f06d978240d9.svg",
+ qS4:"b731e4a6-02ad-45e0-b557-5c09bb85c473.svg", qE4:"ee045cef-a606-427a-b820-af219319b2f3.svg", qI4:"8b52e902-653b-4bc8-837d-5bd309e52930.svg",
+ qE5:"65d0c59c-e28e-488a-bc17-b1c2c508fb89.svg", qVt5:"7701296d-7c0a-41cc-8216-d25d1c03d021.svg", qI5:"e2c12087-7e2f-4878-b46f-ab5710a710e7.svg",
+ fChev:"6bc58b2d-11e4-4f7e-8725-5f83685afd8c.svg", fLine:"f0712188-bcc4-495e-b30b-54888d989a11.svg",
+ bShot:"46234c0c-2d99-45ec-bcb5-ed700f605d31.png", bBack:"9b0707e9-1f16-4da8-982f-68d61d851efa.svg", bArr:"382b0d17-7762-44f8-be8c-562af0164bdf.svg",
+ bD:"9e198e62-2875-48c5-9eeb-1f3200a0d953.svg", bDa:"2a8f7050-f252-4e73-a6c9-451640baa569.svg", bDb:"6bc7775f-5630-4e66-980f-a36fbb7613ae.svg",
+ bN:"ad4a36df-333d-437a-a922-4bed07fcc201.svg", bNa:"cd5f6470-bd7b-4557-8580-d1b531e308b0.svg", bPre:"77346ec3-c55a-41bc-a8a5-5205e61696fa.svg",
+ bPost:"43291f39-4fb4-4f58-82aa-fa49b2b10a60.svg", bPosti:"869157ca-4236-4ea4-bde2-e66e94004780.svg",
+ bFix:"87c35d8b-aff9-41d1-894d-ee54b9064897.svg", bFixi:"75c327c8-8f36-4d5e-b0f2-2f6055e5c1df.svg",
+ bNet:"7b6a09aa-8938-4de2-b115-bd01e2e586cc.svg", bNetv:"22d32752-420a-4b4f-8f37-b1ea66d68fcd.svg", bNeti:"c6d386cb-d8ee-4ded-a35b-70198ee3a436.svg",
+ bHis:"79a3789c-e204-4243-b8c9-8c3795756286.svg", bHisi:"16e68db8-73d0-4566-a963-51c832fc6b0a.svg",
+ hMore:"4d383667-34c8-4def-b46d-bd0e2b708842.svg", hDn2:"9fb5e6be-7a59-4f8b-9f80-92e7ef77c1e2.svg", hDn3:"64c90a19-ec77-4570-917a-964a047da81f.svg",
+ hIll1:"973d4607-d3af-4fa3-bf47-aaccc3d7cc7f.png", hIll2:"a36b3d85-3747-484d-a62d-7cf449bb0f17.png", hArr3:"d96e15d8-7a59-4961-af2d-717c9b735009.svg",
+ hCake:"33da8588-00a7-4c08-bb4c-b4959ff9eaee.png", hPattern:"924ae599-c995-4f3a-9469-14c75baac3e6.png", hMascot:"f2d091b5-c34d-4765-b889-a4fb3fe78778.png",
+ hFe:"ddf28310-aeae-4685-97c4-fd3ec9219144.png", hDay:"6e0e1bac-4795-4d7c-8f53-f86f18160d29.png", hMbv:"d8b6e9d1-01c4-4f8a-94f2-3afd3d06dca7.png",
+ hEasy:"16ae7dfa-54f7-4197-9acb-6e33c9726d4d.png", hHome:"cee66a6e-754d-4fc0-858e-090f71191d3b.png", hStroke:"7cbe728e-4e68-4bb7-b05d-b70b9d0a8230.svg",
+ hArc:"ff41ad9a-8082-4485-a892-fa2b5aa7ad18.svg", hBg:"d9ff8d01-0dc4-4602-9ec6-91c4a30dfacb.svg", hBg1:"61d95611-9dba-419b-88f1-8e0cc28ec97a.svg",
+ hPh:"416efa1a-b68b-4927-889e-038a3332e414.svg", hClip:"3a09a17c-7ac3-4f06-9308-c54b97caab98.svg", hTime:"45216d27-9db5-4d0a-b7d6-2a9c2bd8245e.svg",
+ hFaq:"dbb747ee-2d57-48b5-9e69-ec02c939e8ad.svg", hCall:"b2dfb1a9-3d77-45ff-b7c4-54aa3dff4e21.svg"
+});
+
+const SV_EASE = "cubic-bezier(.32,.72,0,1)";
+const svDim = document.getElementById("svDim");
+const svStack = [];
+const DIM = .22;
+
+/* Chạy animation rồi ghi trạng thái cuối vào style, để lần sau bắt đầu từ đúng chỗ */
+function svAnim(el, kf, opt){
+  el.getAnimations().forEach(a => a.cancel());
+  Object.assign(el.style, kf[0]);
+  const a = el.animate(kf, { fill:"forwards", ...opt });
+  a.onfinish = () => { Object.assign(el.style, kf[kf.length - 1]); a.cancel(); };
+  return a;
+}
+const offT = v => v.classList.contains("modal") ? "translateY(100%)" : "translateX(100%)";
+
+function svStagger(v){
+  v.querySelectorAll(".st").forEach((el, i) => el.animate(
+    [{ opacity:0, transform:"translateY(14px)" }, { opacity:1, transform:"none" }],
+    { duration:520, delay:140 + i * 45, easing:SV_EASE, fill:"backwards" }));
+}
+
+function svOpen(id){
+  const v = document.getElementById(id);
+  if (!v || svStack.includes(v)) return;
+  const z = 17 + svStack.length * 2;
+  svDim.style.zIndex = z - 1; v.style.zIndex = z;
+  v.classList.add("open");
+  svResetView(v);
+  svStack.push(v);
+  svAnim(v, [{ transform:offT(v) }, { transform:"translate(0,0)" }], { duration:v.classList.contains("modal") ? 540 : 480, easing:SV_EASE });
+  svAnim(svDim, [{ opacity:getComputedStyle(svDim).opacity }, { opacity:DIM }], { duration:480, easing:SV_EASE });
+  svStagger(v);
+}
+
+function svClose(){
+  const v = svStack.pop(); if (!v) return;
+  const modal = v.classList.contains("modal");
+  const a = svAnim(v, [{ transform:v.style.transform || "translate(0,0)" }, { transform:offT(v) }], { duration:modal ? 420 : 380, easing:SV_EASE });
+  svAnim(svDim, [{ opacity:getComputedStyle(svDim).opacity }, { opacity:0 }], { duration:380, easing:SV_EASE });
+  a.addEventListener("finish", () => {
+    v.classList.remove("open");
+    const top = svStack[svStack.length - 1];
+    if (top) { svDim.style.zIndex = parseInt(top.style.zIndex) - 1; svDim.style.opacity = DIM; }
+  });
+}
+
+function svReset(){
+  while (svStack.length) { const v = svStack.pop(); v.getAnimations().forEach(a => a.cancel()); v.style.transform = ""; v.classList.remove("open"); }
+  svDim.getAnimations().forEach(a => a.cancel()); svDim.style.opacity = 0;
+}
+
+function svResetView(v){
+  v.querySelectorAll(".sv-sc").forEach(s => s.scrollTop = 0);
+  if (v.id === "svProducts") { prodPager.style.scrollSnapType = "none"; prodPager.scrollLeft = 0; prodPager.style.scrollSnapType = ""; prodSync(); }
+  if (v.id === "svFaq") v.querySelectorAll(".faq-it").forEach(it => it.classList.remove("open"));
+  if (v.id === "svBills") bsShow(false, true);
+  if (v.id === "svLoan") { hubLoans.scrollLeft = 0; hubNav.classList.remove("solid"); }
+}
+
+/* Điểm vào */
+document.querySelector(".tabbar .tb:nth-child(2)").addEventListener("click", () => svOpen("svProducts"));
+document.querySelector(".navrow .ic-help").addEventListener("click", () => svOpen("svFaq"));
+const qcards = document.querySelectorAll("#paneDebt .qcard");
+qcards[0].addEventListener("click", () => svOpen("svLoan"));
+qcards[1].addEventListener("click", () => svOpen("svBills"));
+document.querySelectorAll(".sv [data-back]").forEach(b => b.addEventListener("click", svClose));
+addEventListener("keydown", e => { if (e.key === "Escape") { if (bsOpen) bsShow(false); else svClose(); } });
+document.getElementById("panel").addEventListener("click", e => { if (e.target.closest("button")) svReset(); }, true);
+
+/* Vuốt từ mép trái để quay lại (màn push) */
+document.querySelectorAll(".sv:not(.modal)").forEach(v => {
+  let on = false, moved = false, swallow = false, sx = 0, dx = 0, t0 = 0;
+  v.addEventListener("click", ev => { if (swallow) { ev.stopPropagation(); ev.preventDefault(); } }, true);
+  v.addEventListener("pointerdown", e => {
+    const r = screen.getBoundingClientRect();
+    if ((e.clientX - r.left) / SCALE > 28 || svStack[svStack.length - 1] !== v || bsOpen) return;
+    on = true; moved = false; sx = e.clientX; dx = 0; t0 = performance.now();
+  });
+  v.addEventListener("pointermove", e => {
+    if (!on) return;
+    dx = Math.max(0, (e.clientX - sx) / SCALE);
+    if (!moved) {
+      if (dx < 6) return;
+      moved = true; v.setPointerCapture(e.pointerId);
+      v.getAnimations().forEach(a => a.cancel()); svDim.getAnimations().forEach(a => a.cancel());
+    }
+    v.style.transform = `translate(${dx}px,0)`;
+    svDim.style.opacity = DIM * (1 - dx / 375);
+  });
+  const end = () => {
+    if (!on) return; on = false;
+    if (!moved) return;
+    swallow = true; setTimeout(() => swallow = false, 0);
+    const vel = dx / Math.max(1, performance.now() - t0);
+    if (dx > 120 || (vel > .5 && dx > 30)) svClose();
+    else {
+      svAnim(v, [{ transform:v.style.transform }, { transform:"translate(0,0)" }], { duration:320, easing:SV_EASE });
+      svAnim(svDim, [{ opacity:svDim.style.opacity }, { opacity:DIM }], { duration:320, easing:SV_EASE });
+    }
+  };
+  v.addEventListener("pointerup", end); v.addEventListener("pointercancel", end);
+});
+
+/* Sản phẩm: 2 tab, vuốt ngang để đổi tab */
+const prodPager = document.getElementById("prodPager"), prodInd = document.getElementById("prodInd");
+const prodTabs = [...document.querySelectorAll("#prodTabs button")];
+function prodSync(){
+  const f = Math.min(1, Math.max(0, prodPager.scrollLeft / 375));
+  prodInd.style.transform = `translateX(${f * 187.5}px)`;
+  prodTabs.forEach((b, k) => b.classList.toggle("on", k === Math.round(f)));
+}
+prodPager.addEventListener("scroll", prodSync, { passive:true });
+prodTabs.forEach((b, k) => b.addEventListener("click", () => prodPager.scrollTo({ left:k * 375, behavior:"smooth" })));
+dragScroll(prodPager, "x");
+
+/* Câu hỏi thường gặp: accordion */
+document.querySelectorAll("#svFaq .faq-q").forEach(q => q.addEventListener("click", () => q.parentElement.classList.toggle("open")));
+dragScroll(document.querySelector("#svFaq .sv-sc"), "y");
+
+/* Thanh toán tự động: bottom sheet chọn dịch vụ */
+const bs = document.getElementById("bs"), bsOv = document.getElementById("bsOv");
+let bsOpen = false;
+function bsShow(on, instant){
+  bsOpen = on; bsOv.classList.toggle("on", on);
+  if (instant) {
+    bs.getAnimations().forEach(a => a.cancel()); bsOv.getAnimations().forEach(a => a.cancel());
+    bs.style.transform = on ? "translateY(0px)" : "translateY(100%)"; bsOv.style.opacity = on ? 1 : 0; return;
+  }
+  svAnim(bs, [{ transform:bs.style.transform || "translateY(100%)" }, { transform:on ? "translateY(0px)" : "translateY(100%)" }],
+    { duration:on ? 520 : 340, easing:on ? "cubic-bezier(.2,1.1,.3,1)" : SV_EASE });
+  svAnim(bsOv, [{ opacity:getComputedStyle(bsOv).opacity }, { opacity:on ? 1 : 0 }], { duration:on ? 360 : 300, easing:SV_EASE });
+  if (on) bs.querySelectorAll(".bs-row").forEach((r, i) => r.animate(
+    [{ opacity:0, transform:"translateY(10px)" }, { opacity:1, transform:"none" }],
+    { duration:420, delay:120 + i * 35, easing:SV_EASE, fill:"backwards" }));
+}
+document.getElementById("blCreate").addEventListener("click", () => bsShow(true));
+bsOv.addEventListener("click", () => bsShow(false));
+(() => { // kéo sheet xuống để đóng
+  let on = false, sy = 0, dy = 0, t0 = 0;
+  bs.addEventListener("pointerdown", e => { if (!bsOpen) return; on = true; sy = e.clientY; dy = 0; t0 = performance.now(); bs.getAnimations().forEach(a => a.cancel()); });
+  addEventListener("pointermove", e => {
+    if (!on) return;
+    const d = (e.clientY - sy) / SCALE; dy = d > 0 ? d : d / 4;
+    if (Math.abs(dy) > 4) bs.setPointerCapture?.(e.pointerId);
+    bs.style.transform = `translateY(${dy}px)`; bsOv.style.opacity = Math.max(0, 1 - dy / 600);
+  });
+  addEventListener("pointerup", () => {
+    if (!on) return; on = false;
+    const vel = dy / Math.max(1, performance.now() - t0);
+    if (dy > 140 || (vel > .5 && dy > 30)) bsShow(false);
+    else if (Math.abs(dy) > 2) {
+      svAnim(bs, [{ transform:bs.style.transform }, { transform:"translateY(0px)" }], { duration:320, easing:SV_EASE });
+      svAnim(bsOv, [{ opacity:bsOv.style.opacity }, { opacity:1 }], { duration:320, easing:SV_EASE });
+    }
+  });
+})();
+
+/* Quản lý vay */
+const hubSc = document.getElementById("hubSc"), hubNav = document.getElementById("hubNav"), hubLoans = document.getElementById("hubLoans");
+hubSc.addEventListener("scroll", () => hubNav.classList.toggle("solid", hubSc.scrollTop > 6), { passive:true });
+dragScroll(hubSc, "y"); dragScroll(hubLoans, "x");
 </script>
 </body>
 </html>
