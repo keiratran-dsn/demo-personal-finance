@@ -550,6 +550,31 @@ p{margin:0}
 .tc-r.tt .pv{font-weight:510}
 .tc-r.tt .cv{font-weight:700}
 .tc-line{height:1px;background:var(--neutral-05)}
+
+/* ===== Chọn tháng/năm dạng bánh xe (Figma 375:53016 · Date picker) ===== */
+.tc-month #tcMonth{cursor:pointer;padding:2px 8px;margin:-2px -8px;border-radius:8px;transition:background .15s}
+.tc-month #tcMonth:active{background:rgba(0,0,0,.06)}
+.dp-ov{position:absolute;inset:0;z-index:9;background:rgba(0,0,0,.6);opacity:0;pointer-events:none}
+.dp-ov.on{pointer-events:auto}
+.dp{position:absolute;inset:0;z-index:10;pointer-events:none}
+.dp.on{pointer-events:auto}
+.dp-sheet{position:absolute;left:0;top:572px;width:375px;height:240px;border-radius:24px 24px 40px 40px;overflow:hidden;
+  background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);
+  -webkit-backdrop-filter:blur(40px) saturate(1.6);backdrop-filter:blur(40px) saturate(1.6);transform:translateY(110%)}
+.dp-pill{position:absolute;left:16px;top:91px;width:343px;height:34px;border-radius:16px;background:rgba(0,0,0,.08)}
+.dp-col{position:absolute;top:18px;width:160px;height:180px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;overscroll-behavior:contain;
+  -webkit-mask:linear-gradient(transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(transparent,#000 12%,#000 88%,transparent);perspective:420px}
+.dp-col::-webkit-scrollbar{display:none}
+.dp-col .pad{height:74px}
+.dp-it{height:32px;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;font-size:22px;line-height:26px;color:var(--neutral-60);will-change:transform,opacity;cursor:pointer;user-select:none}
+.dp-it.on{color:var(--neutral-100)}
+.dp-btn{position:absolute;top:508px;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);
+  -webkit-backdrop-filter:blur(24px) saturate(1.6);backdrop-filter:blur(24px) saturate(1.6);
+  box-shadow:0 4px 12px rgba(0,0,0,.12),inset 0 1px 2px rgba(255,255,255,.8);opacity:0;transform:scale(.6)}
+.dp-btn:active{transform:scale(.9)!important}
+.dp-btn svg{width:24px;height:24px}
+.dp-btn.l{left:16px}.dp-btn.r{left:311px}
 </style>
 </head>
 <body>
@@ -1006,6 +1031,16 @@ p{margin:0}
      <div class="tc-card">
       <div class="tc-chart" id="tcChart"></div>
       <div class="tc-tbl" id="tcTbl"></div>
+     </div>
+    </div>
+    <div class="dp-ov" id="dpOv"></div>
+    <div class="dp" id="dp" role="dialog" aria-label="Chọn tháng">
+     <button class="dp-btn l" id="dpX" aria-label="Đóng"><svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+     <button class="dp-btn r" id="dpOk" aria-label="Xác nhận"><svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
+     <div class="dp-sheet" id="dpSheet">
+      <i class="dp-pill"></i>
+      <div class="dp-col" id="dpY" style="left:24px"></div>
+      <div class="dp-col" id="dpM" style="left:192px"></div>
      </div>
     </div>
     <div class="home-ind"></div>
@@ -1751,10 +1786,13 @@ const TC = [
    ["Vàng",          "#F9D775", [0, 0, 1500000, 1800000]],
    ["Chứng chỉ quỹ", "#6EC9AA", [500000, 500000, 1000000, 1200000]] ] }
 ];
-const TC_M0 = 8, TC_MAX = 11;
-let tcTab = 0, tcM = 10, tcPos = null, tcRaf = 0;
+const TC_Y0 = 2022, TC_Y1 = 2030;
+let tcTab = 0, tcY = 2026, tcM = 10, tcPos = null, tcRaf = 0;
+/* có số liệu cho 08–11/2026; tháng khác hiện 0 */
+const tcVal = (row, y, m) => (y === 2026 && m >= 8 && m <= 11) ? row[2][m - 8] : 0;
+const tcPrevYM = (y, m) => m === 1 ? [y - 1, 12] : [y, m - 1];
 const tcFmt = n => n.toLocaleString("en-US");
-const tcPad = m => String(m).padStart(2, "0") + "/2026";
+const tcPad = (y, m) => String(m).padStart(2, "0") + "/" + y;
 
 /* Hình tab "kẹp hồ sơ": mặt trên phẳng [a,b], hai bên uốn cong xuống thân thẻ */
 const TC_POS = [[0, 99], [113, 209], [244, 343]], TC_F = 28;
@@ -1776,8 +1814,8 @@ function tcShapeTo(k, animate){
   })(t0);
 }
 
-function tcDonut(rows, mi){
-  const vals = rows.map(r => r[2][mi]), sum = vals.reduce((a, b) => a + b, 0);
+function tcDonut(rows, vals){
+  const sum = vals.reduce((a, b) => a + b, 0);
   const cx = 92.5, cy = 92.5, R = 87, r = 50;
   const pt = (rad, a) => [cx + rad * Math.sin(a), cy - rad * Math.cos(a)];
   let a0 = 0, segs = "";
@@ -1796,21 +1834,22 @@ function tcDonut(rows, mi){
 }
 
 function tcRender(animate){
-  const d = TC[tcTab], mi = tcM - TC_M0, pi = mi - 1;
+  const d = TC[tcTab], [py, pm] = tcPrevYM(tcY, tcM);
+  const cur = d.rows.map(r => tcVal(r, tcY, tcM)), prev = d.rows.map(r => tcVal(r, py, pm));
   const chart = document.getElementById("tcChart"), tbl = document.getElementById("tcTbl");
-  chart.classList.remove("sweep"); chart.innerHTML = tcDonut(d.rows, mi);
+  chart.classList.remove("sweep"); chart.innerHTML = tcDonut(d.rows, cur);
   void chart.offsetWidth; chart.classList.add("sweep");
-  const tot = i => d.rows.reduce((s, r) => s + r[2][i], 0);
+  const sum = a => a.reduce((s, v) => s + v, 0);
   tbl.innerHTML =
-    `<div class="tc-r hd"><span class="nm">Loại giao dịch</span><span>${tcPad(tcM - 1)} (đ)</span><span>${tcPad(tcM)} (đ)</span></div>` +
-    d.rows.map(r => `<div class="tc-r"><span class="nm"><i style="background:${r[1]}"></i>${r[0]}</span><span class="pv">${tcFmt(r[2][pi])}</span><span class="cv">${tcFmt(r[2][mi])}</span></div>`).join("") +
-    `<i class="tc-line"></i><div class="tc-r tt"><span class="nm">${d.total}</span><span class="pv">${tcFmt(tot(pi))}</span><span class="cv">${tcFmt(tot(mi))}</span></div>`;
+    `<div class="tc-r hd"><span class="nm">Loại giao dịch</span><span>${tcPad(py, pm)} (đ)</span><span>${tcPad(tcY, tcM)} (đ)</span></div>` +
+    d.rows.map((r, i) => `<div class="tc-r"><span class="nm"><i style="background:${r[1]}"></i>${r[0]}</span><span class="pv">${tcFmt(prev[i])}</span><span class="cv">${tcFmt(cur[i])}</span></div>`).join("") +
+    `<i class="tc-line"></i><div class="tc-r tt"><span class="nm">${d.total}</span><span class="pv">${tcFmt(sum(prev))}</span><span class="cv">${tcFmt(sum(cur))}</span></div>`;
   if (animate) [...tbl.children].forEach((el, i) => el.animate(
     [{ opacity:0, transform:"translateY(8px)" }, { opacity:1, transform:"none" }],
     { duration:380, delay:80 + i * 40, easing:"cubic-bezier(.2,.8,.2,1)", fill:"backwards" }));
-  document.getElementById("tcMonth").textContent = "Tháng " + tcPad(tcM);
-  document.getElementById("tcPrev").disabled = tcM - 1 <= TC_M0;
-  document.getElementById("tcNext").disabled = tcM >= TC_MAX;
+  document.getElementById("tcMonth").textContent = "Tháng " + tcPad(tcY, tcM);
+  document.getElementById("tcPrev").disabled = tcY === TC_Y0 && tcM === 1;
+  document.getElementById("tcNext").disabled = tcY === TC_Y1 && tcM === 12;
 }
 
 function tcSetTab(k, animate){
@@ -1822,8 +1861,10 @@ function tcSetTab(k, animate){
 }
 document.querySelectorAll("#tcTabs .tc-tab").forEach(b => b.addEventListener("click", () => { if (+b.dataset.k !== tcTab) tcSetTab(+b.dataset.k, true); }));
 function tcMonth(step){
-  const n = tcM + step; if (n - 1 < TC_M0 || n > TC_MAX) return;
-  tcM = n;
+  let y = tcY, m = tcM + step;
+  if (m < 1) { m = 12; y--; } if (m > 12) { m = 1; y++; }
+  if (y < TC_Y0 || y > TC_Y1) return;
+  tcY = y; tcM = m;
   const lb = document.getElementById("tcMonth");
   lb.animate([{ opacity:0, transform:`translateX(${step * 12}px)` }, { opacity:1, transform:"none" }], { duration:300, easing:"cubic-bezier(.2,.8,.2,1)" });
   tcRender(true);
@@ -1832,7 +1873,7 @@ document.getElementById("tcPrev").addEventListener("click", () => tcMonth(-1));
 document.getElementById("tcNext").addEventListener("click", () => tcMonth(1));
 
 /* Điểm vào: mũi tên "Tổng quan tháng 11" → Chi; thẻ Tổng chi → Chi; thẻ Tổng thu → Thu */
-function tcOpen(k){ tcM = 10; tcSetTab(k, false); svOpen("svTc"); }
+function tcOpen(k){ if (typeof dpShow === "function" && dpOpen) dpShow(false); tcY = 2026; tcM = 10; tcSetTab(k, false); svOpen("svTc"); }
 document.querySelectorAll(".ov").forEach(ov => {
   ov.querySelector(".ov-btn")?.addEventListener("click", () => tcOpen(0));
   const cards = ov.querySelectorAll(".ov-card");
@@ -1840,6 +1881,56 @@ document.querySelectorAll(".ov").forEach(ov => {
   cards[1]?.addEventListener("click", () => tcOpen(1));
 });
 tcSetTab(0, false);
+
+/* ===== Chọn tháng/năm dạng bánh xe ===== */
+const DP_H = 32;
+const dp = document.getElementById("dp"), dpOv = document.getElementById("dpOv"), dpSheet = document.getElementById("dpSheet");
+const dpY = document.getElementById("dpY"), dpM = document.getElementById("dpM");
+const dpBtns = [...dp.querySelectorAll(".dp-btn")];
+function dpFill(col, items){
+  col.innerHTML = `<div class="pad"></div>` + items.map((t, i) => `<div class="dp-it" data-i="${i}">${t}</div>`).join("") + `<div class="pad"></div>`;
+  col.querySelectorAll(".dp-it").forEach(it => it.addEventListener("click", () => col.scrollTo({ top:+it.dataset.i * DP_H, behavior:"smooth" })));
+  col.addEventListener("scroll", () => dpStyle(col), { passive:true });
+  dragScroll(col, "y");
+}
+/* Hiệu ứng trống xoay: hàng càng xa tâm càng nhỏ, nghiêng và mờ */
+function dpStyle(col){
+  const c = col.scrollTop / DP_H;
+  col.querySelectorAll(".dp-it").forEach(it => {
+    const d = +it.dataset.i - c, a = Math.min(Math.abs(d), 3.2);
+    it.style.transform = `rotateX(${-d * 20}deg) scale(${1 - a * .09})`;
+    it.style.opacity = Math.max(0, 1 - a * .26);
+    it.classList.toggle("on", Math.abs(d) < .5);
+  });
+}
+const dpYears = []; for (let y = TC_Y0; y <= TC_Y1; y++) dpYears.push(String(y));
+dpFill(dpY, dpYears);
+dpFill(dpM, Array.from({ length:12 }, (_, i) => "tháng " + (i + 1)));
+const dpIdx = col => Math.round(col.scrollTop / DP_H);
+
+let dpOpen = false;
+function dpShow(on){
+  dpOpen = on; dp.classList.toggle("on", on); dpOv.classList.toggle("on", on);
+  if (on) {
+    dpY.scrollTop = (tcY - TC_Y0) * DP_H; dpM.scrollTop = (tcM - 1) * DP_H;
+    dpStyle(dpY); dpStyle(dpM);
+  }
+  svAnim(dpOv, [{ opacity:getComputedStyle(dpOv).opacity }, { opacity:on ? 1 : 0 }], { duration:on ? 320 : 260, easing:SV_EASE });
+  svAnim(dpSheet, [{ transform:dpSheet.style.transform || "translateY(110%)" }, { transform:on ? "translateY(0px)" : "translateY(110%)" }],
+    { duration:on ? 560 : 320, easing:on ? "cubic-bezier(.2,1.15,.3,1)" : SV_EASE });
+  dpBtns.forEach((b, i) => svAnim(b, [{ opacity:getComputedStyle(b).opacity, transform:b.style.transform || "scale(.6)" },
+    { opacity:on ? 1 : 0, transform:on ? "scale(1)" : "scale(.6)" }],
+    { duration:on ? 460 : 200, delay:on ? 140 + i * 40 : 0, easing:on ? "cubic-bezier(.3,1.5,.5,1)" : SV_EASE }));
+}
+document.getElementById("tcMonth").addEventListener("click", () => dpShow(true));
+document.getElementById("dpX").addEventListener("click", () => dpShow(false));
+dpOv.addEventListener("click", () => dpShow(false));
+document.getElementById("dpOk").addEventListener("click", () => {
+  const y = TC_Y0 + dpIdx(dpY), m = 1 + dpIdx(dpM), changed = y !== tcY || m !== tcM;
+  dpShow(false);
+  if (changed) { tcY = y; tcM = m; setTimeout(() => tcRender(true), 180); }
+});
+addEventListener("keydown", e => { if (e.key === "Escape" && dpOpen) { e.stopImmediatePropagation(); dpShow(false); } }, true);
 </script>
 </body>
 </html>
