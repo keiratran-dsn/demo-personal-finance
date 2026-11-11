@@ -591,6 +591,15 @@ p{margin:0}
 .spark{position:relative;width:16px;height:16px;flex:none;display:none}
 #screen[data-tier="1"] .spark{display:block}
 #screen[data-tier="1"] .ov{display:none}
+
+/* ===== Hôm nay có gì mới: banner carousel (Figma 499:23556) ===== */
+.nb{position:relative;height:130px;margin:0 -16px;overflow:hidden;touch-action:pan-y}
+.nb-s{position:absolute;left:16px;top:0;width:343px;height:130px;border-radius:20px;border:1px solid var(--border-default);background:#fff;overflow:hidden;transform-origin:50% 50%;padding:0;will-change:transform}
+.nb-s img{position:absolute;inset:-1px 0 0 0;width:100%;height:calc(100% + 1px);object-fit:cover;pointer-events:none}
+.nb-ad{position:absolute;left:14px;top:10px;padding:2px 6px;border-radius:16px;background:var(--border-default);border:1px solid #fff;font-size:12px;line-height:14px;font-weight:510;color:var(--neutral-80)}
+.nb-dots{display:flex;align-items:center;justify-content:center;gap:4px;height:4px}
+.nb-dots i{width:4px;height:4px;border-radius:4px;background:#E9E9E9;transition:width .4s cubic-bezier(.3,.7,.2,1),background-color .4s}
+.nb-dots i.on{width:16px;background:var(--red)}
 </style>
 </head>
 <body>
@@ -793,12 +802,9 @@ p{margin:0}
        <p class="h16">Hôm nay có gì mới</p>
        <button class="see-all">Xem tất cả <span class="chev"><img data-a="chevronRed" alt=""></span></button>
       </div>
-      <div class="rail" id="rail">
-       <div class="news reveal" style="--i:0"><div class="im"><img data-a="image42" alt=""></div><div class="ct"><p class="a">Tiết kiệm MBV lên tới 8,61%/ năm</p><p class="b">Mở sổ ngay →</p></div></div>
-       <div class="news reveal" style="--i:1"><div class="im"><img data-a="image43" alt=""></div><div class="ct"><p class="a">Duyệt vay 100TR chỉ 3 phút</p><p class="b">Khám phá →</p></div></div>
-       <div class="news reveal" style="--i:2"><div class="im"><img data-a="image41" alt=""></div><div class="ct"><p class="a">Quà tặng điện tử</p><p class="b">Khám phá →</p></div></div>
-       <div class="news bd reveal" style="--i:3"><div class="im"><img data-a="image38" alt=""></div><div class="ct"><p class="a">Duyệt vay 100TR chỉ 3 phút</p><p class="b">Khám phá →</p></div></div>
-      </div>
+      <!-- Hôm nay có gì mới: banner carousel (Figma 499:23556) -->
+      <div class="nb reveal" id="nb" aria-roledescription="carousel"></div>
+      <div class="nb-dots reveal" id="nbDots"></div>
      </section>
      </div><!-- /paneBody -->
     </div>
@@ -1355,7 +1361,56 @@ function dragScroll(el, axis){
   el.addEventListener("click", e => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
 }
 dragScroll(sc, "y");
-dragScroll(document.getElementById("rail"), "x");
+/* Hôm nay có gì mới: banner giữa lớn nhất, 2 bên thu nhỏ 75%, tự chuyển sau 5s, vuốt ngang được */
+(() => {
+  const nb = document.getElementById("nb"), dotsEl = document.getElementById("nbDots");
+  const IMGS = ["news1", "news2", "news2"], N = IMGS.length, COPIES = 3;
+  const STEP = 343 / 2 + 8 + 343 * .75 / 2, SIDE = .75, T = 5000;
+  nb.innerHTML = Array.from({ length:N * COPIES }, (_, i) =>
+    `<button class="nb-s" data-k="${i % N}" aria-label="Banner ${i % N + 1}"><img src="assets/${IMGS[i % N]}.jpg" alt="" draggable="false"><span class="nb-ad">Ad</span></button>`).join("");
+  dotsEl.innerHTML = IMGS.map(() => "<i></i>").join("");
+  const slides = [...nb.children], dots = [...dotsEl.children];
+  let cur = N, timer = 0, dragX = 0;
+  function layout(anim){
+    slides.forEach((el, i) => {
+      const o = i - cur + dragX / STEP, a = Math.min(Math.abs(o), 1);
+      el.style.transition = anim ? "transform .65s cubic-bezier(.3,.7,.2,1)" : "none";
+      el.style.transform = `translateX(${(o * STEP).toFixed(2)}px) scale(${(1 - (1 - SIDE) * a).toFixed(4)})`;
+      el.style.zIndex = 10 - Math.round(Math.abs(o) * 2);
+      el.style.visibility = Math.abs(o) > 2.2 ? "hidden" : "visible";
+    });
+    const k = ((cur % N) + N) % N;
+    dots.forEach((d, i) => d.classList.toggle("on", i === k));
+  }
+  function go(step){
+    cur += step; layout(true);
+    clearTimeout(go.t);
+    go.t = setTimeout(() => { if (cur < N || cur >= 2 * N) { cur = ((cur % N) + N) % N + N; layout(false); } }, 700);
+  }
+  const play = () => { clearInterval(timer); timer = setInterval(() => { if (!document.hidden) go(1); }, T); };
+  layout(false); play();
+  // vuốt ngang
+  let on = false, moved = false, sx = 0, sy = 0;
+  nb.addEventListener("pointerdown", e => { on = true; moved = false; sx = e.clientX; sy = e.clientY; dragX = 0; });
+  addEventListener("pointermove", e => {
+    if (!on) return;
+    const dx = (e.clientX - sx) / SCALE, dy = (e.clientY - sy) / SCALE;
+    if (!moved) {
+      if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { on = false; return; }
+      if (Math.abs(dx) < 6) return;
+      moved = true; clearInterval(timer);
+    }
+    dragX = dx; layout(false);
+  });
+  addEventListener("pointerup", () => {
+    if (!on) return; on = false;
+    if (!moved) return;
+    const step = dragX < -40 ? 1 : dragX > 40 ? -1 : 0;
+    dragX = 0; go(step); play();
+    drag.last = performance.now();
+  });
+  nb.addEventListener("click", e => { if (performance.now() - (drag.last || 0) < 250) { e.stopPropagation(); e.preventDefault(); } }, true);
+})();
 
 /* ===== Tab Tài sản / Phải trả ===== */
 const tabs = document.getElementById("tabs");
@@ -2008,7 +2063,7 @@ addEventListener("keydown", e => { if (e.key === "Escape" && dpOpen) { e.stopImm
 
 /* ===== Tầng 1: bấm vào dịch vụ nào cũng dẫn sang luồng Onboarding của VTM ===== */
 Object.assign(A, { spark1:"fce11120-e2f8-4f19-a98e-e7bb71c62541.svg", spark2:"34227b5f-6925-4176-b2e0-741856a98f48.svg" });
-const ONBOARD_SEL = "#assetList .row, .slot .btn-dark, .slot .news, .slot .see-all, #paneDebt .qcard, .ov-card, .ov-btn, #svProducts .svc, #svLoan .loan-btn, #svLoan .hub-t";
+const ONBOARD_SEL = "#assetList .row, .slot .btn-dark, .slot .nb-s, .slot .see-all, #paneDebt .qcard, .ov-card, .ov-btn, #svProducts .svc, #svLoan .loan-btn, #svLoan .hub-t";
 document.addEventListener("click", e => {
   if (tier !== "1" || drag.active || performance.now() - (drag.last || 0) < 250) return;
   const el = e.target.closest(ONBOARD_SEL);
