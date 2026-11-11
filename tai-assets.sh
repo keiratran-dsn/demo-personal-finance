@@ -80,6 +80,10 @@ curl -fsSL -o "public/assets/graphUp.svg" "https://www.figma.com/api/mcp/asset/5
 curl -fsSL -o "public/assets/graphDown.svg" "https://www.figma.com/api/mcp/asset/cb68102e-42b3-43aa-b35f-945862c55ccb.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/regClose.svg" "https://www.figma.com/api/mcp/asset/90331beb-d2c6-4462-b993-a391ef3fff9a.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/regIll.png" "https://www.figma.com/api/mcp/asset/9074620c-30a3-4fc7-a83e-c18f007691fd.png" && ok=$((ok+1))
+curl -fsSL -o "public/assets/onbXacThuc.png" "https://www.figma.com/api/mcp/asset/113b0403-dcbb-4ca1-9317-507c6625fa1e.png" && ok=$((ok+1))
+curl -fsSL -o "public/assets/onbQuay.png" "https://www.figma.com/api/mcp/asset/40014589-a639-42ac-a793-7e488f20e206.png" && ok=$((ok+1))
+curl -fsSL -o "public/assets/onbXetDuyet.png" "https://www.figma.com/api/mcp/asset/7e4a42ff-f44f-4d67-93ce-027d98bb4852.png" && ok=$((ok+1))
+curl -fsSL -o "public/assets/onbCheck.svg" "https://www.figma.com/api/mcp/asset/0300cc13-499d-4d03-8d02-1e1fa67a2f04.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/vtmLogo.svg" "https://www.figma.com/api/mcp/asset/ff87a912-80fb-45b5-84b8-4f7b0a42c6a3.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/pS1.svg" "https://www.figma.com/api/mcp/asset/f7850bea-5843-499c-b56f-1351f51ca6f3.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/pE1.svg" "https://www.figma.com/api/mcp/asset/9c6467bf-7d61-46d9-968a-875575e80403.svg" && ok=$((ok+1))
@@ -152,5 +156,5 @@ curl -fsSL -o "public/assets/tcL.svg" "https://www.figma.com/api/mcp/asset/49642
 curl -fsSL -o "public/assets/tcR.svg" "https://www.figma.com/api/mcp/asset/9f94bbe0-b700-4427-95ca-00055788ac68.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/spark1.svg" "https://www.figma.com/api/mcp/asset/fce11120-e2f8-4f19-a98e-e7bb71c62541.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/spark2.svg" "https://www.figma.com/api/mcp/asset/34227b5f-6925-4176-b2e0-741856a98f48.svg" && ok=$((ok+1))
-echo "Asset tải được: $ok/149"
+echo "Asset tải được: $ok/153"
 exit 0

@@ -168,34 +168,41 @@ p{margin:0}
 .ov-trend.dn .ov-gi{transform:scaleY(-1)}
 .ov-sub{font-size:12px;line-height:14px;color:var(--neutral-60);white-space:nowrap}
 
-/* Tầng 1 – popup Onboarding "RegIntro" (Figma SQUnKnAEiYIgpVPbqxuPyE 6764:62934) */
+/* Tầng 1 – popup Onboarding VTM (Figma OOxHqzRWucPK5yCKCEPjMr 12548:266350, modal "Yêu cầu xác thực") */
 .reg{position:absolute;inset:0;z-index:15}
 .reg[hidden]{display:none}
 .reg-ov{position:absolute;inset:0;background:rgba(0,0,0,.6);opacity:0;transition:opacity .3s}
 .reg.show .reg-ov{opacity:1}
-.reg-modal{position:absolute;left:16px;right:16px;bottom:40px;background:var(--white);border-radius:20px;padding:24px 16px;
-  transform:translateY(calc(100% + 60px));transition:transform .55s cubic-bezier(.2,.9,.25,1.06)}
+.reg-modal{position:absolute;left:16px;right:16px;bottom:67px;background:var(--white);border-radius:16px;padding:16px 16px 24px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  transform:translateY(calc(100% + 90px));transition:transform .55s cubic-bezier(.2,.9,.25,1.06)}
 .reg.show .reg-modal{transform:none}
-.reg-x{position:absolute;right:8.07px;top:9px;width:23.93px;height:24px;overflow:hidden;transition:transform .15s}
+.reg-x{position:absolute;right:8px;top:8px;width:24px;height:24px;overflow:hidden;transition:transform .15s}
 .reg-x:active{transform:scale(.88)}
 .reg-x > span{position:absolute;left:5px;top:4px;width:14.143px;height:15.556px}
 .reg-x img{position:absolute;left:0;top:0;width:107.07%;height:100%}
-.reg-c{display:flex;flex-direction:column;gap:24px;align-items:center}
-.reg-content{display:flex;flex-direction:column;gap:16px;align-items:center;width:100%}
-.reg-ill{width:156px;height:147.735px;object-fit:cover}
-.reg-title{font-weight:700;font-size:18px;line-height:22px;color:var(--neutral-100);text-align:center}
-.reg-desc{font-size:16px;line-height:20px;color:var(--neutral-100);text-align:center}
-.reg-accs{display:flex;gap:16px;padding:16px 0;width:100%;overflow:hidden}
-.reg-acc{flex:1 0 0;min-width:1px;height:124px;padding:16px;border-radius:16px;display:flex;flex-direction:column;gap:8px;align-items:center;
-  background:linear-gradient(263.74deg,#f8f8f2 4.21%,#fff4f4 100%);font-size:14px;line-height:18px;color:var(--neutral-100);text-align:center}
-.reg-ic{width:48px;height:48px;border-radius:75px;background:var(--white);border:.75px solid var(--border-default);padding:6px;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden}
-.reg-ic .l36{position:relative;width:36px;height:36px;flex:none}
-.reg-ic .l36 > img{width:100%;height:100%}
-.reg-more{display:flex;gap:4px;align-items:center;justify-content:center;font-size:14px;line-height:18px;color:var(--red)}
-.reg-btn{width:100%;height:48px;border-radius:24px;background:var(--red);color:var(--white);font-weight:500;font-size:18px;line-height:22px;
-  box-shadow:0 6px 14px rgba(238,0,51,.25);transition:transform .15s}
-.reg-btn:active{transform:scale(.97)}
-.run-reg .reg-acc{animation:rise .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.25s + var(--i) * 70ms)}
+.onb-ill{width:220px;height:220px;object-fit:contain;flex:none}
+.onb-title{margin-top:24px;width:311px;font-weight:700;font-size:18px;line-height:22px;color:#222;white-space:pre-line}
+.onb-desc{margin-top:16px;width:311px;font-size:16px;line-height:20px;color:#4e4e4e}
+.onb-note{margin-top:0;width:311px;font-size:16px;line-height:20px;color:#a7a7a7}
+.onb-note:empty{display:none}
+.onb-agree{margin-top:16px;display:flex;gap:8px;align-items:flex-start;text-align:left;font-size:14px;line-height:18px;color:#4e4e4e;cursor:pointer}
+.onb-agree[hidden]{display:none}
+.onb-agree b{font-weight:400;color:var(--red)}
+.onb-agree input{position:absolute;opacity:0;pointer-events:none}
+.onb-cb{position:relative;width:24px;height:24px;flex:none}
+.onb-cb::before{content:"";position:absolute;left:2px;top:2px;width:20px;height:20px;border-radius:4px;border:1.5px solid #a7a7a7;box-sizing:border-box}
+.onb-cb img{position:absolute;left:2px;top:2px;width:20px;height:20px;transition:opacity .15s,transform .2s cubic-bezier(.2,.9,.3,1.3)}
+.onb-agree input:not(:checked) + .onb-cb img{opacity:0;transform:scale(.6)}
+.onb-agree input:focus-visible + .onb-cb::before{outline:2px solid var(--red);outline-offset:2px}
+.onb-btn{margin-top:24px;min-width:200px;height:48px;padding:0 24px;border-radius:24px;background:var(--red);color:var(--white);
+  font-weight:500;font-size:18px;line-height:22px;box-shadow:0 6px 14px rgba(238,0,51,.25);transition:transform .15s,opacity .2s}
+.onb-btn:active{transform:scale(.97)}
+.onb-btn:disabled{opacity:.4;box-shadow:none;pointer-events:none}
+.run-reg .onb-ill{animation:rise .5s cubic-bezier(.2,.8,.2,1) .2s both}
+.onb-toast{position:absolute;z-index:16;left:50%;bottom:110px;max-width:320px;padding:10px 16px;border-radius:12px;background:rgba(34,34,34,.92);color:#fff;
+  font-size:14px;line-height:18px;text-align:center;pointer-events:none;opacity:0;transform:translate(-50%,12px);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.onb-toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ===== Slot gợi ý ===== */
 .slot{margin:32px 16px 0;display:flex;flex-direction:column;gap:16px}
@@ -348,6 +355,9 @@ p{margin:0}
 .seg{display:flex;background:#eef0f3;border-radius:10px;padding:2px}
 .seg[hidden]{display:none}
 #tierNote{max-width:240px}
+.panel .acc{display:flex;flex-direction:column;gap:4px;font-size:12px;line-height:16px;color:var(--neutral-60)}
+.panel .acc[hidden]{display:none}
+.panel .acc select{font:inherit;font-weight:600;color:var(--neutral-100);background:#eef0f3;border:0;border-radius:10px;padding:7px 10px}
 .seg button{flex:1;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:600;color:var(--neutral-80);transition:background .2s,color .2s}
 .seg button.on{background:#fff;color:var(--neutral-100);box-shadow:0 1px 2px rgba(0,0,0,.08)}
 .panel .acts{display:flex;gap:6px}
@@ -832,37 +842,22 @@ p{margin:0}
    </nav>
    <div class="home-ind"></div>
 
-   <!-- Tầng 1: KH chưa có tài khoản → popup Onboarding của VTM -->
+   <!-- Tầng 1: KH chưa có tài khoản → popup Onboarding hiện tại của VTM, nội dung theo thực trạng tài khoản
+        (Figma Onboarding OOxHqzRWucPK5yCKCEPjMr 12548:266350 "Thông báo không đủ ĐK sử dụng dịch vụ"; TTTC 493:22997) -->
    <div class="reg" id="reg" hidden>
     <div class="reg-ov"></div>
-    <div class="reg-modal" role="dialog" aria-label="Xác thực thông tin cá nhân">
+    <div class="reg-modal" role="dialog" aria-modal="true" aria-labelledby="onbTitle">
      <button class="reg-x" id="regClose" aria-label="Đóng"><span><img data-a="regClose" alt=""></span></button>
-     <div class="reg-c">
-      <div class="reg-content">
-       <img class="reg-ill" data-a="regIll" alt="">
-       <p class="reg-title">Xác thực thông tin cá nhân để<br>sử dụng dịch vụ</p>
-       <p class="reg-desc">Sau khi xác thực, bạn có thể mở được đồng thời 3 tài khoản thanh toán</p>
-       <div class="reg-accs">
-        <div class="reg-acc" style="--i:0"><span class="reg-ic"><span class="l36"><img data-a="vtmLogo" alt=""></span></span><span>Ví Viettel</span></div>
-        <div class="reg-acc" style="--i:1"><span class="reg-ic"><span class="l36"><div class="abs" style="inset:0">
-         <div class="abs" style="inset:15.75% 0 4.58% 0"><img class="fill" data-a="vector" alt=""></div>
-         <div class="abs" style="inset:18.39% 3.08% 7.56% 3.33%"><img class="fill" data-a="vector1" alt=""></div>
-         <div class="abs" style="inset:21.07% 6.26% 10.65% 6.86%"><img class="fill" data-a="vector2" alt=""></div>
-         <div class="abs" style="inset:23.71% 9.32% 13.62% 10.2%"><img class="fill" data-a="vector3" alt=""></div>
-         <div class="abs" style="inset:26.35% 12.37% 16.6% 13.53%"><img class="fill" data-a="vector4" alt=""></div>
-         <div class="abs" style="inset:29.19% 16.06% 20.12% 17.76%"><img class="fill" data-a="vector5" alt=""></div>
-         <div class="abs" style="inset:4.33% 6.14% 4.38% 21.12%"><img class="fill" data-a="vector6" alt=""></div>
-         <div class="abs" style="inset:43.55% 16.2% 34.07% 30.86%"><img class="fill" data-a="pay" alt=""></div>
-         <div class="abs" style="inset:33.73% 30.19% 58.86% 30.9%"><img class="fill" data-a="viettel" alt=""></div>
-        </div></span></span><span>ViettelPay</span></div>
-        <div class="reg-acc" style="--i:2"><span class="reg-ic"><span class="l36"><span class="abs" style="inset:0 11.67%"><img class="fill" data-a="icon" alt=""></span></span></span><span>Tiền di động</span></div>
-       </div>
-       <button class="reg-more">Xem chi tiết <span class="chev"><img data-a="chevronRed" alt=""></span></button>
-      </div>
-      <button class="reg-btn" id="regGo">Xác thực ngay</button>
-     </div>
+     <img class="onb-ill" id="onbIll" alt="">
+     <p class="onb-title" id="onbTitle"></p>
+     <p class="onb-desc" id="onbDesc"></p>
+     <p class="onb-note" id="onbNote"></p>
+     <label class="onb-agree" id="onbAgree"><input type="checkbox" id="onbCheck" checked><span class="onb-cb" aria-hidden="true"><img data-a="onbCheck" alt=""></span>
+      <span>Tôi đồng ý với <b>Điều khoản sử dụng</b> và <b>Chính sách cung cấp dữ liệu</b> dịch vụ</span></label>
+     <button class="onb-btn" id="regGo"></button>
     </div>
    </div>
+   <div class="onb-toast" id="onbToast" role="status" aria-live="polite"></div>
 
    <!-- ===== Màn con (push/pop) ===== -->
    <div class="sv-dim" id="svDim"></div>
@@ -1154,6 +1149,14 @@ p{margin:0}
 <div class="panel" id="panel">
  <div><h2>Trung tâm tài chính</h2><div class="sub"><span class="hint-mouse">Cuộn hoặc kéo chuột trong màn hình</span><span class="hint-touch">Vuốt trong màn hình để cuộn</span></div></div>
  <div class="seg" id="tierSeg"><button data-t="1">Tầng 1</button><button data-t="2">Tầng 2</button><button data-t="3" class="on">Tầng 3</button></div>
+ <label class="acc" id="accRow" hidden><span>Thực trạng tài khoản</span>
+  <select id="accSel">
+   <option value="xacthuc">Chưa xác thực thông tin</option>
+   <option value="quay">Cần nâng cấp tại quầy</option>
+   <option value="xetduyet">Đang xét duyệt hồ sơ</option>
+   <option value="nangcap">Cần nâng cấp tài khoản</option>
+   <option value="kichhoat">Chưa kích hoạt nguồn tiền</option>
+  </select></label>
  <div class="seg" id="subSeg" hidden><button data-sub="2a" class="on">Chưa nạp tiền</button><button data-sub="2b">Đã nạp tiền</button></div>
  <div class="sub" id="tierNote"></div>
  <div class="seg" id="seg"><button data-s="0" class="on">Mặc định</button><button data-s="1">Scroll</button></div>
@@ -1202,6 +1205,9 @@ const A = {
  /* Tầng 1 – RegIntro (file Onboarding SQUnKnAEiYIgpVPbqxuPyE) */
  regClose:"90331beb-d2c6-4462-b993-a391ef3fff9a.svg", regIll:"9074620c-30a3-4fc7-a83e-c18f007691fd.png",
  vtmLogo:"ff87a912-80fb-45b5-84b8-4f7b0a42c6a3.svg",
+ /* Tầng 1 – popup Onboarding theo thực trạng TK (file OOxHqzRWucPK5yCKCEPjMr 12548:266350) */
+ onbXacThuc:"113b0403-dcbb-4ca1-9317-507c6625fa1e.png", onbQuay:"40014589-a639-42ac-a793-7e488f20e206.png",
+ onbXetDuyet:"7e4a42ff-f44f-4d67-93ce-027d98bb4852.png", onbCheck:"0300cc13-499d-4d03-8d02-1e1fa67a2f04.svg",
  /* Opt 2 – nền (313:29935) */
  bg2:"c9bbe800-ae71-4766-8888-1cc0ded11315.png",
  /* Màn Phải trả (node 269:23243) */
@@ -1510,20 +1516,81 @@ function renderList(t){
   applyAssets(USE_LOCAL);
 }
 const reg = document.getElementById("reg");
-let regT;
-function showReg(on){
+/* Popup "không đủ điều kiện sử dụng dịch vụ" của VTM – nội dung theo thực trạng tài khoản */
+const ONB = {
+  xacthuc: { ill:"onbXacThuc", title:"Xác thực thông tin", agree:true, btn:"Xác thực ngay", go:"2a",
+             desc:"Để bảo vệ tài khoản và tuân thủ quy định của Ngân hàng nhà nước, bạn vui lòng xác thực thông tin cá nhân của mình nhé",
+             toast:"Mở luồng Xác thực thông tin (eKYC) của VTM" },
+  quay:    { ill:"onbQuay", title:"Nâng cấp tài khoản của bạn", btn:"Tìm quầy Viettel gần nhất",
+             desc:"Để sử dụng tính năng, bạn vui lòng mang CMND/Thẻ căn cước/Hộ chiếu ra quầy Viettel để được hỗ trợ nâng cấp tài khoản miễn phí",
+             toast:"Mở danh sách quầy Viettel gần nhất" },
+  xetduyet:{ ill:"onbXetDuyet", title:"Thông tin của bạn đang được\nxét duyệt", btn:"Đóng",
+             desc:"Thông tin của bạn sẽ được xử lý trong tối đa 48h, kết quả sẽ gửi về qua tin nhắn SMS" },
+  nangcap: { ill:"onbXacThuc", title:"Nâng cấp tài khoản của bạn", btn:"Nâng cấp ngay", go:"2a",
+             desc:"Để sử dụng tính năng, bạn cần nâng cấp tài khoản (miễn phí)",
+             note:"Việc nâng cấp tài khoản sẽ giúp bạn nâng cao bảo mật và đảm bảo không bị mạo danh trong mọi trường hợp",
+             toast:"Mở luồng Nâng cấp tài khoản của VTM" },
+  vtp:     { ill:"onbXacThuc", title:"Kích hoạt tài khoản ViettelPay", btn:"Kích hoạt ngay", go:"2a",
+             desc:"Để sử dụng tính năng, bạn cần kích hoạt tài khoản ViettelPay (miễn phí)",
+             toast:"Mở luồng Kích hoạt tài khoản ViettelPay" },
+  tdd:     { ill:"onbXacThuc", title:"Kích hoạt tài khoản\nTiền di động", btn:"Kích hoạt ngay", go:"2a",
+             desc:"Để sử dụng tính năng, bạn cần kích hoạt tài khoản Tiền di động (miễn phí)",
+             toast:"Mở luồng Kích hoạt tài khoản Tiền di động" }
+};
+const accSel = document.getElementById("accSel"), accRow = document.getElementById("accRow");
+let accState = new URLSearchParams(location.search).get("tk") || "xacthuc";
+if (![...accSel.options].some(o => o.value === accState)) accState = "xacthuc";
+accSel.value = accState;
+accSel.addEventListener("change", () => {
+  accState = accSel.value;
+  const u = new URL(location.href); accState === "xacthuc" ? u.searchParams.delete("tk") : u.searchParams.set("tk", accState);
+  try { history.replaceState(null, "", u); } catch (e) {}
+  showReg(false);
+});
+/* Chọn popup: đã xác thực nhưng chưa kích hoạt nguồn tiền → bấm nguồn tiền nào kích hoạt nguồn đó,
+   các dịch vụ khác dùng ViettelPay làm nguồn mặc định */
+function onbKey(el){
+  if (accState !== "kichhoat") return accState;
+  const name = el && el.querySelector(".name");
+  return name && /Tiền di động/.test(name.textContent) ? "tdd" : "vtp";
+}
+let regT, onbCur;
+const onbCheck = document.getElementById("onbCheck"), regGo = document.getElementById("regGo");
+function showReg(on, key){
   clearTimeout(regT);
   if (on) {
+    const d = ONB[key] || ONB.xacthuc; onbCur = d;
+    const ill = document.getElementById("onbIll"); ill.dataset.a = d.ill;
+    document.getElementById("onbTitle").textContent = d.title;
+    document.getElementById("onbDesc").textContent = d.desc;
+    document.getElementById("onbNote").textContent = d.note || "";
+    document.getElementById("onbAgree").hidden = !d.agree;
+    onbCheck.checked = true; regGo.disabled = false;
+    regGo.textContent = d.btn;
+    applyAssets(USE_LOCAL);
     reg.hidden = false; void reg.offsetWidth;
     reg.classList.add("show"); reg.classList.remove("run-reg"); void reg.offsetWidth; reg.classList.add("run-reg");
+    setTimeout(() => regGo.focus({ preventScroll:true }), 400);
   } else {
     reg.classList.remove("show");
     regT = setTimeout(() => reg.hidden = true, 450);
   }
 }
+let toastT;
+function onbToast(msg){
+  const t = document.getElementById("onbToast"); t.textContent = msg;
+  clearTimeout(toastT); t.classList.add("show"); toastT = setTimeout(() => t.classList.remove("show"), 1800);
+}
+onbCheck.addEventListener("change", () => regGo.disabled = !onbCheck.checked);
+/* Tắt pop-up → ở lại màn Trung tâm tài chính */
 document.getElementById("regClose").addEventListener("click", () => showReg(false));
 reg.querySelector(".reg-ov").addEventListener("click", () => showReg(false));
-document.getElementById("regGo").addEventListener("click", () => { showReg(false); setTimeout(() => setTier("2a", true), 350); });
+addEventListener("keydown", e => { if (e.key === "Escape" && !reg.hidden) showReg(false); });
+regGo.addEventListener("click", () => {
+  const d = onbCur; showReg(false);
+  if (d && d.toast) onbToast(d.toast);
+  if (d && d.go) setTimeout(() => setTier(d.go, true), 1300);
+});
 
 const tierSeg = document.getElementById("tierSeg"), subSeg = document.getElementById("subSeg"), tierNote = document.getElementById("tierNote");
 let tier = "3";
@@ -1531,6 +1598,7 @@ function syncTierUI(){
   const top = tier[0];
   tierSeg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.t === top));
   subSeg.hidden = top !== "2";
+  accRow.hidden = top !== "1";
   subSeg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.sub === tier));
   tierNote.textContent = TIERS[tier].note;
 }
@@ -1948,7 +2016,7 @@ document.addEventListener("click", e => {
   e.preventDefault(); e.stopImmediatePropagation();
   el.animate([{ transform:"scale(1)" }, { transform:"scale(.97)" }, { transform:"scale(1)" }], { duration:220, easing:"ease-out" });
   if (svStack.length) svReset();
-  showReg(true);
+  showReg(true, onbKey(el));
 }, true);
 </script>
 </body>
