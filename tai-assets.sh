@@ -150,5 +150,7 @@ curl -fsSL -o "public/assets/hFaq.svg" "https://www.figma.com/api/mcp/asset/dbb7
 curl -fsSL -o "public/assets/hCall.svg" "https://www.figma.com/api/mcp/asset/b2dfb1a9-3d77-45ff-b7c4-54aa3dff4e21.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/tcL.svg" "https://www.figma.com/api/mcp/asset/49642c77-9857-4ebd-9444-e0a0dc0c6209.svg" && ok=$((ok+1))
 curl -fsSL -o "public/assets/tcR.svg" "https://www.figma.com/api/mcp/asset/9f94bbe0-b700-4427-95ca-00055788ac68.svg" && ok=$((ok+1))
-echo "Asset tải được: $ok/147"
+curl -fsSL -o "public/assets/spark1.svg" "https://www.figma.com/api/mcp/asset/fce11120-e2f8-4f19-a98e-e7bb71c62541.svg" && ok=$((ok+1))
+curl -fsSL -o "public/assets/spark2.svg" "https://www.figma.com/api/mcp/asset/34227b5f-6925-4176-b2e0-741856a98f48.svg" && ok=$((ok+1))
+echo "Asset tải được: $ok/149"
 exit 0

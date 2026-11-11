@@ -575,6 +575,12 @@ p{margin:0}
 .dp-btn:active{transform:scale(.9)!important}
 .dp-btn svg{width:24px;height:24px}
 .dp-btn.l{left:16px}.dp-btn.r{left:311px}
+
+/* Tầng 1 (Figma 493:22610): chưa có tài khoản – ẩn Tổng quan tháng, tiêu đề Gợi ý có icon */
+.slot-h{display:flex;align-items:center;gap:8px}
+.spark{position:relative;width:16px;height:16px;flex:none;display:none}
+#screen[data-tier="1"] .spark{display:block}
+#screen[data-tier="1"] .ov{display:none}
 </style>
 </head>
 <body>
@@ -745,7 +751,7 @@ p{margin:0}
 
      <!-- ===== Gợi ý cho bạn ===== -->
      <section class="slot">
-      <p class="h16 reveal">Gợi ý cho bạn</p>
+      <p class="h16 reveal slot-h"><span class="spark" aria-hidden="true"><span class="abs" style="inset:4.51% 24.97% 22.55% 2.08%"><img class="fill" data-a="spark1" alt=""></span><span class="abs" style="inset:59.42% 2.08% 4.51% 61.85%"><img class="fill" data-a="spark2" alt=""></span></span>Gợi ý cho bạn</p>
       <div class="advisors">
        <div class="adv reveal" style="--i:1">
         <div class="l">
@@ -1328,6 +1334,7 @@ function dragScroll(el, axis){
   });
   addEventListener("pointerup", () => {
     if (!down) return; down = false;
+    if (moved) drag.last = performance.now();
     let vel = -v * 16;
     (function glide(){
       if (Math.abs(vel) < .4) {
@@ -1476,7 +1483,7 @@ const ASSETS = [
 ];
 const VTP = ["ViettelPay", "--c-vtp"], TDD = ["Tiền di động", "--c-tdd"];
 const TIERS = {
-  "1":  { total: 0,        chart: "none", owned: false, src: [[...VTP, "0"], [...TDD, null]], note: "Tầng 1: KH chưa có tài khoản → luồng Onboarding hiện tại của VTM" },
+  "1":  { total: 0,        chart: "none", owned: false, src: [[...VTP, null], [...TDD, null]], note: "Tầng 1: KH chưa có tài khoản – vẫn vào Trung tâm tài chính; bấm dịch vụ nào cũng chuyển sang luồng Onboarding hiện tại của VTM" },
   "2a": { total: 0,        chart: "none", owned: false, src: [[...VTP, "0"], [...TDD, null]], note: "Tầng 2: Đã có tài khoản, chưa có tiền (chưa nạp tiền) – ẩn chart" },
   "2b": { total: 625000,   chart: "vtp",  owned: false, src: [[...VTP, "625,000"], [...TDD, null]], note: "Tầng 2: Đã có tài khoản, đã nạp tiền vào nguồn tiền – hiện chart" },
   "3":  { total: 52000000, chart: "full", owned: true,  src: [[...TDD, "632,000"], [...VTP, "0"]], note: "Tầng 3: Đã có tài khoản, đã có tiền, có ít nhất 1 SPTC" }
@@ -1531,6 +1538,7 @@ function applyTierNow(){
   const t = TIERS[tier];
   TABS[0].value = t.total;
   document.getElementById("assetCard").dataset.chart = t.chart;
+  screen.dataset.tier = tier;
   renderList(t);
 }
 function setTier(k, animate){
@@ -1557,7 +1565,6 @@ function setTier(k, animate){
     screen.classList.remove("run"); void screen.offsetWidth; screen.classList.add("run");
     if (changed) { const s = getSeen(); delete s[0]; memSeen = s; try { sessionStorage.setItem(SEEN_KEY, JSON.stringify(s)); } catch (e) {} }
     maybeCount(false, 900, 120);
-    if (k === "1") regT = setTimeout(() => showReg(true), 700);
   });
 }
 tierSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
@@ -1568,7 +1575,6 @@ subSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () =>
 tier = new URLSearchParams(location.search).get("tang") || "3";
 if (!TIERS[tier]) tier = "3";
 syncTierUI(); applyTierNow();
-if (tier === "1") setTimeout(() => showReg(true), 1200);
 
 /* ===== Bật/tắt bảng điều khiển (điện thoại) ===== */
 const panel = document.getElementById("panel"), pt = document.getElementById("panelToggle");
@@ -1931,6 +1937,19 @@ document.getElementById("dpOk").addEventListener("click", () => {
   if (changed) { tcY = y; tcM = m; setTimeout(() => tcRender(true), 180); }
 });
 addEventListener("keydown", e => { if (e.key === "Escape" && dpOpen) { e.stopImmediatePropagation(); dpShow(false); } }, true);
+
+/* ===== Tầng 1: bấm vào dịch vụ nào cũng dẫn sang luồng Onboarding của VTM ===== */
+Object.assign(A, { spark1:"fce11120-e2f8-4f19-a98e-e7bb71c62541.svg", spark2:"34227b5f-6925-4176-b2e0-741856a98f48.svg" });
+const ONBOARD_SEL = "#assetList .row, .slot .btn-dark, .slot .news, .slot .see-all, #paneDebt .qcard, .ov-card, .ov-btn, #svProducts .svc, #svLoan .loan-btn, #svLoan .hub-t";
+document.addEventListener("click", e => {
+  if (tier !== "1" || drag.active || performance.now() - (drag.last || 0) < 250) return;
+  const el = e.target.closest(ONBOARD_SEL);
+  if (!el) return;
+  e.preventDefault(); e.stopImmediatePropagation();
+  el.animate([{ transform:"scale(1)" }, { transform:"scale(.97)" }, { transform:"scale(1)" }], { duration:220, easing:"ease-out" });
+  if (svStack.length) svReset();
+  showReg(true);
+}, true);
 </script>
 </body>
 </html>
