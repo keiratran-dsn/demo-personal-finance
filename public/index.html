@@ -1216,7 +1216,7 @@ const A = {
  debtGlow1:"0838a960-9e26-4c64-bcb5-a7dc6afa3969.svg", debtIcon1:"6311189e-59d6-4298-a29c-f0d7316c9416.svg"
 };
 const ext = f => f.slice(f.lastIndexOf("."));
-let USE_LOCAL = false;
+let USE_LOCAL = true;   // asset đã nằm sẵn trong repo
 function applyAssets(local){
   USE_LOCAL = local;
   document.querySelectorAll("img[data-a]").forEach(img=>{

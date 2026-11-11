@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="18.3333" height="18.3333" viewBox="0 0 18.3333 18.3333" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Time Circle">
+<mask id="stroke0_0_941" fill="white">
+<path d="M18.3333 9.16667C18.3333 4.10468 14.2296 0 9.16667 0C4.10468 0 0 4.10468 0 9.16667C0 14.2286 4.10468 18.3333 9.16667 18.3333C14.2296 18.3333 18.3333 14.2286 18.3333 9.16667Z" fill-rule="evenodd" clip-rule="evenodd"/>
+</mask>
+<path id="Stroke 4" d="M18.3333 9.16667C18.3333 4.10468 14.2296 -4.76837e-07 9.16667 -4.76837e-07C4.10468 -4.76837e-07 -4.76837e-07 4.10468 -4.76837e-07 9.16667C-4.76837e-07 14.2286 4.10468 18.3333 9.16667 18.3333C14.2296 18.3333 18.3333 14.2286 18.3333 9.16667Z" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" stroke="#2D4982" mask="url(#stroke0_0_941)"/>
+<path id="Stroke 3" d="M12.3123 11.8643L8.85646 9.80273V5.35965" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round" stroke="#2D4982"/>
+</g>
+</svg>

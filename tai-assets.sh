@@ -1,160 +1,160 @@
 #!/usr/bin/env bash
-# Tải asset từ Figma vào public/assets. Chạy tự động khi Vercel build.
-# Nếu tải lỗi, trang vẫn chạy vì tự lấy ảnh từ link Figma.
+# Asset đã được lưu sẵn trong repo (public/assets) vì link asset của Figma MCP hết hạn sau 7 ngày.
+# Script chỉ tải những file còn thiếu (asset mới thêm). Asset mới nên được commit vào repo ngay sau khi thêm.
 cd "$(dirname "$0")" && mkdir -p public/assets
 ok=0
-curl -fsSL -o "public/assets/coinsHand.svg" "https://www.figma.com/api/mcp/asset/d24fc6cf-fe53-4ec0-9905-ee54de016c11.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/arrowLeft.svg" "https://www.figma.com/api/mcp/asset/830677f9-6111-4034-bcb2-819e0c32890f.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/connector.svg" "https://www.figma.com/api/mcp/asset/fd3d7cc6-a13b-4723-9a74-6ade41c3a845.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bg.png" "https://www.figma.com/api/mcp/asset/38d61867-2dbe-444b-b269-83e34be3f5e9.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/image.png" "https://www.figma.com/api/mcp/asset/9a30df56-f668-42e3-8220-e25411e21275.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/icCcq.png" "https://www.figma.com/api/mcp/asset/f6e76919-afe1-4cbf-9a53-6f5aa2d72f66.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/image42.png" "https://www.figma.com/api/mcp/asset/afd086b2-f06a-4ef0-bfca-d3a16e561f80.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/image43.png" "https://www.figma.com/api/mcp/asset/40ca2de8-54dd-4803-afd9-81b698561b4a.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/image41.png" "https://www.figma.com/api/mcp/asset/d1eefa31-257b-4dee-a1ee-3ebdac5ab3bc.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/image38.png" "https://www.figma.com/api/mcp/asset/4e2c1859-d208-4462-bea1-023ff1aaecfe.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/show.svg" "https://www.figma.com/api/mcp/asset/c27ade37-3142-44e7-8b47-4962e0d495ad.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/group36289.svg" "https://www.figma.com/api/mcp/asset/6d08ba8b-8ba1-4407-a503-19cdaff4d7a3.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/group36290.svg" "https://www.figma.com/api/mcp/asset/7501ca54-58e3-4890-a0b8-6201e075c45c.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/ellipse2110.svg" "https://www.figma.com/api/mcp/asset/59a971ee-e519-4a2b-a08f-a7b7f53718c0.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/tietKiem.svg" "https://www.figma.com/api/mcp/asset/c6c27378-be20-4c09-a33d-a1a3f53404c0.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/viettelPay.svg" "https://www.figma.com/api/mcp/asset/c04d745d-1e6c-40e9-9a4f-54c8954c2c4e.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/mobileMoney.svg" "https://www.figma.com/api/mcp/asset/33a66ce7-878f-4cb2-adbb-0f92665108c5.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/chungChiQuy.svg" "https://www.figma.com/api/mcp/asset/16117d5d-eaa6-4ccd-876d-5cb4f586cdb3.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/line32.svg" "https://www.figma.com/api/mcp/asset/02cc8276-de58-4e24-9f24-89c2bed40ecc.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/line33.svg" "https://www.figma.com/api/mcp/asset/71970662-54de-43cf-8b62-61848a241b7e.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/shape0.svg" "https://www.figma.com/api/mcp/asset/35bab7a5-44b7-4ad7-86b8-6f1970a597a7.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/ellipse2109.svg" "https://www.figma.com/api/mcp/asset/2ad91015-2de4-4e45-b95d-110c40d9b607.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/group.svg" "https://www.figma.com/api/mcp/asset/37d22db4-c13e-41c2-9c5b-e3dbfc523c84.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vector.svg" "https://www.figma.com/api/mcp/asset/6881893c-c91c-4a12-b331-cdabb749071c.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vector1.svg" "https://www.figma.com/api/mcp/asset/a96c3f6f-0075-427e-9c2f-ad425f5dc9a2.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vector2.svg" "https://www.figma.com/api/mcp/asset/da0308d6-1f2b-4806-a622-ec8ee0f0ec51.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vector3.svg" "https://www.figma.com/api/mcp/asset/617dccc3-df0f-490d-9eff-674505236f3a.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vector4.svg" "https://www.figma.com/api/mcp/asset/e6739e02-507f-42cc-96c9-163e1766977d.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vector5.svg" "https://www.figma.com/api/mcp/asset/7f54b9f3-083c-40cf-b736-7647ed769b10.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vector6.svg" "https://www.figma.com/api/mcp/asset/e4ee2124-2966-4768-b211-ed72d61d11b9.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pay.svg" "https://www.figma.com/api/mcp/asset/ea35310f-0e89-40f8-a379-36a40cddf82c.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/viettel.svg" "https://www.figma.com/api/mcp/asset/0d1f8823-edda-49a1-a07b-1846c3698834.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/icon.svg" "https://www.figma.com/api/mcp/asset/8c369d09-96ac-4d87-b830-d83afd911ae6.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/shape1.svg" "https://www.figma.com/api/mcp/asset/22875282-d48f-4a36-ab90-fed96d28daaa.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/ellipse2111.svg" "https://www.figma.com/api/mcp/asset/94fc12d9-942c-4465-abff-d2e9c6478aa6.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/shape2.svg" "https://www.figma.com/api/mcp/asset/e9c1bf68-9d57-4a4a-b973-e9fb5b92bd3c.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/ellipse2112.svg" "https://www.figma.com/api/mcp/asset/eee701c8-649b-416c-a6de-e3d01ee708c5.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/shape3.svg" "https://www.figma.com/api/mcp/asset/1d74ffd7-6bc3-49bd-ba02-18c8aeac3a63.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/ellipse2113.svg" "https://www.figma.com/api/mcp/asset/e3861d07-3fe1-4a76-9ae6-50d925073d7a.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/group1.svg" "https://www.figma.com/api/mcp/asset/e175c1ae-aa35-4afc-9826-cb3e859cae25.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/battery.svg" "https://www.figma.com/api/mcp/asset/4a02a413-9b88-4aff-9bb6-3bd6b4d819f0.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/wifi.svg" "https://www.figma.com/api/mcp/asset/36fc1137-aad2-4af3-8346-b7bf85cb5bc2.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/cellular.svg" "https://www.figma.com/api/mcp/asset/8a6d7819-e213-4704-8974-d476ab03d68c.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/dangerCircle.svg" "https://www.figma.com/api/mcp/asset/37413f02-d5f4-4017-b0f3-78d828a6f6f3.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/chevron.svg" "https://www.figma.com/api/mcp/asset/2eb46f97-c14b-4130-b361-1ca2719c06c6.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/shape4.svg" "https://www.figma.com/api/mcp/asset/6cbd08e8-04c1-4cdf-b606-31735cff9b3e.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/ellipse2114.svg" "https://www.figma.com/api/mcp/asset/4f2c8882-5e98-4177-a57a-8d3371d5c10f.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/icon1.svg" "https://www.figma.com/api/mcp/asset/177c64a7-d02a-4817-8f22-89c311a7b42d.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/shape5.svg" "https://www.figma.com/api/mcp/asset/8a7c3eca-9be4-4acc-9450-ed5661027e21.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/ellipse2115.svg" "https://www.figma.com/api/mcp/asset/5d1c070a-9eff-46bc-bda8-40edf35d414e.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/group2.svg" "https://www.figma.com/api/mcp/asset/ce54b1de-6b39-4ea6-bc4a-dd1fb6caa222.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/shape6.svg" "https://www.figma.com/api/mcp/asset/100e94a3-9742-4c8f-9c32-4f1966718509.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/ellipse2116.svg" "https://www.figma.com/api/mcp/asset/79218e4f-dd52-4366-b6a2-95d4b63d563a.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/group3.svg" "https://www.figma.com/api/mcp/asset/7df558f9-b6b8-4503-b465-6ec32016698d.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/chevronRed.svg" "https://www.figma.com/api/mcp/asset/a74afe5e-deb1-4479-bb75-4afd8b1e3da8.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/home.svg" "https://www.figma.com/api/mcp/asset/707d24ac-3691-4088-b59b-cbc6b7b2ae7d.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/debtShape0.svg" "https://www.figma.com/api/mcp/asset/496a588c-c5d2-42b4-9329-9e02a67590c8.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/debtGlow0.svg" "https://www.figma.com/api/mcp/asset/95bfb64d-8bb5-416e-aee8-eed6419e4499.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/debtIcon0.svg" "https://www.figma.com/api/mcp/asset/abdd58b9-3f0b-4912-976e-7b9ea6fad6d7.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/debtShape1.svg" "https://www.figma.com/api/mcp/asset/8fc5bc6f-601e-4763-ae19-b68f492b9d24.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/debtGlow1.svg" "https://www.figma.com/api/mcp/asset/0838a960-9e26-4c64-bcb5-a7dc6afa3969.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/debtIcon1.svg" "https://www.figma.com/api/mcp/asset/6311189e-59d6-4298-a29c-f0d7316c9416.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bg2.png" "https://www.figma.com/api/mcp/asset/c9bbe800-ae71-4766-8888-1cc0ded11315.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bgSilk.png" "https://www.figma.com/api/mcp/asset/151235c0-956c-4933-862c-a09d415700db.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bgTint.png" "https://www.figma.com/api/mcp/asset/abd7a0dd-91c9-4d8a-b705-094cfe6c5e97.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vtpRing.svg" "https://www.figma.com/api/mcp/asset/f6300f86-9ab3-4f03-bae7-ef856490209d.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pieVtpFull.svg" "https://www.figma.com/api/mcp/asset/ccafc344-0e34-482f-854e-5313e39467aa.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vtpConnA.svg" "https://www.figma.com/api/mcp/asset/6e5c98fc-cc45-466f-b12e-9b70f21654ac.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vtpLine.svg" "https://www.figma.com/api/mcp/asset/47c5cbaf-c351-4bb9-b859-4b8625b1ba36.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vtpConnB.svg" "https://www.figma.com/api/mcp/asset/4564f6fc-aa70-4544-a50c-a91d86906bab.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vtpConnC.svg" "https://www.figma.com/api/mcp/asset/5575ba91-2c9d-4234-8849-03990abcb870.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vtpConnD.svg" "https://www.figma.com/api/mcp/asset/45fdc125-a0aa-4559-9508-6266838a7452.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/ovArrow.svg" "https://www.figma.com/api/mcp/asset/90f6a3cb-768b-4daf-9cad-a8ca6e8c9552.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/graphUp.svg" "https://www.figma.com/api/mcp/asset/5256c31e-0c59-43d6-950f-d8d490cfe132.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/graphDown.svg" "https://www.figma.com/api/mcp/asset/cb68102e-42b3-43aa-b35f-945862c55ccb.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/regClose.svg" "https://www.figma.com/api/mcp/asset/90331beb-d2c6-4462-b993-a391ef3fff9a.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/regIll.png" "https://www.figma.com/api/mcp/asset/9074620c-30a3-4fc7-a83e-c18f007691fd.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/onbXacThuc.png" "https://www.figma.com/api/mcp/asset/113b0403-dcbb-4ca1-9317-507c6625fa1e.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/onbQuay.png" "https://www.figma.com/api/mcp/asset/40014589-a639-42ac-a793-7e488f20e206.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/onbXetDuyet.png" "https://www.figma.com/api/mcp/asset/7e4a42ff-f44f-4d67-93ce-027d98bb4852.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/onbCheck.svg" "https://www.figma.com/api/mcp/asset/0300cc13-499d-4d03-8d02-1e1fa67a2f04.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/vtmLogo.svg" "https://www.figma.com/api/mcp/asset/ff87a912-80fb-45b5-84b8-4f7b0a42c6a3.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pS1.svg" "https://www.figma.com/api/mcp/asset/f7850bea-5843-499c-b56f-1351f51ca6f3.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pE1.svg" "https://www.figma.com/api/mcp/asset/9c6467bf-7d61-46d9-968a-875575e80403.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pL1.svg" "https://www.figma.com/api/mcp/asset/199ea4fa-791b-40ed-91b2-6c944fdd3f60.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pS2.svg" "https://www.figma.com/api/mcp/asset/68330042-9bba-4679-91c4-ffb7818db3d0.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pE2.svg" "https://www.figma.com/api/mcp/asset/17897b6e-6f91-4956-aef6-f8756ca1546d.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pG2.svg" "https://www.figma.com/api/mcp/asset/931cebad-1804-41a3-a741-ee3db9bbc685.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pG3.svg" "https://www.figma.com/api/mcp/asset/cc94c64f-e6ad-4b92-91a5-21ac050ef86d.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pS4.svg" "https://www.figma.com/api/mcp/asset/1ed8431e-1900-451d-8635-14b79f972b03.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pE4.svg" "https://www.figma.com/api/mcp/asset/dd52a0f3-efe2-451b-ae90-563eb9dc9bfa.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pI4.svg" "https://www.figma.com/api/mcp/asset/dbf98585-dd5d-42c3-bc90-3a023bbb294b.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pV5.svg" "https://www.figma.com/api/mcp/asset/02a54c82-e3b3-4e31-9983-22e93a39e498.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/pU5.svg" "https://www.figma.com/api/mcp/asset/55530aa8-69b9-4caa-859f-60ef093fc429.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qS1.svg" "https://www.figma.com/api/mcp/asset/bf8f8588-a68f-44b3-aea5-590fadbd67be.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qG1a.svg" "https://www.figma.com/api/mcp/asset/bcc75b36-9f5f-41a2-b5fc-95938a40e5e3.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qG1b.svg" "https://www.figma.com/api/mcp/asset/0f492b4b-f3e0-4e8c-8388-32c347e1b0ce.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qS2.svg" "https://www.figma.com/api/mcp/asset/d41d3bba-6079-4b52-b934-fe5aa92039e4.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qG2.svg" "https://www.figma.com/api/mcp/asset/ffd10121-2830-4f35-9c08-79b9d2f7c62c.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qG3.svg" "https://www.figma.com/api/mcp/asset/fd8273b1-dd60-4bed-8dce-f06d978240d9.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qS4.svg" "https://www.figma.com/api/mcp/asset/b731e4a6-02ad-45e0-b557-5c09bb85c473.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qE4.svg" "https://www.figma.com/api/mcp/asset/ee045cef-a606-427a-b820-af219319b2f3.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qI4.svg" "https://www.figma.com/api/mcp/asset/8b52e902-653b-4bc8-837d-5bd309e52930.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qE5.svg" "https://www.figma.com/api/mcp/asset/65d0c59c-e28e-488a-bc17-b1c2c508fb89.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qVt5.svg" "https://www.figma.com/api/mcp/asset/7701296d-7c0a-41cc-8216-d25d1c03d021.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/qI5.svg" "https://www.figma.com/api/mcp/asset/e2c12087-7e2f-4878-b46f-ab5710a710e7.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/fChev.svg" "https://www.figma.com/api/mcp/asset/6bc58b2d-11e4-4f7e-8725-5f83685afd8c.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/fLine.svg" "https://www.figma.com/api/mcp/asset/f0712188-bcc4-495e-b30b-54888d989a11.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bShot.png" "https://www.figma.com/api/mcp/asset/46234c0c-2d99-45ec-bcb5-ed700f605d31.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bBack.svg" "https://www.figma.com/api/mcp/asset/9b0707e9-1f16-4da8-982f-68d61d851efa.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bArr.svg" "https://www.figma.com/api/mcp/asset/382b0d17-7762-44f8-be8c-562af0164bdf.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bD.svg" "https://www.figma.com/api/mcp/asset/9e198e62-2875-48c5-9eeb-1f3200a0d953.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bDa.svg" "https://www.figma.com/api/mcp/asset/2a8f7050-f252-4e73-a6c9-451640baa569.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bDb.svg" "https://www.figma.com/api/mcp/asset/6bc7775f-5630-4e66-980f-a36fbb7613ae.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bN.svg" "https://www.figma.com/api/mcp/asset/ad4a36df-333d-437a-a922-4bed07fcc201.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bNa.svg" "https://www.figma.com/api/mcp/asset/cd5f6470-bd7b-4557-8580-d1b531e308b0.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bPre.svg" "https://www.figma.com/api/mcp/asset/77346ec3-c55a-41bc-a8a5-5205e61696fa.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bPost.svg" "https://www.figma.com/api/mcp/asset/43291f39-4fb4-4f58-82aa-fa49b2b10a60.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bPosti.svg" "https://www.figma.com/api/mcp/asset/869157ca-4236-4ea4-bde2-e66e94004780.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bFix.svg" "https://www.figma.com/api/mcp/asset/87c35d8b-aff9-41d1-894d-ee54b9064897.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bFixi.svg" "https://www.figma.com/api/mcp/asset/75c327c8-8f36-4d5e-b0f2-2f6055e5c1df.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bNet.svg" "https://www.figma.com/api/mcp/asset/7b6a09aa-8938-4de2-b115-bd01e2e586cc.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bNetv.svg" "https://www.figma.com/api/mcp/asset/22d32752-420a-4b4f-8f37-b1ea66d68fcd.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bNeti.svg" "https://www.figma.com/api/mcp/asset/c6d386cb-d8ee-4ded-a35b-70198ee3a436.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bHis.svg" "https://www.figma.com/api/mcp/asset/79a3789c-e204-4243-b8c9-8c3795756286.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/bHisi.svg" "https://www.figma.com/api/mcp/asset/16e68db8-73d0-4566-a963-51c832fc6b0a.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hMore.svg" "https://www.figma.com/api/mcp/asset/4d383667-34c8-4def-b46d-bd0e2b708842.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hDn2.svg" "https://www.figma.com/api/mcp/asset/9fb5e6be-7a59-4f8b-9f80-92e7ef77c1e2.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hDn3.svg" "https://www.figma.com/api/mcp/asset/64c90a19-ec77-4570-917a-964a047da81f.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hIll1.png" "https://www.figma.com/api/mcp/asset/973d4607-d3af-4fa3-bf47-aaccc3d7cc7f.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hIll2.png" "https://www.figma.com/api/mcp/asset/a36b3d85-3747-484d-a62d-7cf449bb0f17.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hArr3.svg" "https://www.figma.com/api/mcp/asset/d96e15d8-7a59-4961-af2d-717c9b735009.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hCake.png" "https://www.figma.com/api/mcp/asset/33da8588-00a7-4c08-bb4c-b4959ff9eaee.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hPattern.png" "https://www.figma.com/api/mcp/asset/924ae599-c995-4f3a-9469-14c75baac3e6.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hMascot.png" "https://www.figma.com/api/mcp/asset/f2d091b5-c34d-4765-b889-a4fb3fe78778.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hFe.png" "https://www.figma.com/api/mcp/asset/ddf28310-aeae-4685-97c4-fd3ec9219144.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hDay.png" "https://www.figma.com/api/mcp/asset/6e0e1bac-4795-4d7c-8f53-f86f18160d29.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hMbv.png" "https://www.figma.com/api/mcp/asset/d8b6e9d1-01c4-4f8a-94f2-3afd3d06dca7.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hEasy.png" "https://www.figma.com/api/mcp/asset/16ae7dfa-54f7-4197-9acb-6e33c9726d4d.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hHome.png" "https://www.figma.com/api/mcp/asset/cee66a6e-754d-4fc0-858e-090f71191d3b.png" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hStroke.svg" "https://www.figma.com/api/mcp/asset/7cbe728e-4e68-4bb7-b05d-b70b9d0a8230.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hArc.svg" "https://www.figma.com/api/mcp/asset/ff41ad9a-8082-4485-a892-fa2b5aa7ad18.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hBg.svg" "https://www.figma.com/api/mcp/asset/d9ff8d01-0dc4-4602-9ec6-91c4a30dfacb.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hBg1.svg" "https://www.figma.com/api/mcp/asset/61d95611-9dba-419b-88f1-8e0cc28ec97a.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hPh.svg" "https://www.figma.com/api/mcp/asset/416efa1a-b68b-4927-889e-038a3332e414.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hClip.svg" "https://www.figma.com/api/mcp/asset/3a09a17c-7ac3-4f06-9308-c54b97caab98.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hTime.svg" "https://www.figma.com/api/mcp/asset/45216d27-9db5-4d0a-b7d6-2a9c2bd8245e.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hFaq.svg" "https://www.figma.com/api/mcp/asset/dbb747ee-2d57-48b5-9e69-ec02c939e8ad.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/hCall.svg" "https://www.figma.com/api/mcp/asset/b2dfb1a9-3d77-45ff-b7c4-54aa3dff4e21.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/tcL.svg" "https://www.figma.com/api/mcp/asset/49642c77-9857-4ebd-9444-e0a0dc0c6209.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/tcR.svg" "https://www.figma.com/api/mcp/asset/9f94bbe0-b700-4427-95ca-00055788ac68.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/spark1.svg" "https://www.figma.com/api/mcp/asset/fce11120-e2f8-4f19-a98e-e7bb71c62541.svg" && ok=$((ok+1))
-curl -fsSL -o "public/assets/spark2.svg" "https://www.figma.com/api/mcp/asset/34227b5f-6925-4176-b2e0-741856a98f48.svg" && ok=$((ok+1))
+[ -s "public/assets/coinsHand.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/coinsHand.svg" "https://www.figma.com/api/mcp/asset/d24fc6cf-fe53-4ec0-9905-ee54de016c11.svg" && ok=$((ok+1)); }
+[ -s "public/assets/arrowLeft.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/arrowLeft.svg" "https://www.figma.com/api/mcp/asset/830677f9-6111-4034-bcb2-819e0c32890f.svg" && ok=$((ok+1)); }
+[ -s "public/assets/connector.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/connector.svg" "https://www.figma.com/api/mcp/asset/fd3d7cc6-a13b-4723-9a74-6ade41c3a845.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bg.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bg.png" "https://www.figma.com/api/mcp/asset/38d61867-2dbe-444b-b269-83e34be3f5e9.png" && ok=$((ok+1)); }
+[ -s "public/assets/image.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/image.png" "https://www.figma.com/api/mcp/asset/9a30df56-f668-42e3-8220-e25411e21275.png" && ok=$((ok+1)); }
+[ -s "public/assets/icCcq.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/icCcq.png" "https://www.figma.com/api/mcp/asset/f6e76919-afe1-4cbf-9a53-6f5aa2d72f66.png" && ok=$((ok+1)); }
+[ -s "public/assets/image42.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/image42.png" "https://www.figma.com/api/mcp/asset/afd086b2-f06a-4ef0-bfca-d3a16e561f80.png" && ok=$((ok+1)); }
+[ -s "public/assets/image43.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/image43.png" "https://www.figma.com/api/mcp/asset/40ca2de8-54dd-4803-afd9-81b698561b4a.png" && ok=$((ok+1)); }
+[ -s "public/assets/image41.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/image41.png" "https://www.figma.com/api/mcp/asset/d1eefa31-257b-4dee-a1ee-3ebdac5ab3bc.png" && ok=$((ok+1)); }
+[ -s "public/assets/image38.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/image38.png" "https://www.figma.com/api/mcp/asset/4e2c1859-d208-4462-bea1-023ff1aaecfe.png" && ok=$((ok+1)); }
+[ -s "public/assets/show.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/show.svg" "https://www.figma.com/api/mcp/asset/c27ade37-3142-44e7-8b47-4962e0d495ad.svg" && ok=$((ok+1)); }
+[ -s "public/assets/group36289.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/group36289.svg" "https://www.figma.com/api/mcp/asset/6d08ba8b-8ba1-4407-a503-19cdaff4d7a3.svg" && ok=$((ok+1)); }
+[ -s "public/assets/group36290.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/group36290.svg" "https://www.figma.com/api/mcp/asset/7501ca54-58e3-4890-a0b8-6201e075c45c.svg" && ok=$((ok+1)); }
+[ -s "public/assets/ellipse2110.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/ellipse2110.svg" "https://www.figma.com/api/mcp/asset/59a971ee-e519-4a2b-a08f-a7b7f53718c0.svg" && ok=$((ok+1)); }
+[ -s "public/assets/tietKiem.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/tietKiem.svg" "https://www.figma.com/api/mcp/asset/c6c27378-be20-4c09-a33d-a1a3f53404c0.svg" && ok=$((ok+1)); }
+[ -s "public/assets/viettelPay.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/viettelPay.svg" "https://www.figma.com/api/mcp/asset/c04d745d-1e6c-40e9-9a4f-54c8954c2c4e.svg" && ok=$((ok+1)); }
+[ -s "public/assets/mobileMoney.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/mobileMoney.svg" "https://www.figma.com/api/mcp/asset/33a66ce7-878f-4cb2-adbb-0f92665108c5.svg" && ok=$((ok+1)); }
+[ -s "public/assets/chungChiQuy.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/chungChiQuy.svg" "https://www.figma.com/api/mcp/asset/16117d5d-eaa6-4ccd-876d-5cb4f586cdb3.svg" && ok=$((ok+1)); }
+[ -s "public/assets/line32.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/line32.svg" "https://www.figma.com/api/mcp/asset/02cc8276-de58-4e24-9f24-89c2bed40ecc.svg" && ok=$((ok+1)); }
+[ -s "public/assets/line33.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/line33.svg" "https://www.figma.com/api/mcp/asset/71970662-54de-43cf-8b62-61848a241b7e.svg" && ok=$((ok+1)); }
+[ -s "public/assets/shape0.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/shape0.svg" "https://www.figma.com/api/mcp/asset/35bab7a5-44b7-4ad7-86b8-6f1970a597a7.svg" && ok=$((ok+1)); }
+[ -s "public/assets/ellipse2109.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/ellipse2109.svg" "https://www.figma.com/api/mcp/asset/2ad91015-2de4-4e45-b95d-110c40d9b607.svg" && ok=$((ok+1)); }
+[ -s "public/assets/group.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/group.svg" "https://www.figma.com/api/mcp/asset/37d22db4-c13e-41c2-9c5b-e3dbfc523c84.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vector.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vector.svg" "https://www.figma.com/api/mcp/asset/6881893c-c91c-4a12-b331-cdabb749071c.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vector1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vector1.svg" "https://www.figma.com/api/mcp/asset/a96c3f6f-0075-427e-9c2f-ad425f5dc9a2.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vector2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vector2.svg" "https://www.figma.com/api/mcp/asset/da0308d6-1f2b-4806-a622-ec8ee0f0ec51.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vector3.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vector3.svg" "https://www.figma.com/api/mcp/asset/617dccc3-df0f-490d-9eff-674505236f3a.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vector4.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vector4.svg" "https://www.figma.com/api/mcp/asset/e6739e02-507f-42cc-96c9-163e1766977d.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vector5.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vector5.svg" "https://www.figma.com/api/mcp/asset/7f54b9f3-083c-40cf-b736-7647ed769b10.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vector6.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vector6.svg" "https://www.figma.com/api/mcp/asset/e4ee2124-2966-4768-b211-ed72d61d11b9.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pay.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pay.svg" "https://www.figma.com/api/mcp/asset/ea35310f-0e89-40f8-a379-36a40cddf82c.svg" && ok=$((ok+1)); }
+[ -s "public/assets/viettel.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/viettel.svg" "https://www.figma.com/api/mcp/asset/0d1f8823-edda-49a1-a07b-1846c3698834.svg" && ok=$((ok+1)); }
+[ -s "public/assets/icon.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/icon.svg" "https://www.figma.com/api/mcp/asset/8c369d09-96ac-4d87-b830-d83afd911ae6.svg" && ok=$((ok+1)); }
+[ -s "public/assets/shape1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/shape1.svg" "https://www.figma.com/api/mcp/asset/22875282-d48f-4a36-ab90-fed96d28daaa.svg" && ok=$((ok+1)); }
+[ -s "public/assets/ellipse2111.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/ellipse2111.svg" "https://www.figma.com/api/mcp/asset/94fc12d9-942c-4465-abff-d2e9c6478aa6.svg" && ok=$((ok+1)); }
+[ -s "public/assets/shape2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/shape2.svg" "https://www.figma.com/api/mcp/asset/e9c1bf68-9d57-4a4a-b973-e9fb5b92bd3c.svg" && ok=$((ok+1)); }
+[ -s "public/assets/ellipse2112.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/ellipse2112.svg" "https://www.figma.com/api/mcp/asset/eee701c8-649b-416c-a6de-e3d01ee708c5.svg" && ok=$((ok+1)); }
+[ -s "public/assets/shape3.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/shape3.svg" "https://www.figma.com/api/mcp/asset/1d74ffd7-6bc3-49bd-ba02-18c8aeac3a63.svg" && ok=$((ok+1)); }
+[ -s "public/assets/ellipse2113.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/ellipse2113.svg" "https://www.figma.com/api/mcp/asset/e3861d07-3fe1-4a76-9ae6-50d925073d7a.svg" && ok=$((ok+1)); }
+[ -s "public/assets/group1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/group1.svg" "https://www.figma.com/api/mcp/asset/e175c1ae-aa35-4afc-9826-cb3e859cae25.svg" && ok=$((ok+1)); }
+[ -s "public/assets/battery.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/battery.svg" "https://www.figma.com/api/mcp/asset/4a02a413-9b88-4aff-9bb6-3bd6b4d819f0.svg" && ok=$((ok+1)); }
+[ -s "public/assets/wifi.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/wifi.svg" "https://www.figma.com/api/mcp/asset/36fc1137-aad2-4af3-8346-b7bf85cb5bc2.svg" && ok=$((ok+1)); }
+[ -s "public/assets/cellular.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/cellular.svg" "https://www.figma.com/api/mcp/asset/8a6d7819-e213-4704-8974-d476ab03d68c.svg" && ok=$((ok+1)); }
+[ -s "public/assets/dangerCircle.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/dangerCircle.svg" "https://www.figma.com/api/mcp/asset/37413f02-d5f4-4017-b0f3-78d828a6f6f3.svg" && ok=$((ok+1)); }
+[ -s "public/assets/chevron.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/chevron.svg" "https://www.figma.com/api/mcp/asset/2eb46f97-c14b-4130-b361-1ca2719c06c6.svg" && ok=$((ok+1)); }
+[ -s "public/assets/shape4.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/shape4.svg" "https://www.figma.com/api/mcp/asset/6cbd08e8-04c1-4cdf-b606-31735cff9b3e.svg" && ok=$((ok+1)); }
+[ -s "public/assets/ellipse2114.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/ellipse2114.svg" "https://www.figma.com/api/mcp/asset/4f2c8882-5e98-4177-a57a-8d3371d5c10f.svg" && ok=$((ok+1)); }
+[ -s "public/assets/icon1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/icon1.svg" "https://www.figma.com/api/mcp/asset/177c64a7-d02a-4817-8f22-89c311a7b42d.svg" && ok=$((ok+1)); }
+[ -s "public/assets/shape5.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/shape5.svg" "https://www.figma.com/api/mcp/asset/8a7c3eca-9be4-4acc-9450-ed5661027e21.svg" && ok=$((ok+1)); }
+[ -s "public/assets/ellipse2115.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/ellipse2115.svg" "https://www.figma.com/api/mcp/asset/5d1c070a-9eff-46bc-bda8-40edf35d414e.svg" && ok=$((ok+1)); }
+[ -s "public/assets/group2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/group2.svg" "https://www.figma.com/api/mcp/asset/ce54b1de-6b39-4ea6-bc4a-dd1fb6caa222.svg" && ok=$((ok+1)); }
+[ -s "public/assets/shape6.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/shape6.svg" "https://www.figma.com/api/mcp/asset/100e94a3-9742-4c8f-9c32-4f1966718509.svg" && ok=$((ok+1)); }
+[ -s "public/assets/ellipse2116.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/ellipse2116.svg" "https://www.figma.com/api/mcp/asset/79218e4f-dd52-4366-b6a2-95d4b63d563a.svg" && ok=$((ok+1)); }
+[ -s "public/assets/group3.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/group3.svg" "https://www.figma.com/api/mcp/asset/7df558f9-b6b8-4503-b465-6ec32016698d.svg" && ok=$((ok+1)); }
+[ -s "public/assets/chevronRed.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/chevronRed.svg" "https://www.figma.com/api/mcp/asset/a74afe5e-deb1-4479-bb75-4afd8b1e3da8.svg" && ok=$((ok+1)); }
+[ -s "public/assets/home.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/home.svg" "https://www.figma.com/api/mcp/asset/707d24ac-3691-4088-b59b-cbc6b7b2ae7d.svg" && ok=$((ok+1)); }
+[ -s "public/assets/debtShape0.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/debtShape0.svg" "https://www.figma.com/api/mcp/asset/496a588c-c5d2-42b4-9329-9e02a67590c8.svg" && ok=$((ok+1)); }
+[ -s "public/assets/debtGlow0.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/debtGlow0.svg" "https://www.figma.com/api/mcp/asset/95bfb64d-8bb5-416e-aee8-eed6419e4499.svg" && ok=$((ok+1)); }
+[ -s "public/assets/debtIcon0.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/debtIcon0.svg" "https://www.figma.com/api/mcp/asset/abdd58b9-3f0b-4912-976e-7b9ea6fad6d7.svg" && ok=$((ok+1)); }
+[ -s "public/assets/debtShape1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/debtShape1.svg" "https://www.figma.com/api/mcp/asset/8fc5bc6f-601e-4763-ae19-b68f492b9d24.svg" && ok=$((ok+1)); }
+[ -s "public/assets/debtGlow1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/debtGlow1.svg" "https://www.figma.com/api/mcp/asset/0838a960-9e26-4c64-bcb5-a7dc6afa3969.svg" && ok=$((ok+1)); }
+[ -s "public/assets/debtIcon1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/debtIcon1.svg" "https://www.figma.com/api/mcp/asset/6311189e-59d6-4298-a29c-f0d7316c9416.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bg2.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bg2.png" "https://www.figma.com/api/mcp/asset/c9bbe800-ae71-4766-8888-1cc0ded11315.png" && ok=$((ok+1)); }
+[ -s "public/assets/bgSilk.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bgSilk.png" "https://www.figma.com/api/mcp/asset/151235c0-956c-4933-862c-a09d415700db.png" && ok=$((ok+1)); }
+[ -s "public/assets/bgTint.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bgTint.png" "https://www.figma.com/api/mcp/asset/abd7a0dd-91c9-4d8a-b705-094cfe6c5e97.png" && ok=$((ok+1)); }
+[ -s "public/assets/vtpRing.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vtpRing.svg" "https://www.figma.com/api/mcp/asset/f6300f86-9ab3-4f03-bae7-ef856490209d.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pieVtpFull.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pieVtpFull.svg" "https://www.figma.com/api/mcp/asset/ccafc344-0e34-482f-854e-5313e39467aa.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vtpConnA.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vtpConnA.svg" "https://www.figma.com/api/mcp/asset/6e5c98fc-cc45-466f-b12e-9b70f21654ac.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vtpLine.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vtpLine.svg" "https://www.figma.com/api/mcp/asset/47c5cbaf-c351-4bb9-b859-4b8625b1ba36.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vtpConnB.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vtpConnB.svg" "https://www.figma.com/api/mcp/asset/4564f6fc-aa70-4544-a50c-a91d86906bab.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vtpConnC.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vtpConnC.svg" "https://www.figma.com/api/mcp/asset/5575ba91-2c9d-4234-8849-03990abcb870.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vtpConnD.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vtpConnD.svg" "https://www.figma.com/api/mcp/asset/45fdc125-a0aa-4559-9508-6266838a7452.svg" && ok=$((ok+1)); }
+[ -s "public/assets/ovArrow.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/ovArrow.svg" "https://www.figma.com/api/mcp/asset/90f6a3cb-768b-4daf-9cad-a8ca6e8c9552.svg" && ok=$((ok+1)); }
+[ -s "public/assets/graphUp.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/graphUp.svg" "https://www.figma.com/api/mcp/asset/5256c31e-0c59-43d6-950f-d8d490cfe132.svg" && ok=$((ok+1)); }
+[ -s "public/assets/graphDown.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/graphDown.svg" "https://www.figma.com/api/mcp/asset/cb68102e-42b3-43aa-b35f-945862c55ccb.svg" && ok=$((ok+1)); }
+[ -s "public/assets/regClose.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/regClose.svg" "https://www.figma.com/api/mcp/asset/90331beb-d2c6-4462-b993-a391ef3fff9a.svg" && ok=$((ok+1)); }
+[ -s "public/assets/regIll.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/regIll.png" "https://www.figma.com/api/mcp/asset/9074620c-30a3-4fc7-a83e-c18f007691fd.png" && ok=$((ok+1)); }
+[ -s "public/assets/onbXacThuc.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/onbXacThuc.png" "https://www.figma.com/api/mcp/asset/113b0403-dcbb-4ca1-9317-507c6625fa1e.png" && ok=$((ok+1)); }
+[ -s "public/assets/onbQuay.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/onbQuay.png" "https://www.figma.com/api/mcp/asset/40014589-a639-42ac-a793-7e488f20e206.png" && ok=$((ok+1)); }
+[ -s "public/assets/onbXetDuyet.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/onbXetDuyet.png" "https://www.figma.com/api/mcp/asset/7e4a42ff-f44f-4d67-93ce-027d98bb4852.png" && ok=$((ok+1)); }
+[ -s "public/assets/onbCheck.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/onbCheck.svg" "https://www.figma.com/api/mcp/asset/0300cc13-499d-4d03-8d02-1e1fa67a2f04.svg" && ok=$((ok+1)); }
+[ -s "public/assets/vtmLogo.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/vtmLogo.svg" "https://www.figma.com/api/mcp/asset/ff87a912-80fb-45b5-84b8-4f7b0a42c6a3.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pS1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pS1.svg" "https://www.figma.com/api/mcp/asset/f7850bea-5843-499c-b56f-1351f51ca6f3.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pE1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pE1.svg" "https://www.figma.com/api/mcp/asset/9c6467bf-7d61-46d9-968a-875575e80403.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pL1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pL1.svg" "https://www.figma.com/api/mcp/asset/199ea4fa-791b-40ed-91b2-6c944fdd3f60.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pS2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pS2.svg" "https://www.figma.com/api/mcp/asset/68330042-9bba-4679-91c4-ffb7818db3d0.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pE2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pE2.svg" "https://www.figma.com/api/mcp/asset/17897b6e-6f91-4956-aef6-f8756ca1546d.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pG2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pG2.svg" "https://www.figma.com/api/mcp/asset/931cebad-1804-41a3-a741-ee3db9bbc685.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pG3.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pG3.svg" "https://www.figma.com/api/mcp/asset/cc94c64f-e6ad-4b92-91a5-21ac050ef86d.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pS4.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pS4.svg" "https://www.figma.com/api/mcp/asset/1ed8431e-1900-451d-8635-14b79f972b03.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pE4.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pE4.svg" "https://www.figma.com/api/mcp/asset/dd52a0f3-efe2-451b-ae90-563eb9dc9bfa.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pI4.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pI4.svg" "https://www.figma.com/api/mcp/asset/dbf98585-dd5d-42c3-bc90-3a023bbb294b.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pV5.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pV5.svg" "https://www.figma.com/api/mcp/asset/02a54c82-e3b3-4e31-9983-22e93a39e498.svg" && ok=$((ok+1)); }
+[ -s "public/assets/pU5.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/pU5.svg" "https://www.figma.com/api/mcp/asset/55530aa8-69b9-4caa-859f-60ef093fc429.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qS1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qS1.svg" "https://www.figma.com/api/mcp/asset/bf8f8588-a68f-44b3-aea5-590fadbd67be.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qG1a.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qG1a.svg" "https://www.figma.com/api/mcp/asset/bcc75b36-9f5f-41a2-b5fc-95938a40e5e3.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qG1b.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qG1b.svg" "https://www.figma.com/api/mcp/asset/0f492b4b-f3e0-4e8c-8388-32c347e1b0ce.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qS2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qS2.svg" "https://www.figma.com/api/mcp/asset/d41d3bba-6079-4b52-b934-fe5aa92039e4.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qG2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qG2.svg" "https://www.figma.com/api/mcp/asset/ffd10121-2830-4f35-9c08-79b9d2f7c62c.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qG3.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qG3.svg" "https://www.figma.com/api/mcp/asset/fd8273b1-dd60-4bed-8dce-f06d978240d9.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qS4.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qS4.svg" "https://www.figma.com/api/mcp/asset/b731e4a6-02ad-45e0-b557-5c09bb85c473.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qE4.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qE4.svg" "https://www.figma.com/api/mcp/asset/ee045cef-a606-427a-b820-af219319b2f3.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qI4.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qI4.svg" "https://www.figma.com/api/mcp/asset/8b52e902-653b-4bc8-837d-5bd309e52930.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qE5.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qE5.svg" "https://www.figma.com/api/mcp/asset/65d0c59c-e28e-488a-bc17-b1c2c508fb89.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qVt5.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qVt5.svg" "https://www.figma.com/api/mcp/asset/7701296d-7c0a-41cc-8216-d25d1c03d021.svg" && ok=$((ok+1)); }
+[ -s "public/assets/qI5.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/qI5.svg" "https://www.figma.com/api/mcp/asset/e2c12087-7e2f-4878-b46f-ab5710a710e7.svg" && ok=$((ok+1)); }
+[ -s "public/assets/fChev.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/fChev.svg" "https://www.figma.com/api/mcp/asset/6bc58b2d-11e4-4f7e-8725-5f83685afd8c.svg" && ok=$((ok+1)); }
+[ -s "public/assets/fLine.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/fLine.svg" "https://www.figma.com/api/mcp/asset/f0712188-bcc4-495e-b30b-54888d989a11.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bShot.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bShot.png" "https://www.figma.com/api/mcp/asset/46234c0c-2d99-45ec-bcb5-ed700f605d31.png" && ok=$((ok+1)); }
+[ -s "public/assets/bBack.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bBack.svg" "https://www.figma.com/api/mcp/asset/9b0707e9-1f16-4da8-982f-68d61d851efa.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bArr.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bArr.svg" "https://www.figma.com/api/mcp/asset/382b0d17-7762-44f8-be8c-562af0164bdf.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bD.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bD.svg" "https://www.figma.com/api/mcp/asset/9e198e62-2875-48c5-9eeb-1f3200a0d953.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bDa.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bDa.svg" "https://www.figma.com/api/mcp/asset/2a8f7050-f252-4e73-a6c9-451640baa569.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bDb.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bDb.svg" "https://www.figma.com/api/mcp/asset/6bc7775f-5630-4e66-980f-a36fbb7613ae.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bN.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bN.svg" "https://www.figma.com/api/mcp/asset/ad4a36df-333d-437a-a922-4bed07fcc201.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bNa.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bNa.svg" "https://www.figma.com/api/mcp/asset/cd5f6470-bd7b-4557-8580-d1b531e308b0.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bPre.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bPre.svg" "https://www.figma.com/api/mcp/asset/77346ec3-c55a-41bc-a8a5-5205e61696fa.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bPost.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bPost.svg" "https://www.figma.com/api/mcp/asset/43291f39-4fb4-4f58-82aa-fa49b2b10a60.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bPosti.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bPosti.svg" "https://www.figma.com/api/mcp/asset/869157ca-4236-4ea4-bde2-e66e94004780.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bFix.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bFix.svg" "https://www.figma.com/api/mcp/asset/87c35d8b-aff9-41d1-894d-ee54b9064897.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bFixi.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bFixi.svg" "https://www.figma.com/api/mcp/asset/75c327c8-8f36-4d5e-b0f2-2f6055e5c1df.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bNet.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bNet.svg" "https://www.figma.com/api/mcp/asset/7b6a09aa-8938-4de2-b115-bd01e2e586cc.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bNetv.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bNetv.svg" "https://www.figma.com/api/mcp/asset/22d32752-420a-4b4f-8f37-b1ea66d68fcd.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bNeti.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bNeti.svg" "https://www.figma.com/api/mcp/asset/c6d386cb-d8ee-4ded-a35b-70198ee3a436.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bHis.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bHis.svg" "https://www.figma.com/api/mcp/asset/79a3789c-e204-4243-b8c9-8c3795756286.svg" && ok=$((ok+1)); }
+[ -s "public/assets/bHisi.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/bHisi.svg" "https://www.figma.com/api/mcp/asset/16e68db8-73d0-4566-a963-51c832fc6b0a.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hMore.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hMore.svg" "https://www.figma.com/api/mcp/asset/4d383667-34c8-4def-b46d-bd0e2b708842.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hDn2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hDn2.svg" "https://www.figma.com/api/mcp/asset/9fb5e6be-7a59-4f8b-9f80-92e7ef77c1e2.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hDn3.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hDn3.svg" "https://www.figma.com/api/mcp/asset/64c90a19-ec77-4570-917a-964a047da81f.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hIll1.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hIll1.png" "https://www.figma.com/api/mcp/asset/973d4607-d3af-4fa3-bf47-aaccc3d7cc7f.png" && ok=$((ok+1)); }
+[ -s "public/assets/hIll2.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hIll2.png" "https://www.figma.com/api/mcp/asset/a36b3d85-3747-484d-a62d-7cf449bb0f17.png" && ok=$((ok+1)); }
+[ -s "public/assets/hArr3.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hArr3.svg" "https://www.figma.com/api/mcp/asset/d96e15d8-7a59-4961-af2d-717c9b735009.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hCake.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hCake.png" "https://www.figma.com/api/mcp/asset/33da8588-00a7-4c08-bb4c-b4959ff9eaee.png" && ok=$((ok+1)); }
+[ -s "public/assets/hPattern.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hPattern.png" "https://www.figma.com/api/mcp/asset/924ae599-c995-4f3a-9469-14c75baac3e6.png" && ok=$((ok+1)); }
+[ -s "public/assets/hMascot.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hMascot.png" "https://www.figma.com/api/mcp/asset/f2d091b5-c34d-4765-b889-a4fb3fe78778.png" && ok=$((ok+1)); }
+[ -s "public/assets/hFe.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hFe.png" "https://www.figma.com/api/mcp/asset/ddf28310-aeae-4685-97c4-fd3ec9219144.png" && ok=$((ok+1)); }
+[ -s "public/assets/hDay.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hDay.png" "https://www.figma.com/api/mcp/asset/6e0e1bac-4795-4d7c-8f53-f86f18160d29.png" && ok=$((ok+1)); }
+[ -s "public/assets/hMbv.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hMbv.png" "https://www.figma.com/api/mcp/asset/d8b6e9d1-01c4-4f8a-94f2-3afd3d06dca7.png" && ok=$((ok+1)); }
+[ -s "public/assets/hEasy.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hEasy.png" "https://www.figma.com/api/mcp/asset/16ae7dfa-54f7-4197-9acb-6e33c9726d4d.png" && ok=$((ok+1)); }
+[ -s "public/assets/hHome.png" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hHome.png" "https://www.figma.com/api/mcp/asset/cee66a6e-754d-4fc0-858e-090f71191d3b.png" && ok=$((ok+1)); }
+[ -s "public/assets/hStroke.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hStroke.svg" "https://www.figma.com/api/mcp/asset/7cbe728e-4e68-4bb7-b05d-b70b9d0a8230.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hArc.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hArc.svg" "https://www.figma.com/api/mcp/asset/ff41ad9a-8082-4485-a892-fa2b5aa7ad18.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hBg.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hBg.svg" "https://www.figma.com/api/mcp/asset/d9ff8d01-0dc4-4602-9ec6-91c4a30dfacb.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hBg1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hBg1.svg" "https://www.figma.com/api/mcp/asset/61d95611-9dba-419b-88f1-8e0cc28ec97a.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hPh.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hPh.svg" "https://www.figma.com/api/mcp/asset/416efa1a-b68b-4927-889e-038a3332e414.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hClip.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hClip.svg" "https://www.figma.com/api/mcp/asset/3a09a17c-7ac3-4f06-9308-c54b97caab98.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hTime.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hTime.svg" "https://www.figma.com/api/mcp/asset/45216d27-9db5-4d0a-b7d6-2a9c2bd8245e.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hFaq.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hFaq.svg" "https://www.figma.com/api/mcp/asset/dbb747ee-2d57-48b5-9e69-ec02c939e8ad.svg" && ok=$((ok+1)); }
+[ -s "public/assets/hCall.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/hCall.svg" "https://www.figma.com/api/mcp/asset/b2dfb1a9-3d77-45ff-b7c4-54aa3dff4e21.svg" && ok=$((ok+1)); }
+[ -s "public/assets/tcL.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/tcL.svg" "https://www.figma.com/api/mcp/asset/49642c77-9857-4ebd-9444-e0a0dc0c6209.svg" && ok=$((ok+1)); }
+[ -s "public/assets/tcR.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/tcR.svg" "https://www.figma.com/api/mcp/asset/9f94bbe0-b700-4427-95ca-00055788ac68.svg" && ok=$((ok+1)); }
+[ -s "public/assets/spark1.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/spark1.svg" "https://www.figma.com/api/mcp/asset/fce11120-e2f8-4f19-a98e-e7bb71c62541.svg" && ok=$((ok+1)); }
+[ -s "public/assets/spark2.svg" ] && ok=$((ok+1)) || { curl -fsSL -o "public/assets/spark2.svg" "https://www.figma.com/api/mcp/asset/34227b5f-6925-4176-b2e0-741856a98f48.svg" && ok=$((ok+1)); }
 echo "Asset tải được: $ok/153"
 exit 0

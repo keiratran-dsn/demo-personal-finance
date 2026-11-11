@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Shape icon D&#225;&#187;&#139;ch v&#225;&#187;&#165;/Master component">
+<g id="Icon Frame">
+<use xlink:href="#stroke0_0_445" fill="white"/>
+<use xlink:href="#stroke0_0_445" fill="url(#paint0_linear_0_445)"/>
+<mask id="stroke1_0_445" fill="white">
+<use xlink:href="#stroke0_0_445"/>
+</mask>
+<path d="M42.9969 5.01524C38.4684 0.504187 31.957 0 24 0C16.0329 0 9.51167 0.509999 4.98505 5.03324C0.459092 9.55461 0 16.0653 0 24.0233C0 31.9826 0.459093 38.4953 4.98693 43.0182C9.51326 47.5421 16.0338 48 24 48C31.9663 48 38.4856 47.5421 43.0119 43.0182C47.5395 38.4944 47.9999 31.9826 47.9999 24.0233C47.9999 16.0551 47.5345 9.53736 42.9969 5.01524Z" stroke-width="4" stroke="#F4F4F4" mask="url(#stroke1_0_445)"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_445" x1="24" y1="0" x2="24" y2="48" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F86571"/>
+<stop offset="1" stop-color="#FBB5AF"/>
+</linearGradient>
+<path id="stroke0_0_445" d="M42.9969 5.01524C38.4684 0.504187 31.957 0 24 0C16.0329 0 9.51167 0.509999 4.98505 5.03324C0.459092 9.55461 0 16.0653 0 24.0233C0 31.9826 0.459093 38.4953 4.98693 43.0182C9.51326 47.5421 16.0338 48 24 48C31.9663 48 38.4856 47.5421 43.0119 43.0182C47.5395 38.4944 47.9999 31.9826 47.9999 24.0233C47.9999 16.0551 47.5345 9.53736 42.9969 5.01524Z"/>
+</defs>
+</svg>

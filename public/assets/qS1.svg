@@ -1,0 +1,26 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="53.3333" height="53.334" viewBox="0 0 53.3333 53.334" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Shape icon D&#225;&#187;&#139;ch v&#225;&#187;&#165;/Master component">
+<g id="Icon Frame">
+<use xlink:href="#stroke0_0_414" fill="url(#paint0_linear_0_414)"/>
+<mask id="stroke1_0_414" fill="white">
+<use xlink:href="#stroke0_0_414"/>
+</mask>
+<path d="M45.6632 5.01524C41.1347 0.504187 34.6233 0 26.6663 0C18.6993 0 12.178 0.509999 7.6514 5.03324C3.12544 9.55461 2.66634 16.0653 2.66634 24.0233C2.66634 31.9826 3.12544 38.4953 7.65327 43.0182C12.1796 47.5421 18.7001 48 26.6663 48C34.6326 48 41.152 47.5421 45.6783 43.0182C50.2058 38.4944 50.6663 31.9826 50.6663 24.0233C50.6663 16.0551 50.2009 9.53736 45.6632 5.01524Z" stroke-width="4" stroke="#F4F4F4" mask="url(#stroke1_0_414)"/>
+</g>
+<g id="Ellipse 2109" filter="url(#filter0_f_0_414)">
+<circle cx="26.6667" cy="26.6673" r="13.3333" fill="#F2BC39"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_0_414" x="0" y="0.000648499" width="53.3333" height="53.3333" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="6.66667" result="effect1_foregroundBlur_0_414"/>
+</filter>
+<linearGradient id="paint0_linear_0_414" x1="26.6663" y1="0" x2="26.6663" y2="48" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FEBD14"/>
+<stop offset="1" stop-color="#F5E0A8"/>
+</linearGradient>
+<path id="stroke0_0_414" d="M45.6632 5.01524C41.1347 0.504187 34.6233 0 26.6663 0C18.6993 0 12.178 0.509999 7.6514 5.03324C3.12544 9.55461 2.66634 16.0653 2.66634 24.0233C2.66634 31.9826 3.12544 38.4953 7.65327 43.0182C12.1796 47.5421 18.7001 48 26.6663 48C34.6326 48 41.152 47.5421 45.6783 43.0182C50.2058 38.4944 50.6663 31.9826 50.6663 24.0233C50.6663 16.0551 50.2009 9.53736 45.6632 5.01524Z"/>
+</defs>
+</svg>
