@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trung tâm tài chính · Prototype iPhone</title>
+<title>Quản lý tài chính · Prototype iPhone</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet">
@@ -158,7 +158,8 @@ p{margin:0}
 .ov-amt{display:flex;gap:4px;align-items:center;white-space:nowrap}
 .ov-amt .n{font-weight:700;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--neutral-100)}
 .ov-amt .d{font-weight:510;font-size:12px;line-height:14px;color:var(--dark60)}
-.ov-cmp{display:flex;flex-direction:column;gap:4px;padding-right:22px;width:100%}
+/* Phase 1 (Figma 807:22203): thẻ Tổng chi/Tổng thu không có dòng so sánh tháng trước */
+.ov-cmp{display:none!important;flex-direction:column;gap:4px;padding-right:22px;width:100%}
 .ov-trend{display:flex;gap:4px;align-items:center;font-size:12px;line-height:14px;white-space:nowrap}
 .ov-trend .v{display:flex;gap:2px}
 .ov-trend.up{color:var(--green)} .ov-trend.dn{color:var(--service-red)}
@@ -282,7 +283,8 @@ p{margin:0}
 /* Cảm giác "túm block biểu đồ kéo lên"
    --pull: vận tốc cuộn đã làm mượt (−1…1), --pullAbs: độ lớn, --p: tiến độ thu gọn */
 .screen{--pull:0;--pullAbs:0}
-.grabber{display:block;position:absolute;left:50%;top:6px;width:calc(36px + 12px * var(--pullAbs));height:4px;border-radius:2px;
+/* Phase 1: không hiện grabber trên thẻ tài sản */
+.grabber{display:none;position:absolute;left:50%;top:6px;width:calc(36px + 12px * var(--pullAbs));height:4px;border-radius:2px;
   background:rgba(34,34,34,calc(.14 + .14 * var(--pullAbs)));transform:translateX(-50%);opacity:clamp(0,calc(1 - var(--p) * 1.3),1);transition:background-color .2s}
 .card-surface{margin-top:calc(var(--pull) * -12px);
   filter:drop-shadow(0 calc(-6px - 10px * var(--pullAbs)) calc(14px + 20px * var(--pullAbs)) rgba(0,0,0,calc(.03 + .07 * var(--pullAbs))))}
@@ -730,7 +732,7 @@ p{margin:0}
 
      <!-- Tổng quan tháng 11 (Figma 345:36251) -->
      <section class="ov">
-      <div class="ov-h"><p class="h16">Tổng quan tháng 11</p><button class="ov-btn" aria-label="Quản lý thu chi"><span class="ov-ic"><span><img data-a="ovArrow" alt=""></span></span></button></div>
+      <div class="ov-h"><p class="h16">Tổng quan tháng này</p><button class="ov-btn" aria-label="Quản lý thu chi"><span class="ov-ic"><span><img data-a="ovArrow" alt=""></span></span></button></div>
       <div class="ov-cards">
        <button class="ov-card">
         <span class="ov-top"><span class="ov-t">Tổng chi</span><span class="chev"><img data-a="chevron" alt=""></span></span>
@@ -793,7 +795,7 @@ p{margin:0}
     <button class="ic24 ic-back" aria-label="Quay lại"><span class="box"><img data-a="arrowLeft" alt=""></span></button>
     <button class="ic24 ic-help" aria-label="Hướng dẫn"><span class="box"><div><img data-a="dangerCircle" alt=""></div></span></button>
    </div>
-   <h1 class="nav-title"><span class="drop" style="display:block;--d:.05s">Trung tâm tài chính</span></h1>
+   <h1 class="nav-title"><span class="drop" style="display:block;--d:.05s">Quản lý tài chính</span></h1>
 
    <div class="tabs" id="tabs" data-i="0">
     <div class="tabs-in drop" style="--d:.1s">
