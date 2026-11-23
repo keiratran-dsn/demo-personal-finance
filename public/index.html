@@ -613,7 +613,7 @@ p{margin:0}
   <div class="screen" id="screen">
 
    <!-- Nền "dải lụa băng giá" -->
-   <div class="bg"><img src="assets/bgQLTC.jpg" alt=""></div>
+   <div class="bg"><img id="bgImg" src="assets/bgQLTC.jpg" alt=""></div>
 
    <!-- ===== Nội dung cuộn ===== -->
    <div class="scroller" id="scroller">
@@ -1119,6 +1119,8 @@ p{margin:0}
  <div class="seg" id="subSeg" hidden><button data-sub="2a" class="on">Chưa nạp tiền</button><button data-sub="2b">Đã nạp tiền</button></div>
  <div class="sub" id="tierNote"></div>
  <div class="seg" id="seg"><button data-s="0" class="on">Mặc định</button><button data-s="1">Scroll</button></div>
+ <div class="sub">Nền</div>
+ <div class="seg" id="bgSeg"><button data-bg="1" class="on">Nền 1</button><button data-bg="2">Nền 2</button></div>
  <div class="acts"><button id="demo">▶ Demo cuộn</button><button id="replay" class="ghost">↺ Intro</button></div>
 </div>
 
@@ -2026,6 +2028,21 @@ document.addEventListener("click", e => {
   if (svStack.length) svReset();
   showReg(true, onbKey(el));
 }, true);
+
+/* ===== Chọn nền: Nền 1 = component "Nền Quản lý tài chính" (852:5354), Nền 2 = nền của màn 931:5755. Link: ?nen=2 ===== */
+(() => {
+  const BG = { "1":"assets/bgQLTC.jpg", "2":"assets/bgQLTC2.jpg" };
+  const img = document.getElementById("bgImg"), segBg = document.getElementById("bgSeg");
+  function setBg(k){
+    if (!BG[k]) k = "1";
+    img.src = BG[k];
+    segBg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.bg === k));
+    const u = new URL(location.href); if (k === "1") u.searchParams.delete("nen"); else u.searchParams.set("nen", k);
+    history.replaceState(null, "", u);
+  }
+  segBg.querySelectorAll("button").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); setBg(b.dataset.bg); }));
+  setBg(new URLSearchParams(location.search).get("nen") || "1");
+})();
 </script>
 </body>
 </html>
