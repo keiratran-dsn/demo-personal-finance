@@ -1197,10 +1197,9 @@ addEventListener("resize", fit); fit();
 
 /* ===== Scroll → --p (0 = Mặc định, 1 = Scroll) ===== */
 const screen = document.getElementById("screen"), sc = document.getElementById("scroller"), tabbar = document.getElementById("tabbar");
-/* Quãng cuộn để thu gọn header:
-   Tài sản: card từ y=312 (Mặc định) lên y=184 (Scroll) = 128
-   Phải trả: 2 thẻ từ y=334 lên y=184 (ngay dưới header 162 + 22, như card Tài sản) = 150 */
-const COLL = [128, 150];
+/* Quãng cuộn để thu gọn header: đồng bộ 128px cho cả 2 tab
+   (Tài sản: card từ y=312 lên y=184; Phải trả: 2 thẻ từ y=334 lên y=206) */
+const COLL = [128, 128];
 const TABS = [
   { label: "Tổng tài sản",   value: 52000000 },
   { label: "Dư nợ tháng này", value: 2152000 }
