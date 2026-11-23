@@ -59,7 +59,8 @@ p{margin:0}
 .island{position:absolute;z-index:20;top:12px;left:50%;width:96px;height:28px;border-radius:14px;background:#000;transform:translateX(-50%)}
 
 /* ===== Nền ===== */
-.bg{position:absolute;z-index:0;left:0;top:0;width:375px;height:714px;overflow:hidden}
+/* Nền = component "Nền Quản lý tài chính" (Figma 852:5354), xuất nguyên khối 375×812 gồm ảnh nền và lớp mờ */
+.bg{position:absolute;z-index:0;left:0;top:0;width:375px;height:812px;overflow:hidden}
 .bg img{position:absolute;left:0;top:0;width:375px;height:812px}
 /* Nền (Figma 344:33492): lụa 50% (object-bottom) + lớp tím phủ (object-cover), khung 375×812 cắt ở 714 */
 .bg .silk{object-position:bottom;opacity:.5}
@@ -612,8 +613,7 @@ p{margin:0}
   <div class="screen" id="screen">
 
    <!-- Nền "dải lụa băng giá" -->
-   <div class="bg"><img class="silk" data-a="bgSilk" alt=""><img class="tint" data-a="bgTint" alt=""></div>
-   <div class="bg-fade"></div>
+   <div class="bg"><img src="assets/bgQLTC.jpg" alt=""></div>
 
    <!-- ===== Nội dung cuộn ===== -->
    <div class="scroller" id="scroller">
