@@ -59,7 +59,7 @@ p{margin:0}
 .island{position:absolute;z-index:20;top:12px;left:50%;width:96px;height:28px;border-radius:14px;background:#000;transform:translateX(-50%)}
 
 /* ===== Nền ===== */
-/* Nền = component "Nền Quản lý tài chính" (Figma 852:5354), xuất nguyên khối 375×812 gồm ảnh nền và lớp mờ */
+/* Nền = component "Nền Quản lý tài chính" (Figma 852:5354, bản 25/11: tím #F1E7FD + quầng sáng trên + mờ dần về #FBFBFB), xuất nguyên khối 375×812 */
 .bg{position:absolute;z-index:0;left:0;top:0;width:375px;height:812px;overflow:hidden}
 .bg img{position:absolute;left:0;top:0;width:375px;height:812px}
 /* Nền (Figma 344:33492): lụa 50% (object-bottom) + lớp tím phủ (object-cover), khung 375×812 cắt ở 714 */
@@ -157,9 +157,9 @@ p{margin:0}
 /* UI mới (Figma 853:5676): thẻ kính không viền – nền trắng 90% + gradient toả từ góc trên trái,
    3 lớp inner shadow trắng tạo mép kính, minh hoạ ví mờ 23% góc dưới phải */
 .ov-card{position:relative;overflow:hidden;--tint:252,237,239;border:0;
-  background:radial-gradient(325px 78px at 24px 0,rgba(var(--tint),.3),rgba(255,255,255,.3)),rgba(255,255,255,.9);
+  background:radial-gradient(325px 78px at 24px 0,rgba(var(--tint),var(--tintA,.3)),rgba(255,255,255,var(--tintA,.3))),rgba(255,255,255,.9);
   box-shadow:inset 0 4.38px 76.6px rgba(255,255,255,.5),inset 4.38px 3.28px 4.38px rgba(255,255,255,.25),inset 1.09px 1.09px 1.09px rgba(255,255,255,.6)}
-.ov-card.thu{--tint:234,247,242}
+.ov-card.thu{--tint:234,247,242;--tintA:.41}
 .ov-card > span:not(.ov-art){position:relative;z-index:1}
 .ov-art{position:absolute;left:89.57px;top:18.48px;width:71.93px;height:59.52px;pointer-events:none}
 .ov-card.thu .ov-art{left:90.07px;width:71.43px}
@@ -623,7 +623,7 @@ p{margin:0}
   <div class="screen" id="screen">
 
    <!-- Nền "dải lụa băng giá" -->
-   <div class="bg"><img id="bgImg" src="assets/bgQLTC.jpg" alt=""></div>
+   <div class="bg"><img id="bgImg" src="assets/bgQLTC.jpg?v=3" alt=""></div>
 
    <!-- ===== Nội dung cuộn ===== -->
    <div class="scroller" id="scroller">
@@ -1131,8 +1131,6 @@ p{margin:0}
  <div class="seg" id="subSeg" hidden><button data-sub="2a" class="on">Chưa nạp tiền</button><button data-sub="2b">Đã nạp tiền</button></div>
  <div class="sub" id="tierNote"></div>
  <div class="seg" id="seg"><button data-s="0" class="on">Mặc định</button><button data-s="1">Scroll</button></div>
- <div class="sub">Nền</div>
- <div class="seg" id="bgSeg"><button data-bg="1" class="on">Nền 1</button><button data-bg="2">Nền 2</button></div>
  <div class="acts"><button id="demo">▶ Demo cuộn</button><button id="replay" class="ghost">↺ Intro</button></div>
 </div>
 
@@ -2040,20 +2038,6 @@ document.addEventListener("click", e => {
   showReg(true, onbKey(el));
 }, true);
 
-/* ===== Chọn nền: Nền 1 = component "Nền Quản lý tài chính" (852:5354), Nền 2 = nền của màn 931:5755. Link: ?nen=2 ===== */
-(() => {
-  const BG = { "1":"assets/bgQLTC.jpg", "2":"assets/bgQLTC2.jpg" };
-  const img = document.getElementById("bgImg"), segBg = document.getElementById("bgSeg");
-  function setBg(k){
-    if (!BG[k]) k = "1";
-    img.src = BG[k];
-    segBg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.bg === k));
-    const u = new URL(location.href); if (k === "1") u.searchParams.delete("nen"); else u.searchParams.set("nen", k);
-    history.replaceState(null, "", u);
-  }
-  segBg.querySelectorAll("button").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); setBg(b.dataset.bg); }));
-  setBg(new URLSearchParams(location.search).get("nen") || "1");
-})();
 </script>
 </body>
 </html>
