@@ -71,7 +71,7 @@ p{margin:0}
 /* ===== Vùng cuộn ===== */
 .scroller{position:absolute;z-index:2;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;overscroll-behavior:contain}
 .scroller::-webkit-scrollbar{display:none}
-.content{position:relative;padding-top:312px;padding-bottom:140px}
+.content{position:relative;padding-top:314px;padding-bottom:110px}
 .nav-title{position:absolute;z-index:6;left:50%;top:53px;width:247px;margin:0;transform:translate(-50%,calc(-8px * var(--p)));text-align:center;pointer-events:none;
   font-weight:700;font-size:16px;line-height:20px;color:var(--neutral-100);opacity:clamp(0,calc(1 - var(--p) * 2.5),1)}
 .sync-hero{position:absolute;top:258px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:4px;
@@ -140,8 +140,9 @@ p{margin:0}
 .cta{font-weight:510;font-size:12px;line-height:14px;color:var(--red);white-space:nowrap}
 .chart-vtp{height:248px}
 .card[data-chart="none"] .chart,.card[data-chart="none"] .chart-gap{display:none}
-.card[data-chart="full"] .chart-vtp{display:none}
-.card[data-chart="vtp"] .chart-full{display:none}
+.chart-part{height:248px}
+.part-ov{position:absolute;left:0;top:0;width:311px;height:248px;pointer-events:none}
+.card:not([data-chart="full"]) .chart-full,.card:not([data-chart="vtp"]) .chart-vtp,.card:not([data-chart="part"]) .chart-part{display:none}
 
 /* Tổng quan tháng 11 (Figma 345:36251) */
 .ov{margin:32px 16px 0;display:flex;flex-direction:column;gap:16px}
@@ -288,7 +289,7 @@ p{margin:0}
 
 /* ===== Màn Phải trả ===== */
 .pane[hidden]{display:none}
-/* Tài sản (Figma section 305:23325): card kính bắt đầu ở y=312 */
+/* Tài sản & Phải trả (Figma 25/11): nội dung bắt đầu ở y=314 */
 .pane-asset{padding-top:0}
 
 /* Cảm giác "túm block biểu đồ kéo lên"
@@ -303,7 +304,7 @@ p{margin:0}
 .chart{transform:translateY(calc(var(--pull) * 7px))}
 .card.grab .card-surface{--pullAbs:.6}
 .card.grab .grabber{width:48px;background:rgba(34,34,34,.32)}
-.pane-debt{padding-top:22px}
+.pane-debt{padding-top:0}
 .quick{display:flex;gap:12px;margin-left:18px;width:347px}
 .qcard{flex:1 0 0;min-width:1px;display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:12px;text-align:left;
   background:rgba(255,255,255,.8);border:1px solid var(--border-default);transition:transform .15s}
@@ -709,6 +710,13 @@ p{margin:0}
         </div>
        </div>
 
+       <!-- Chart một phần – Tầng 3 sở hữu một phần SPTC (Figma 814:12557, 311×248): Gửi tiết kiệm, Tích luỹ, Tiền di động -->
+       <div class="chart chart-part" id="chartPart">
+        <div class="ring" style="top:18px"><img data-a="vtpRing" alt=""></div>
+        <div class="pie" style="top:25px"><img src="assets/piePart.png" alt=""></div>
+        <img class="part-ov fd" src="assets/chartPartOv.png" alt="" style="--i:1">
+       </div>
+
        <!-- Chart 100% ViettelPay – Tầng 2 đã nạp tiền (Figma 300:15232, 311×248) -->
        <div class="chart chart-vtp" id="chartVtp">
         <div class="ring" style="top:18px"><img data-a="vtpRing" alt=""></div>
@@ -747,14 +755,14 @@ p{margin:0}
        <button class="ov-card chi">
         <span class="ov-art"><img src="assets/ovChi.png" alt=""></span>
         <span class="ov-top"><span class="ov-t">Tổng chi</span><span class="chev"><img data-a="chevron" alt=""></span></span>
-        <span class="ov-amt"><span class="n money" data-v="30,000,000">30,000,000</span><span class="d">VND</span></span>
-        <span class="ov-cmp"><span class="ov-trend up"><span class="ov-gi"><span><span><img data-a="graphUp" alt=""></span></span></span><span class="v"><span class="money" data-v="1,152,066">1,152,066</span><span>VND</span></span></span><span class="ov-sub">So với 10/2026</span></span>
+        <span class="ov-amt"><span class="n" data-v="30,000,000">30,000,000</span><span class="d">VND</span></span>
+        <span class="ov-cmp"><span class="ov-trend up"><span class="ov-gi"><span><span><img data-a="graphUp" alt=""></span></span></span><span class="v"><span data-v="1,152,066">1,152,066</span><span>VND</span></span></span><span class="ov-sub">So với 10/2026</span></span>
        </button>
        <button class="ov-card thu">
         <span class="ov-art"><img src="assets/ovThu.png" alt=""></span>
         <span class="ov-top"><span class="ov-t">Tổng thu</span><span class="chev"><img data-a="chevron" alt=""></span></span>
-        <span class="ov-amt"><span class="n money" data-v="1,000,000">1,000,000</span><span class="d">VND</span></span>
-        <span class="ov-cmp"><span class="ov-trend dn"><span class="ov-gi"><span><span><img data-a="graphDown" alt=""></span></span></span><span class="v"><span class="money" data-v="1,100,066">1,100,066</span><span>VND</span></span></span><span class="ov-sub">So với 10/2026</span></span>
+        <span class="ov-amt"><span class="n" data-v="1,000,000">1,000,000</span><span class="d">VND</span></span>
+        <span class="ov-cmp"><span class="ov-trend dn"><span class="ov-gi"><span><span><img data-a="graphDown" alt=""></span></span></span><span class="v"><span data-v="1,100,066">1,100,066</span><span>VND</span></span></span><span class="ov-sub">So với 10/2026</span></span>
        </button>
       </div>
      </section>
@@ -1129,6 +1137,7 @@ p{margin:0}
    <option value="kichhoat">Chưa kích hoạt nguồn tiền</option>
   </select></label>
  <div class="seg" id="subSeg" hidden><button data-sub="2a" class="on">Chưa nạp tiền</button><button data-sub="2b">Đã nạp tiền</button></div>
+ <div class="seg" id="subSeg3"><button data-sub="3" class="on">Đủ 4 sản phẩm</button><button data-sub="3b">Một phần</button></div>
  <div class="sub" id="tierNote"></div>
  <div class="seg" id="seg"><button data-s="0" class="on">Mặc định</button><button data-s="1">Scroll</button></div>
  <div class="acts"><button id="demo">▶ Demo cuộn</button><button id="replay" class="ghost">↺ Intro</button></div>
@@ -1207,9 +1216,9 @@ addEventListener("resize", fit); fit();
 
 /* ===== Scroll → --p (0 = Mặc định, 1 = Scroll) ===== */
 const screen = document.getElementById("screen"), sc = document.getElementById("scroller"), tabbar = document.getElementById("tabbar");
-/* Quãng cuộn để thu gọn header: đồng bộ 128px cho cả 2 tab
-   (Tài sản: card từ y=312 lên y=184; Phải trả: 2 thẻ từ y=334 lên y=206) */
-const COLL = [128, 128];
+/* Quãng cuộn để thu gọn header: đồng bộ 130px cho cả 2 tab
+   (cả 2 tab: nội dung từ y=314 lên y=184, khớp màn Scroll trên Figma) */
+const COLL = [130, 130];
 const TABS = [
   { label: "Tổng tài sản",   value: 52000000 },
   { label: "Dư nợ tháng này", value: 2152000 }
@@ -1496,7 +1505,7 @@ document.getElementById("demo").addEventListener("click", async () => {
   await animateScroll(C(), 1100); await wait(700);
   await animateScroll(0, 900);
 });
-/* ===== 3 tầng khách hàng (Figma section "Tài sản" 305:23325) – ?tang=1|2a|2b|3 =====
+/* ===== 3 tầng khách hàng (Figma section "Tài sản" 305:23325) – ?tang=1|2a|2b|3|3b =====
    Tầng 1: chưa có tài khoản → popup Onboarding VTM (RegIntro) trên màn 0đ
    Tầng 2: có tài khoản, chưa có tiền – 2a chưa nạp (ẩn chart), 2b đã nạp (chart 100% ViettelPay)
    Tầng 3: có tiền + ít nhất 1 SPTC                                                                 */
@@ -1511,20 +1520,22 @@ const TIERS = {
   "1":  { total: 0,        chart: "none", owned: false, src: [[...VTP, null], [...TDD, null]], note: "Tầng 1: KH chưa có tài khoản – vẫn vào Trung tâm tài chính; bấm dịch vụ nào cũng chuyển sang luồng Onboarding hiện tại của VTM" },
   "2a": { total: 0,        chart: "none", owned: false, src: [[...VTP, "0"], [...TDD, null]], note: "Tầng 2: Đã có tài khoản, chưa có tiền (chưa nạp tiền) – ẩn chart" },
   "2b": { total: 625000,   chart: "vtp",  owned: false, src: [[...VTP, "625,000"], [...TDD, null]], note: "Tầng 2: Đã có tài khoản, đã nạp tiền vào nguồn tiền – hiện chart" },
-  "3":  { total: 52000000, chart: "full", owned: true,  src: [[...TDD, "632,000"], [...VTP, "0"]], note: "Tầng 3: Đã có tài khoản, đã có tiền, có ít nhất 1 SPTC" }
+  "3":  { total: 52000000, chart: "full", owned: true,  src: [[...TDD, "632,000"], [...VTP, "0"]], note: "Tầng 3: Đã có tài khoản, đã có tiền, có đủ 4 SPTC" },
+  "3b": { total: 52000000, chart: "part", owned: [true, true, false, false], src: [[...TDD, "632,000"], [...VTP, "0"]], note: "Tầng 3: Đã có tài khoản, đã có tiền, có một phần SPTC (Gửi tiết kiệm, Tích luỹ) – Vàng, CCQ hiện nút mua" }
 };
 const chevHTML = '<span class="chev-w"><span class="chev"><img data-a="chevron" alt=""></span></span>';
 const money = v => `<span class="n money" data-v="${v}">${masked ? "******" : v}</span>`;
 function renderList(t){
   let i = 0;
-  const rows = ASSETS.map(a => {
+  const rows = ASSETS.map((a, ai) => {
+    const own = Array.isArray(t.owned) ? t.owned[ai] : t.owned;
     const lbl = `<span class="lbl"><i class="bar" style="background:var(${a.c})"></i><span class="name">${a.name}</span></span>`;
-    const rt = t.owned
+    const rt = own
       ? `<span class="rt"><span class="vals"><span class="amt">${money(a.v)}<span class="d">đ</span></span>` +
         (a.d ? `<span class="delta ${a.dc}"><span class="money" data-v="${a.d}">${masked ? "******" : a.d}</span><span>đ</span></span>` : `<span class="delta no"><span>--</span><span>đ</span></span>`) +
         `</span>${chevHTML}</span>`
       : `<span class="rt"><span class="cta">${a.cta}</span>${chevHTML}</span>`;
-    return `<button class="row rise${t.owned ? "" : " cta-row"}" style="--d:.15s;--i:${++i}">${lbl}${rt}</button>`;
+    return `<button class="row rise${own ? "" : " cta-row"}" style="--d:.15s;--i:${++i}">${lbl}${rt}</button>`;
   }).join("");
   const src = t.src.map(([n, c, v]) => `<button class="row c rise" style="--d:.15s;--i:${++i + 1}"><span class="lbl"><i class="bar" style="background:var(${c})"></i><span class="name">${n}</span></span>` +
     (v === null ? `<span class="rt"><span class="cta">Kích hoạt ngay</span><span class="chev"><img data-a="chevron" alt=""></span></span>`
@@ -1611,7 +1622,7 @@ regGo.addEventListener("click", () => {
   if (d && d.go) setTimeout(() => setTier(d.go, true), 1300);
 });
 
-const tierSeg = document.getElementById("tierSeg"), subSeg = document.getElementById("subSeg"), tierNote = document.getElementById("tierNote");
+const tierSeg = document.getElementById("tierSeg"), subSeg = document.getElementById("subSeg"), subSeg3 = document.getElementById("subSeg3"), tierNote = document.getElementById("tierNote");
 let tier = "3";
 function syncTierUI(){
   const top = tier[0];
@@ -1619,6 +1630,8 @@ function syncTierUI(){
   subSeg.hidden = top !== "2";
   accRow.hidden = top !== "1";
   subSeg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.sub === tier));
+  subSeg3.hidden = top !== "3";
+  subSeg3.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.sub === tier));
   tierNote.textContent = TIERS[tier].note;
 }
 function applyTierNow(){
@@ -1656,9 +1669,10 @@ function setTier(k, animate){
 }
 tierSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
   const t = b.dataset.t;
-  setTier(t === "2" ? (tier[0] === "2" ? tier : "2a") : t, true);
+  setTier(t === "2" ? (tier[0] === "2" ? tier : "2a") : t === "3" ? (tier[0] === "3" ? tier : "3") : t, true);
 }));
 subSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setTier(b.dataset.sub, true)));
+subSeg3.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setTier(b.dataset.sub, true)));
 tier = new URLSearchParams(location.search).get("tang") || "3";
 if (!TIERS[tier]) tier = "3";
 syncTierUI(); applyTierNow();
