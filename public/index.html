@@ -71,7 +71,8 @@ p{margin:0}
 /* ===== Vùng cuộn ===== */
 .scroller{position:absolute;z-index:2;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;overscroll-behavior:contain}
 .scroller::-webkit-scrollbar{display:none}
-.content{position:relative;padding-top:314px;padding-bottom:110px}
+.content{position:relative;padding-top:314px;padding-bottom:110px;box-sizing:border-box;min-height:942px}
+/* min-height = 812 + quãng thu gọn 130: tab ngắn (Phải trả) vẫn giữ được header thu gọn khi đổi tab */
 .nav-title{position:absolute;z-index:6;left:50%;top:53px;width:247px;margin:0;transform:translate(-50%,calc(-8px * var(--p)));text-align:center;pointer-events:none;
   font-weight:700;font-size:16px;line-height:20px;color:var(--neutral-100);opacity:clamp(0,calc(1 - var(--p) * 2.5),1)}
 .sync-hero{position:absolute;top:258px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:4px;
@@ -1390,10 +1391,12 @@ const tabs = document.getElementById("tabs");
 const paneBody = document.getElementById("paneBody"), panes = [document.getElementById("paneAsset"), document.getElementById("paneDebt")];
 const totalLabel = document.getElementById("totalLabel"), amountIn = document.querySelector(".t-amount-in");
 let switching = false;
+const tabY = [0, 0];   // vị trí cuộn riêng của từng tab (khi header đã thu gọn)
 function switchTab(i){
   if (i === tab || switching) return;
   switching = true;
-  const dir = i > tab ? 1 : -1, wasCompact = sc.scrollTop >= C() - 1;
+  const dir = i > tab ? 1 : -1, keepY = Math.min(sc.scrollTop, C()), wasCompact = keepY >= C() - 1;
+  tabY[tab] = sc.scrollTop;
   tab = i;
   tabs.dataset.i = i; screen.dataset.tab = i;
   tabs.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", +x.dataset.t === i));
@@ -1403,9 +1406,11 @@ function switchTab(i){
     { duration: 180, easing: "ease-in", fill: "forwards" });
   [totalLabel, amountIn].forEach(el => el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150, fill: "forwards" }));
   out.finished.then(() => {
-    // 2) đổi pane + giữ trạng thái header (đang thu gọn thì vẫn thu gọn)
+    // 2) đổi pane + giữ nguyên trạng thái header: thu gọn / dở dang / chưa cuộn đều giữ đúng --p, không giật
     panes.forEach((pn, k) => pn.hidden = k !== i);
-    sc.scrollTop = wasCompact ? C() : 0;
+    // header đang thu gọn → về lại vị trí cũ của tab đích (ít nhất là mốc thu gọn); chưa thu gọn hết → giữ đúng mức đang cuộn
+    const toY = wasCompact ? Math.max(C(), tabY[i]) : keepY;
+    sc.scrollTop = toY; lastY = sc.scrollTop;
     update();
     totalLabel.textContent = TABS[i].label;
     out.cancel();
