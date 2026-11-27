@@ -2,7 +2,8 @@
 
 > Dành cho dev đưa thẳng vào AI coding assistant (Claude, Cursor, Copilot…) làm ngữ cảnh.
 > Nguồn sự thật: prototype https://demo-personal-finance-pink.vercel.app (file `public/index.html`) và Figma "Tài chính thông minh", page Phase 1 (node 807:22203).
-> Cập nhật: 25/11/2026.
+> Cập nhật: 27/11/2026 – đã đồng bộ với motion Home VTM 9.9 (Figma "VTM 9.9 (QLUD Only)", page "Home - Phase 1 (19.10.2026)", mục "4. Interaction / Micro-Animation / Haptic / Loading").
+> Phần dùng chung (lớp 1–2) lấy số của Home; phần riêng Quản lý tài chính (donut, thu gọn header tổng số dư, Quản lý thu chi) giữ nguyên.
 
 ---
 
@@ -43,10 +44,18 @@ Dùng token ở mục 2. Cubic-bezier viết theo dạng `(x1, y1, x2, y2)`.
 - **Theo thời gian** (time-based): chạy hết thời lượng khi có trigger.
 - **Theo cuộn** (scroll-driven): giá trị là hàm của vị trí cuộn, KHÔNG có thời lượng. Ký hiệu `p` (0…1). Không dùng animation thời gian để giả lập.
 
-### 1.4 Reduce Motion
+### 1.4 Spring (theo Home)
+Home dùng spring kiểu Apple với 2 tham số: `response` (giây, càng nhỏ càng nhanh) và `damping` ζ (1 = không nảy, < 1 = nảy).
+- Công thức: `stiffness = (2π / response)²`, `damping_coeff = 4π·ζ / response`, mass = 1.
+- iOS: `.spring(response:, dampingFraction:)`. Android Compose: `spring(dampingRatio = ζ, stiffness = (2π/response)²)`. Flutter: `SpringDescription(mass: 1, stiffness: …, damping: …)`. Web: easing `linear()` sinh từ spring (xem `springKF()` trong prototype).
+- Spring luôn chạy tiếp từ giá trị + vận tốc hiện tại → ngắt được giữa chừng, không giật.
+- Sau cử chỉ (vuốt, kéo): đích chọn theo điểm dừng dự kiến `project(v) = (v/1000)·d/(1−d)` (v px/s), rồi giao vận tốc tay cho spring (`v0 = v / quãng còn lại`).
+
+### 1.5 Reduce Motion
 Khi hệ điều hành bật Reduce Motion:
 - Tắt M01 (intro), M02 (đếm số), M07 (reveal): hiện ngay trạng thái cuối.
-- Giữ chuyển cảnh điều hướng (M13, M14) nhưng đổi sang fade 200 ms.
+- Chuyển màn (M13) đổi sang fade 200 ms; đổi tab (M08) fade 100/150 ms, không blur.
+- Nhấn (M22): không scale, đổi opacity 0.55 (thanh điều hướng 0.6).
 - Giữ animation theo cuộn (M03) vì nó gắn với thao tác tay.
 
 ---
@@ -54,6 +63,25 @@ Khi hệ điều hành bật Reduce Motion:
 ## 2. Tokens
 
 ```yaml
+spring:            # [response giây, damping ζ] – lấy từ Home VTM 9.9
+  press:   [0.18, 1.0]    # lún khi chạm
+  bounce:  [0.38, 0.5]    # nảy về khi nhả
+  bar-down:[0.25, 1.0]    # cả thanh điều hướng dưới lún
+  bar-up:  [0.40, 0.6]
+  tab-down:[0.20, 1.0]    # từng nút trong thanh điều hướng
+  tab-up:  [0.35, 0.55]
+  page:    [0.38, 1.0]    # bắt trang carousel, snap header
+  indicator:[0.30, 1.0]   # viên chỉ báo tab
+  dots:    [0.12, 1.0]    # chấm phân trang
+  push:    [0.50, 1.0]    # màn con đẩy vào / ra
+projection:
+  page: 0.99         # carousel (Home)
+  edge-swipe: 0.998  # vuốt cạnh trái để back (độ giảm tốc cuộn chuẩn iOS)
+nav-delay: 100       # ms – nhả tay xong 100 ms mới mở màn/sheet (Home)
+push-under-shift: -112   # pt – màn dưới lùi khi màn con push vào (Home)
+push-dim: 0.10           # màn dưới tối 10% (Home)
+axis-lock: 10            # pt – kéo quá 10 pt mới khoá trục ngang/dọc
+
 easing:
   ease-out-standard: [0.2, 0.8, 0.2, 1]      # vào màn, trượt nội dung, toast
   ease-ios-sheet:    [0.32, 0.72, 0, 1]      # push, modal, bottom sheet, FAQ
@@ -76,18 +104,14 @@ duration:
   tab-out: 180
   tab-in: 340
   tab-pill: 500
-  push-open: 480
-  push-close: 380
-  modal-open: 540
-  modal-close: 420
   sheet-open: 520
   sheet-close: 340
   snap-back: 320
 
 scale:
-  press-large: 0.97    # thẻ, nút lớn, dòng
-  press-icon: 0.9      # nút tròn 20 pt
-  press-arrow: 0.85    # mũi tên đổi tháng
+  press-card: 0.97     # thẻ, dòng, thanh điều hướng
+  press-cta: 0.94      # nút CTA
+  press-icon: 0.88     # nút icon, nút trong thanh điều hướng
 
 layout:
   screen: [375, 812]
@@ -112,15 +136,14 @@ layout:
 | Tab Tài sản / Phải trả | opacity 0→1, y −10→0 | 100 | 600 | ease-out-standard |
 | Nhãn "Tổng tài sản" + icon mắt | opacity 0→1, y −10→0 | 200 | 600 | ease-out-standard |
 | Số tiền tổng | opacity 0→1, y −10→0; đồng thời đếm số (M02) | 250 | 600 | ease-out-standard |
-| Dòng "Đồng bộ lúc…" | opacity 0→1, y +12→0 | 500 | 600 | ease-out-standard |
-| Tiêu đề nhóm + từng dòng tài sản/nguồn tiền | opacity 0→1, y +12→0 | 150 + i × 60 | 600 | ease-out-standard |
+| Dòng "Đồng bộ lúc…", tiêu đề nhóm, từng dòng tài sản/nguồn tiền, các khối bên dưới | opacity 0→1, y +8→0 (Home) | 80 + min(i, 5) × 40 (Home) | 600 | ease-out-standard |
 | Vòng nền donut | opacity 0→1, scale 0.82→1, rotate −25°→0° | 50 | 800 | ease-out-standard |
 | Cung màu donut | quét 0°→360° theo chiều kim đồng hồ (mask) | 250 | 1200 | sweep |
 | Icon sản phẩm quanh donut | opacity 0→1, scale 0.3→1 | 1000 + i × 70 | 600 | spring-pop |
 | Nhãn % và đường nối | opacity 0→1 | 1200 + i × 60 | 450 | ease |
 | Thanh điều hướng dưới | opacity 0→1, y +60→0, scale 0.9→1 | 900 | 700 | spring-tabbar |
 
-- **Quy tắc:** khối "Tổng quan tháng này", "Hôm nay có gì mới" không thuộc intro, dùng M07.
+- **Quy tắc (Home):** mọi khối vào cùng một lượt, so le tối đa 6 bậc (i ≤ 5); không có khối nào hiện riêng khi cuộn tới.
 - **Nghiệm thu:**
   - [ ] Tiêu đề màn hiện ngay, không rơi.
   - [ ] Icon donut bật sau khi cung đã quét gần xong (~1 s).
@@ -168,10 +191,8 @@ onScroll(y):
 
 ### M04 – Snap header khi thả tay
 - **Trigger:** ngừng cuộn 140 ms và 0 < p < 1.
-- **Đích:** p ≥ 0.5 → cuộn tới 130 (thu gọn hẳn); p < 0.5 → cuộn về 0.
-- **Thời lượng:**
-  - Tab Tài sản: thu gọn 560 ms ease-out-back (nảy nhẹ); mở ra 420 ms ease-out-cubic.
-  - Tab Phải trả: 320 ms ease-out-cubic, không nảy.
+- **Đích:** theo điểm dừng dự kiến `scrollY + project(v, 0.99)` (v = vận tốc cuộn gần nhất, px/s): ≥ 65 → 130 (thu gọn hẳn), < 65 → 0.
+- **Chuyển động:** spring `page` (0.38, ζ 1) nhận vận tốc cuộn hiện tại, không nảy. Hai tab như nhau.
 - **Quy tắc:** không snap khi người dùng đang giữ tay hoặc khi một animation cuộn khác đang chạy.
 
 ### M05 – Ẩn/hiện thanh điều hướng dưới khi cuộn
@@ -186,10 +207,9 @@ onScroll(y):
 - Bóng đổ thẻ: offsetY −(6 + 10|pull|), blur 14 + 20|pull|, alpha 0.03 + 0.07|pull|.
 - Ngừng cuộn → về 0. Nhấn giữ lên thẻ → |pull| = 0.6 (cảm giác "túm" thẻ).
 
-### M07 – Hiện khi cuộn tới (reveal)
-- Áp cho: "Tổng quan tháng này", "Hôm nay có gì mới" và các khối bên dưới thẻ tài sản.
-- Trigger: lộ ≥ 15% diện tích trong vùng cuộn. Chạy 1 lần cho mỗi phần tử.
-- opacity 0→1 (600 ms ease), translateY 18→0 (600 ms ease-out-standard), stagger i × 70 ms.
+### M07 – Khối bên dưới (Tổng quan tháng này, Hôm nay có gì mới…)
+- Đã bỏ "hiện khi cuộn tới" để giống Home: Home không hiện từng phần.
+- Các khối này vào cùng lượt intro (M01): opacity 0→1, y +8→0, trễ 80 + min(i, 5) × 40 ms (thực tế 280 ms vì i ≥ 5).
 
 ### M08 – Đổi tab Tài sản ↔ Phải trả
 - **Trigger:** chạm tab.
@@ -197,17 +217,15 @@ onScroll(y):
 
 | Bước | Phần tử | Từ → Đến | Delay | Duration | Easing |
 |---|---|---|---|---|---|
-| Ra | Nội dung tab cũ | opacity 1→0, x 0→−28·dir | 0 | 180 | ease-in |
-| Ra | Nhãn + số tiền tổng | opacity 1→0 | 0 | 150 | linear |
+| Ra | Nội dung tab cũ (cả khối) | opacity 1→0, blur 0→2 pt | 0 | 180 | ease-out bậc 3 |
+| Ra | Nhãn + số tiền tổng | opacity 1→0 | 0 | 180 | ease-out bậc 3 |
 | Đổi | Ẩn tab cũ, hiện tab mới, đặt scrollY (xem Quy tắc) | – | 180 | 0 | – |
-| Vào | Nội dung tab mới | opacity 0→1, x +28·dir→0 | 180 | 340 | ease-out-standard |
-| Vào | Nhãn ("Tổng tài sản" ↔ "Dư nợ tháng này") + số tiền | opacity 0→1, y +6→0 | 180 | 300 | ease-out-standard |
-| Vào | Từng dòng/thẻ của tab mới | opacity 0→1, y +10→0 | 180 + 60 + k × 50 | 420 | ease-out-standard |
-| Vào | Donut (chỉ tab Tài sản) | chạy lại quét vòng như M01 | 180 | như M01 | như M01 |
-| Song song | Viên thuốc nền tab | trượt sang tab mới | 0 | 500 | spring-pill |
+| Vào | Nội dung tab mới (cả khối) | opacity 0→1, blur 2→0 pt | 180 | 260 | ease-out bậc 3 |
+| Vào | Nhãn ("Tổng tài sản" ↔ "Dư nợ tháng này") + số tiền | opacity 0→1 | 180 | 260 | ease-out bậc 3 |
+| Song song | Viên chỉ báo tab | trượt sang tab mới | 0 | spring indicator (0.30, ζ 1) | – |
 | Song song | Màu chữ tab | đổi màu | 0 | 300 | ease |
 
-  `dir = +1` khi đi Tài sản → Phải trả, `−1` khi ngược lại.
+  Theo tab Đề xuất/Yêu thích của Home: không trượt ngang, không cho từng dòng chạy lẻ, không chạy lại donut.
 - **Quy tắc giữ header (quan trọng, tránh giật):**
   1. Header KHÔNG đổi trạng thái khi đổi tab: p trước và sau khi đổi phải bằng nhau.
   2. Mỗi tab nhớ scrollY riêng (`tabY[tab]`).
@@ -239,20 +257,23 @@ onScroll(y):
 
 ### M12 – Banner "Hôm nay có gì mới" (carousel)
 - Thẻ giữa 343×130; hai thẻ bên scale 0.75; bước trượt 308.125.
-- Chuyển thẻ 650 ms ease-carousel; scale thẻ giữa/bên đổi cùng lúc.
+- Scale thẻ giữa/bên đổi cùng lúc với vị trí.
 - Tự chạy mỗi 5 s, lặp vô hạn liền mạch; dừng khi người dùng đang kéo, chạy lại sau khi thả.
-- Kéo: thẻ bám ngón tay; kéo > 40 → sang thẻ kế; chưa đủ → trả về.
-- Phân biệt cuộn dọc: ngón tay đi dọc > 8 trước khi đi ngang → nhường cho cuộn trang.
-- Chấm phân trang: chấm hiện tại rộng 4→16, màu #E9E9E9 → đỏ thương hiệu, 400 ms ease-carousel.
+- Tự chạy: chuyển thẻ bằng spring `page` (0.38, ζ 1).
+- Kéo (Home): khoá trục sau 10 pt; đi dọc trước → nhường cho cuộn trang. Thẻ bám ngón tay.
+- Thả: trang đích = làm tròn `(dx + project(v, 0.99)) / bước`, tối đa ±1 trang; spring `page` nhận vận tốc tay.
+- Chấm phân trang: chấm hiện tại rộng 4→16, màu #E9E9E9 → đỏ thương hiệu, spring `dots` (0.12, ζ 1).
 
 ### M13 – Màn con: push và modal
 | Kiểu | Mở | Đóng | Màn dưới |
 |---|---|---|---|
-| Push (từ phải) | x 100%→0, 480 ms ease-ios-sheet | 380 ms | tối dần tới 22% đen |
-| Modal (từ dưới) | y 100%→0, 540 ms ease-ios-sheet | 420 ms | tối dần tới 22% đen |
+| Push (từ phải) | x 100%→0, spring push (0.5, ζ 1) | spring push | tối tới 10%, lùi x 0 → −112 pt cùng spring (Home) |
+| Modal (từ dưới) | y 100%→0, spring push | spring push | tối tới 10%, không lùi |
 
+- Mở bằng chạm: nhả tay xong 100 ms mới bắt đầu (Home `nav-delay`), để kịp thấy nút nảy về.
 - Nội dung màn con: từng khối opacity 0→1, y 14→0, 520 ms, delay 140 + i × 45 ms.
-- Vuốt cạnh trái để quay lại (chỉ push): bắt đầu trong 28 pt sát mép trái, nhận khi kéo ngang > 6. Màn bám ngón tay. Thả: đóng nếu dx > 120 hoặc (vận tốc > 0.5 px/ms và dx > 30); không thì trả về 320 ms.
+- Vuốt cạnh trái để quay lại (chỉ push): bắt đầu trong 28 pt sát mép trái, nhận khi kéo ngang > 6. Màn con và màn dưới (−112 → 0) bám ngón tay.
+- Thả: đóng nếu `dx + project(v, 0.998) > 187.5`; spring push nhận vận tốc tay (`v0 = v / (375 − dx)`). Không đủ → spring trả về.
 
 ### M14 – Bottom sheet
 - Mở 520 ms, easing (0.2, 1.1, 0.3, 1) (nảy nhẹ); đóng 340 ms ease-ios-sheet.
@@ -293,25 +314,34 @@ onScroll(y):
 ### M21 – Tab màn Sản phẩm
 - Chạm tab → nội dung cuộn ngang mượt (smooth scroll hệ thống) tới trang của tab.
 
-### M22 – Trạng thái nhấn (dùng chung)
-- Thẻ, dòng, icon sản phẩm, nút lớn: scale 0.97–0.98, 150 ms; thả → 1.
-- Nút tròn 20 pt: scale 0.9. Mũi tên đổi tháng: 0.85.
-- Thẻ "Tổng quan tháng này": 1 → 0.97 → 1 trong 220 ms rồi mở màn chi tiết.
+### M22 – Trạng thái nhấn (dùng chung, theo Home)
+- Lún ngay khi chạm (pointer-down), spring `press` (0.18, ζ 1):
+  - Thẻ, dòng, thẻ tổng quan, thẻ khoản vay: 0.97.
+  - Nút CTA (Kích hoạt, Tôi đồng ý, Vay ngay…): 0.94.
+  - Nút icon (back, ?, mũi tên tháng, đồng bộ, chevron 20 pt): 0.88.
+- Nhả tay: nảy về 1 bằng spring `bounce` (0.38, ζ 0.5). Mở màn/sheet sau 100 ms.
+- Tay đi quá 10 pt (đang cuộn/vuốt) hoặc huỷ → về 1 bằng spring `press`, không mở gì.
+- Thanh điều hướng dưới: cả thanh lún 0.97 (`bar-down` / `bar-up`), nút được chạm lún 0.88 (`tab-down` / `tab-up`); nhả → rung nhẹ (haptic light) + mở màn.
+- Reduce Motion: không scale, opacity 0.55 (thanh điều hướng 0.6).
 
 ---
 
 ## 4. Quy tắc chung khi hiện thực
 1. Animation theo cuộn (M03, M06) phải chạy trên luồng render/UI mỗi frame, không debounce.
-2. Animation mới được phép ngắt animation cũ của cùng phần tử, bắt đầu từ giá trị hiện tại (không reset về điểm đầu).
+2. Animation mới được phép ngắt animation cũ của cùng phần tử, bắt đầu từ giá trị + vận tốc hiện tại (không reset về điểm đầu). Ưu tiên spring cho mọi thứ người dùng chạm/kéo được.
+5. Khi dữ liệu đổi (đồng bộ, làm mới ngầm): crossfade cả khối 240 ms, không đổi lẻ từng chữ/số (quy tắc Home); chỉ đếm số ở lần vào đầu.
 3. Không chạy intro/đếm số lại khi chỉ quay về từ màn con (M13).
 4. Tất cả chạm trong lúc màn con đang mở/đóng bị bỏ qua cho tới khi animation xong.
 
 ## 5. Câu hỏi còn mở
-- Haptic (rung nhẹ) cho snap header, đổi tab, tick checkbox: đề xuất mức light, cần chốt.
+- Haptic: đã có cho thanh điều hướng (theo Home). Snap header, đổi tab, tick checkbox: Home chưa quy định, chưa thêm.
+- Snap header vẫn theo cuộn (scrub) vì header Quản lý tài chính có số tiền lớn thu nhỏ dần; Home dùng ngưỡng 40/24 pt + spring cho thanh top. Cần designer Home xác nhận giữ khác biệt này.
+- Thời lượng khối vào (M01, 600 ms): Home chỉ ghi trễ 80 + 40·i và lệch 8 pt, chưa ghi thời lượng – cần đối chiếu file tokens của Home.
 - Trạng thái đang tải (skeleton) khi đồng bộ: chưa có trên prototype/Figma.
 - Hành vi chi tiết của nút đồng bộ (M11) khi lỗi / giới hạn số lần bấm: BRD chưa mô tả.
 
 ## 6. Tham chiếu
 - Prototype: https://demo-personal-finance-pink.vercel.app — tham số `?tang=1|2a|2b|3|3b` để xem từng tầng người dùng.
 - Figma page Phase 1: 807:22203. Bảng spec trực quan: section "Spec animation" trong page này.
+- Motion Home VTM 9.9: Figma owTkAz1FHxoyqdukaqmWDy, page "Home - Phase 1 (19.10.2026)" (thanh top, thanh điều hướng, tab dịch vụ, banner, loading).
 - Component liên quan (page Component): Navbar (Chưa scroll / Đã scroll), Tổng số dư (Trạng thái Chưa scroll / Đã scroll), Thẻ tài sản, Tổng quan tháng này, Hôm nay có gì mới, Thanh điều hướng dưới.
