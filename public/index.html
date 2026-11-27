@@ -120,7 +120,6 @@ p{margin:0}
 .h14{font-weight:700;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--dark100)}
 .row{display:flex;justify-content:space-between;align-items:flex-start;width:100%;border-radius:8px;transition:transform .15s,background .15s}
 .row.c{align-items:center}
-.row:active{transform:scale(.98)}
 .row .lbl{display:flex;align-items:center;gap:8px}
 .bar{width:4px;height:20px;border-radius:11px;flex:none}
 .name{font-weight:510;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--dark100);white-space:nowrap}
@@ -149,13 +148,11 @@ p{margin:0}
 .ov{margin:32px 16px 0;display:flex;flex-direction:column;gap:16px}
 .ov-h{display:flex;align-items:center;justify-content:space-between}
 .ov-btn{width:20px;height:20px;border-radius:14px;background:var(--neutral-05);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none;transition:transform .15s}
-.ov-btn:active{transform:scale(.9)}
 .ov-ic{position:relative;width:12px;height:12px;overflow:hidden;flex:none}
 .ov-ic > span{position:absolute;inset:16.67% 32.84% 16.67% 29.17%}
 .ov-ic img,.ov-gi img{width:100%;height:100%}
 .ov-cards{display:flex;gap:20px;filter:drop-shadow(0 2px 12px rgba(0,0,0,.04))}
 .ov-card{flex:1 0 0;min-width:1px;display:flex;flex-direction:column;gap:16px;align-items:flex-start;padding:12px;border-radius:12px;background:var(--white);border:1px solid var(--neutral-05);text-align:left;transition:transform .15s}
-.ov-card:active{transform:scale(.97)}
 /* UI mới (Figma 853:5676): thẻ kính không viền – nền trắng 90% + gradient toả từ góc trên trái,
    3 lớp inner shadow trắng tạo mép kính, minh hoạ ví mờ 23% góc dưới phải */
 .ov-card{position:relative;overflow:hidden;--tint:252,237,239;border:0;
@@ -192,7 +189,6 @@ p{margin:0}
   transform:translateY(calc(100% + 90px));transition:transform .55s cubic-bezier(.2,.9,.25,1.06)}
 .reg.show .reg-modal{transform:none}
 .reg-x{position:absolute;right:8px;top:8px;width:24px;height:24px;overflow:hidden;transition:transform .15s}
-.reg-x:active{transform:scale(.88)}
 .reg-x > span{position:absolute;left:5px;top:4px;width:14.143px;height:15.556px}
 .reg-x img{position:absolute;left:0;top:0;width:107.07%;height:100%}
 .onb-ill{width:220px;height:220px;object-fit:contain;flex:none}
@@ -211,7 +207,6 @@ p{margin:0}
 .onb-agree input:focus-visible + .onb-cb::before{outline:2px solid var(--red);outline-offset:2px}
 .onb-btn{margin-top:24px;min-width:200px;height:48px;padding:0 24px;border-radius:24px;background:var(--red);color:var(--white);
   font-weight:500;font-size:18px;line-height:22px;box-shadow:0 6px 14px rgba(238,0,51,.25);transition:transform .15s,opacity .2s}
-.onb-btn:active{transform:scale(.97)}
 .onb-btn:disabled{opacity:.4;box-shadow:none;pointer-events:none}
 .run-reg .onb-ill{animation:rise .5s cubic-bezier(.2,.8,.2,1) .2s both}
 .onb-toast{position:absolute;z-index:16;left:50%;bottom:110px;max-width:320px;padding:10px 16px;border-radius:12px;background:rgba(34,34,34,.92);color:#fff;
@@ -232,7 +227,6 @@ p{margin:0}
 .adv .ds{font-size:13px;line-height:16px;letter-spacing:-.08px;color:var(--neutral-80)}
 .tag{padding:4px;border-radius:4px;background:var(--pine05);font-weight:700;font-size:13px;line-height:16px;color:var(--green);white-space:nowrap}
 .btn-dark{flex:none;padding:8px;border-radius:37.587px;background:var(--red);color:var(--white);font-weight:510;font-size:12px;line-height:14px;white-space:nowrap;transition:transform .15s}
-.btn-dark:active{transform:scale(.94)}
 .sec-h{display:flex;align-items:center;justify-content:space-between}
 .see-all{display:flex;align-items:center;gap:6px;font-weight:510;font-size:14px;line-height:18px;letter-spacing:-.16px;color:var(--red)}
 .rail{display:flex;gap:8px;margin:0 -16px;padding:0 16px 8px;overflow-x:auto;overflow-y:hidden;touch-action:pan-x pan-y;overscroll-behavior-x:contain;overscroll-behavior-y:auto;scrollbar-width:none;scroll-snap-type:x mandatory;scroll-padding:0 16px}
@@ -240,7 +234,6 @@ p{margin:0}
 .news{flex:none;width:148px;border-radius:16px;background:var(--white);overflow:hidden;scroll-snap-align:start;display:flex;flex-direction:column;
   box-shadow:0 0 0 1px rgba(25,28,33,.02),0 1px 0 0 rgba(25,28,33,.01),0 2px 3px 0 rgba(0,0,0,.02);transition:transform .15s}
 .news.bd{box-shadow:none;border:1px solid var(--border-default)}
-.news:active{transform:scale(.97)}
 .news .im{position:relative;height:148px;width:100%}
 .news .im img{position:absolute;left:0;top:5px;width:148px;height:148px;object-fit:cover}
 .news .ct{height:102px;padding:12px 16px;display:flex;flex-direction:column;justify-content:space-between;font-weight:510}
@@ -258,7 +251,6 @@ p{margin:0}
 .statusbar .time{position:absolute;left:48px;top:14px;width:54px;transform:translateX(-50%);text-align:center;font-weight:500;font-size:15px;letter-spacing:-.3px;color:var(--neutral-100)}
 .navrow{position:absolute;z-index:6;left:0;top:44px;width:375px;height:40px;padding:4px 20px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .navrow button{pointer-events:auto;transition:transform .15s}
-.navrow button:active{transform:scale(.88)}
 .ic24{position:relative;width:24px;height:24px;overflow:hidden}
 .ic-back .box{position:absolute;inset:19.21% 12.5%;display:flex;align-items:center;justify-content:center}
 .ic-back .box img{width:14.78px;height:18px;transform:rotate(90deg) scaleX(-1);flex:none}
@@ -271,7 +263,7 @@ p{margin:0}
   transform:translate(64px,calc(112px - 64px * var(--p)))}
 .tabs-in{position:relative;width:248px;height:32px;display:flex;border-radius:100px;background:rgba(255,255,255,.32);border:1px solid var(--white)}
 .tabs .pill{position:absolute;left:0;top:0;width:50%;height:100%;border-radius:100px;background:rgba(178,178,178,.2);border:1px solid var(--neutral-05);
-  transition:transform .5s cubic-bezier(.3,1.35,.5,1)}
+  transition:transform var(--ind-d,.3s) var(--ind-e,ease-out)}
 .tabs[data-i="1"] .pill{transform:translateX(100%)}
 .tab{position:relative;flex:1 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:14px;color:var(--neutral-60);transition:color .3s}
 .tab.on{font-weight:700;color:var(--neutral-100)}
@@ -309,7 +301,6 @@ p{margin:0}
 .quick{display:flex;gap:12px;margin-left:18px;width:347px}
 .qcard{flex:1 0 0;min-width:1px;display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:12px;text-align:left;
   background:rgba(255,255,255,.8);border:1px solid var(--border-default);transition:transform .15s}
-.qcard:active{transform:scale(.97)}
 .qc-l{display:flex;flex-direction:column;gap:8px;align-items:flex-start;justify-content:center}
 .ico30{position:relative;width:30px;height:30px;overflow:hidden;flex:none}
 .ico30 .shape{position:absolute;left:0;top:0;width:30px;height:30px}
@@ -327,7 +318,6 @@ p{margin:0}
 .tabbar.hide{transform:translateY(110px);opacity:0;pointer-events:none}
 .tabbar-in{display:flex;align-items:center;padding:4px;border-radius:100px;background:rgba(255,255,255,.8);filter:drop-shadow(0 2px 6px rgba(0,0,0,.08))}
 .tb{flex:1 0 0;min-width:1px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 12px;border-radius:100px;transition:transform .15s}
-.tb:active{transform:scale(.94)}
 .tb.on{padding:6px 14px;background:rgba(178,178,178,.2);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 .tb .i{position:relative;width:20px;height:20px}
 .tb .i .home{position:absolute;inset:8.33% 10.42%}
@@ -346,13 +336,13 @@ p{margin:0}
 @keyframes pop{from{opacity:0;transform:scale(.3)}}
 .run .fd{animation:fd .45s ease both;animation-delay:calc(1.2s + var(--i) * 60ms)}
 @keyframes fd{from{opacity:0}}
-.run .rise{animation:rise .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--d,0s) + var(--i,0) * 60ms)}
-@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+.run .rise{animation:rise .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(80ms + min(var(--i,0), 5) * 40ms)}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}   /* Home: block vào so le 80 + 40·i ms (i ≤ 5), lệch 8 */
 .run .drop{animation:drop .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
 @keyframes drop{from{opacity:0;transform:translateY(-10px)}}
 .run .tabbar-in{animation:barUp .7s cubic-bezier(.2,.9,.25,1.15) .9s both}
 @keyframes barUp{from{opacity:0;transform:translateY(60px) scale(.9)}}
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0) * 70ms)}
+.reveal{opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1);transition-delay:calc(80ms + min(var(--i,5), 5) * 40ms)}
 .reveal.in{opacity:1;transform:none}
 .mask-flash{animation:mflash .3s ease}
 @keyframes mflash{0%{opacity:1}40%{opacity:0;filter:blur(3px)}100%{opacity:1}}
@@ -406,7 +396,6 @@ p{margin:0}
 .sv-nav{position:absolute;z-index:5;left:0;top:0;width:375px;height:84px}
 .sv-row{position:absolute;left:0;top:44px;width:375px;height:40px;padding:4px 20px;display:flex;align-items:center}
 .sv-row button{transition:transform .15s}
-.sv-row button:active{transform:scale(.88)}
 .sv-title{position:absolute;left:50%;top:9px;width:247px;transform:translateX(-50%);margin:0;text-align:center;font-size:16px;line-height:20px;font-weight:700;color:var(--neutral-100);pointer-events:none}
 
 /* Sản phẩm */
@@ -421,7 +410,6 @@ p{margin:0}
 .page{flex:0 0 375px;scroll-snap-align:start;padding:28px 20px 0}
 .svc-list{width:343px;display:flex;flex-direction:column;gap:24px}
 .svc{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font-size:16px;line-height:20px;font-weight:510;letter-spacing:-.31px;color:var(--neutral-100);transition:transform .15s}
-.svc:active{transform:scale(.97)}
 .i48{position:relative;flex:none;width:48px;height:48px;overflow:hidden}
 .i48.free{overflow:visible}
 
@@ -446,10 +434,9 @@ p{margin:0}
 .bl-top{position:absolute;left:0;top:0;width:375px;height:88px;background:#fff}
 .bl-div{position:absolute;left:0;top:88px;width:375px;height:1px;background:var(--border-default)}
 .bl-back{position:absolute;z-index:6;left:8px;top:50px;width:32px;height:32px;transition:transform .15s}
-.bl-back:active{transform:scale(.88)}
 .bl-title{position:absolute;left:16px;top:56px;width:343px;margin:0;text-align:center;font-size:16px;line-height:20px;font-weight:700;color:var(--neutral-100)}
 .bl-create{position:absolute;left:16px;top:716px;width:343px;height:48px;border-radius:100px;transition:background .15s,transform .15s}
-.bl-create:active{background:rgba(0,0,0,.12);transform:scale(.98)}
+.bl-create:active{background:rgba(0,0,0,.12)}
 .bs-ov{position:absolute;inset:0;z-index:9;background:rgba(0,0,0,.6);opacity:0;pointer-events:none}
 .bs-ov.on{pointer-events:auto}
 .bs{position:absolute;z-index:10;left:0;top:216px;width:375px;height:596px;transform:translateY(100%);touch-action:none}
@@ -504,7 +491,6 @@ p{margin:0}
 .loan-v b{font-size:20px;line-height:24px;font-weight:700;letter-spacing:-.45px;color:var(--neutral-100)}
 .loan-v i{font-style:normal;font-size:18px;line-height:22px;width:10px}
 .loan-btn{width:120px;height:32px;border-radius:37px;background:var(--red);color:#fff;font-size:14px;line-height:18px;font-weight:500;filter:drop-shadow(0 4px 6px rgba(238,0,51,.25));transition:transform .15s}
-.loan-btn:active{transform:scale(.95)}
 .hub-prod{display:flex;flex-direction:column;gap:16px;height:296px}
 .hub-main{position:relative;width:343px;height:258px}
 .hub-arc{position:absolute;left:50%;top:58px;width:375px;height:132px;transform:translateX(-50%)}
@@ -526,7 +512,6 @@ p{margin:0}
 .hub-ill{position:absolute;left:219px;top:-6px;width:123px;height:123px}
 .hub-tool{padding:16px;border-radius:16px;border:1px solid var(--neutral-05);background:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.04));display:flex;justify-content:space-between}
 .hub-t{width:73px;padding-top:8px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;line-height:14px;font-weight:510;color:var(--neutral-80);text-align:center;transition:transform .15s}
-.hub-t:active{transform:scale(.92)}
 .hub-t > span:last-child{height:36px}
 .ic32{position:relative;width:32px;height:32px}
 .hub-nav{position:absolute;z-index:5;left:0;top:0;width:375px;height:88px;transition:background .3s,box-shadow .3s}
@@ -535,7 +520,6 @@ p{margin:0}
 .hub-row b{flex:1 0 0;min-width:1px;font-size:16px;line-height:20px;color:var(--neutral-100);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hub-act{display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-radius:100px;border:.5px solid var(--neutral-05);background:rgba(240,240,240,.65);backdrop-filter:blur(1px)}
 .hub-act button{transition:transform .15s}
-.hub-act button:active{transform:scale(.85)}
 .hub-act i{width:1px;height:16px;border-radius:100px;background:var(--neutral-80)}
 
 /* Nhịp xuất hiện khi mở màn */
@@ -547,7 +531,6 @@ p{margin:0}
 .tc-month{position:absolute;z-index:4;left:16px;top:100px;width:343px;height:36px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-radius:100px;background:rgba(255,255,255,.6);border:1px solid #fff}
 .tc-month b{font-size:14px;line-height:18px;font-weight:700;letter-spacing:-.16px;color:var(--neutral-100);display:inline-block}
 .tc-month button{transition:opacity .2s,transform .15s}
-.tc-month button:active{transform:scale(.85)}
 .tc-month button:disabled{opacity:.25;cursor:default}
 .tc-wrap{position:absolute;left:16px;top:159px;width:343px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.04))}
 .tc-tabs{position:relative;height:43px;border:1px solid #fff;border-bottom:0;border-radius:24px 24px 0 0;overflow:hidden;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
@@ -613,7 +596,7 @@ p{margin:0}
 .nb-s img{position:absolute;inset:-1px 0 0 0;width:100%;height:calc(100% + 1px);object-fit:cover;pointer-events:none}
 .nb-ad{position:absolute;left:14px;top:10px;padding:2px 6px;border-radius:16px;background:var(--border-default);border:1px solid #fff;font-size:12px;line-height:14px;font-weight:510;color:var(--neutral-80)}
 .nb-dots{display:flex;align-items:center;justify-content:center;gap:4px;height:4px}
-.nb-dots i{width:4px;height:4px;border-radius:4px;background:#E9E9E9;transition:width .4s cubic-bezier(.3,.7,.2,1),background-color .4s}
+.nb-dots i{width:4px;height:4px;border-radius:4px;background:#E9E9E9;transition:width var(--dot-d,.2s) var(--dot-e,ease-out),background-color var(--dot-d,.2s) var(--dot-e,ease-out)}
 .nb-dots i.on{width:16px;background:var(--red)}
 </style>
 </head>
@@ -1245,10 +1228,9 @@ sc.addEventListener("scroll", () => {
     if (busy || drag.active) return;
     const st = sc.scrollTop;
     if (st > 1 && st < C() - 1) {
-      const up = st >= C() / 2;
-      // thả tay → card "bật" lên vị trí thu gọn, có nảy nhẹ
-      if (tab === 0) animateScroll(up ? C() : 0, up ? 560 : 420, up ? easeOutBack : easeOutCubic);
-      else animateScroll(up ? C() : 0, 320);
+      // Home/Apple: chọn đích theo điểm dừng dự kiến (vị trí + quán tính), rồi spring tới đó, nhận vận tốc hiện tại
+      const vPxS = sv * 1000, up = st + project(vPxS) >= C() / 2;
+      springScroll(up ? C() : 0, SPRING.page, vPxS);
     }
   }, 140);
   trackPull();
@@ -1276,6 +1258,134 @@ const cardEl = document.querySelector(".pane-asset .card");
 cardEl.addEventListener("pointerdown", () => { if (tab === 0 && sc.scrollTop < C()) cardEl.classList.add("grab"); });
 addEventListener("pointerup", () => cardEl.classList.remove("grab"));
 addEventListener("pointercancel", () => cardEl.classList.remove("grab"));
+
+
+/* ===== Motion core – đồng bộ Home VTM 9.9 (spring kiểu Apple: response r giây + damping ζ) =====
+   Nguồn: Figma VTM 9.9 page "Home - Phase 1", mục "4. Interaction / Micro-Animation / Haptic / Loading" */
+const SPRING = {
+  press:  { r:.18, z:1   },   // lún ngay khi chạm (Home: CTA, thẻ)
+  bounce: { r:.38, z:.5  },   // nảy về khi nhả
+  barDown:{ r:.25, z:1   }, barUp:{ r:.4,  z:.6  },   // cả thanh điều hướng dưới
+  tabDown:{ r:.2,  z:1   }, tabUp:{ r:.35, z:.55 },   // từng nút trong thanh
+  page:   { r:.38, z:1   },   // bắt trang carousel, snap header
+  ind:    { r:.30, z:1   },   // viên chỉ báo tab
+  dots:   { r:.12, z:1   },   // chấm phân trang
+  push:   { r:.5,  z:1   }    // màn con
+};
+const NAV_DELAY = 100;                    // Home: nhả tay → 100 ms sau mới mở màn
+const PUSH_SHIFT = 112, PUSH_DIM = .10;   // Home: màn dưới lùi 112 pt, tối 10%
+const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+const project = (v, d = .99) => (v / 1000) * d / (1 - d);   // điểm dừng dự kiến theo vận tốc (px/s)
+/* Spring 0 → 1 (v0 = vận tốc đầu / quãng đường) → easing linear() cho WAAPI & CSS transition */
+const _skf = new Map();
+function springKF(cfg, v0 = 0){
+  v0 = Math.max(-20, Math.min(20, v0 || 0));
+  const key = cfg.r + "|" + cfg.z + "|" + v0.toFixed(2);
+  if (_skf.has(key)) return _skf.get(key);
+  const k = (2 * Math.PI / cfg.r) ** 2, c = 4 * Math.PI * cfg.z / cfg.r, h = 1 / 240;
+  let x = 0, v = v0; const pts = [0];
+  for (let f = 0; f < 240; f++) {
+    for (let j = 0; j < 4; j++) { const a = -k * (x - 1) - c * v; v += a * h; x += v * h; }
+    pts.push(+x.toFixed(4));
+    if (Math.abs(1 - x) < .002 && Math.abs(v) < .02) break;
+  }
+  pts[pts.length - 1] = 1;
+  const out = { easing: `linear(${pts.join(",")})`, duration: Math.round((pts.length - 1) * 1000 / 60) };
+  _skf.set(key, out); return out;
+}
+/* Spring trên giá trị số: luôn chạy tiếp từ giá trị + vận tốc hiện tại nên ngắt được giữa chừng */
+function Spr(x, apply){ this.x = x; this.v = 0; this.to = x; this.cfg = SPRING.press; this.apply = apply; this.raf = 0; }
+Spr.prototype.go = function(to, cfg){
+  this.to = to; this.cfg = cfg;
+  if (this.raf) return;
+  let last = performance.now();
+  const tick = now => {
+    const dt = Math.min(.05, (now - last) / 1000); last = now;
+    const k = (2 * Math.PI / this.cfg.r) ** 2, c = 4 * Math.PI * this.cfg.z / this.cfg.r, n = Math.max(1, Math.ceil(dt * 240)), h = dt / n;
+    for (let i = 0; i < n; i++) { const a = -k * (this.x - this.to) - c * this.v; this.v += a * h; this.x += this.v * h; }
+    if (Math.abs(this.x - this.to) < 1e-4 && Math.abs(this.v) < 1e-3) { this.x = this.to; this.v = 0; this.raf = 0; this.apply(this.x, true); return; }
+    this.apply(this.x, false); this.raf = requestAnimationFrame(tick);
+  };
+  this.raf = requestAnimationFrame(tick);
+};
+function haptic(){ try { navigator.vibrate && navigator.vibrate(10); } catch (e) {} }   // rung nhẹ (light)
+let pressCommitAt = -1e9;
+
+/* Nhấn (Home): lún ngay khi chạm, nảy về khi nhả; tay đi quá 10 pt (đang cuộn/vuốt) thì huỷ */
+const PRESS = [
+  [".row,.ov-card,.qcard,.svc,.news,.bl-create", .97],
+  [".btn-dark,.onb-btn,.loan-btn,.hub-t", .94],
+  [".ov-btn,.reg-x,.navrow button,.sv-row button,.bl-back,.hub-act button,.tc-month button,.ic-sync", .88]
+];
+(() => {
+  const SEL = PRESS.map(p => p[0]).join(",");
+  const scaleFor = el => { for (const [q, k] of PRESS) if (el.matches(q)) return k; return .97; };
+  const M = new WeakMap();
+  const sprOf = el => { let o = M.get(el); if (!o) { o = new Spr(1, (x, done) => { el.style.scale = done && x === 1 ? "" : x.toFixed(4); }); M.set(el, o); } return o; };
+  let cur = null;
+  function release(commit){
+    const el = cur.el; cur = null;
+    if (reduceMotion()) el.style.opacity = "";
+    else sprOf(el).go(1, commit ? SPRING.bounce : SPRING.press);
+    if (commit) pressCommitAt = performance.now();
+  }
+  screen.addEventListener("pointerdown", e => {
+    if (e.button > 0) return;
+    const el = e.target.closest(SEL);
+    if (!el || el.disabled || el.closest(".tabbar")) return;
+    cur = { el, id: e.pointerId, x: e.clientX, y: e.clientY };
+    if (reduceMotion()) { el.style.opacity = ".55"; return; }
+    sprOf(el).go(scaleFor(el), SPRING.press);
+  }, true);
+  addEventListener("pointermove", e => {
+    if (cur && e.pointerId === cur.id && Math.hypot(e.clientX - cur.x, e.clientY - cur.y) / SCALE > 10) release(false);
+  }, true);
+  addEventListener("pointerup", e => { if (cur && e.pointerId === cur.id) release(true); }, true);
+  addEventListener("pointercancel", e => { if (cur && e.pointerId === cur.id) release(false); }, true);
+})();
+
+/* Thanh điều hướng dưới (Home): cả thanh lún 0.97, nút lún 0.88, nhả thì nảy + rung nhẹ */
+(() => {
+  const bar = document.querySelector(".tabbar-in");
+  const barS = new Spr(1, (x, d) => bar.style.scale = d && x === 1 ? "" : x.toFixed(4));
+  document.querySelectorAll(".tabbar .tb").forEach(tb => {
+    const s = new Spr(1, (x, d) => tb.style.scale = d && x === 1 ? "" : x.toFixed(4));
+    let id = null;
+    tb.addEventListener("pointerdown", e => {
+      if (e.button > 0) return; id = e.pointerId;
+      if (reduceMotion()) { tb.style.opacity = ".6"; return; }
+      s.go(.88, SPRING.tabDown); barS.go(.97, SPRING.barDown);
+    });
+    const end = (e, ok) => {
+      if (e.pointerId !== id) return; id = null; tb.style.opacity = "";
+      s.go(1, SPRING.tabUp); barS.go(1, SPRING.barUp);
+      if (ok) { haptic(); pressCommitAt = performance.now(); }
+    };
+    tb.addEventListener("pointerup", e => end(e, true));
+    tb.addEventListener("pointercancel", e => end(e, false));
+    tb.addEventListener("pointerleave", e => end(e, false));
+  });
+})();
+/* Viên chỉ báo tab + chấm phân trang chạy theo spring của Home */
+(() => {
+  const ind = springKF(SPRING.ind), dot = springKF(SPRING.dots);
+  screen.style.setProperty("--ind-d", ind.duration + "ms"); screen.style.setProperty("--ind-e", ind.easing);
+  screen.style.setProperty("--dot-d", dot.duration + "ms"); screen.style.setProperty("--dot-e", dot.easing);
+})();
+/* Cuộn tới đích bằng spring, nhận vận tốc tay (px/s) để không có "đường nối" giữa vuốt và animation */
+function springScroll(to, cfg, v0 = 0){
+  return new Promise(res => {
+    busy = true; let x = sc.scrollTop, v = v0, last = performance.now();
+    const k = (2 * Math.PI / cfg.r) ** 2, c = 4 * Math.PI * cfg.z / cfg.r;
+    (function step(now){
+      const dt = Math.min(.05, (now - last) / 1000); last = now;
+      const n = Math.max(1, Math.ceil(dt * 240)), h = dt / n;
+      for (let i = 0; i < n; i++) { const a = -k * (x - to) - c * v; v += a * h; x += v * h; }
+      if (Math.abs(x - to) < .5 && Math.abs(v) < 5) { sc.scrollTop = to; busy = false; return res(); }
+      sc.scrollTop = x; requestAnimationFrame(step);
+    })(last);
+  });
+}
 
 const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
 const easeOutBack = t => { const c1 = 1.25, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
@@ -1348,7 +1458,7 @@ dragScroll(sc, "y");
   function layout(anim){
     slides.forEach((el, i) => {
       const o = i - cur + dragX / STEP, a = Math.min(Math.abs(o), 1);
-      el.style.transition = anim ? "transform .65s cubic-bezier(.3,.7,.2,1)" : "none";
+      el.style.transition = anim ? `transform ${anim.duration}ms ${anim.easing}` : "none";
       el.style.transform = `translateX(${(o * STEP).toFixed(2)}px) scale(${(1 - (1 - SIDE) * a).toFixed(4)})`;
       el.style.zIndex = 10 - Math.round(Math.abs(o) * 2);
       el.style.visibility = Math.abs(o) > 2.2 ? "hidden" : "visible";
@@ -1356,31 +1466,37 @@ dragScroll(sc, "y");
     const k = ((cur % N) + N) % N;
     dots.forEach((d, i) => d.classList.toggle("on", i === k));
   }
-  function go(step){
-    cur += step; layout(true);
+  function go(step, kf = springKF(SPRING.page)){
+    cur += step; layout(kf);
     clearTimeout(go.t);
     go.t = setTimeout(() => { if (cur < N || cur >= 2 * N) { cur = ((cur % N) + N) % N + N; layout(false); } }, 700);
   }
   const play = () => { clearInterval(timer); timer = setInterval(() => { if (!document.hidden) go(1); }, T); };
   layout(false); play();
   // vuốt ngang
-  let on = false, moved = false, sx = 0, sy = 0;
-  nb.addEventListener("pointerdown", e => { on = true; moved = false; sx = e.clientX; sy = e.clientY; dragX = 0; });
+  let on = false, moved = false, sx = 0, sy = 0, hist = [];
+  nb.addEventListener("pointerdown", e => { on = true; moved = false; sx = e.clientX; sy = e.clientY; dragX = 0; hist = [[0, performance.now()]]; });
   addEventListener("pointermove", e => {
     if (!on) return;
     const dx = (e.clientX - sx) / SCALE, dy = (e.clientY - sy) / SCALE;
     if (!moved) {
-      if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { on = false; return; }
-      if (Math.abs(dx) < 6) return;
+      if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;      // Home: khoá trục sau 10 pt
+      if (Math.abs(dy) > Math.abs(dx)) { on = false; return; }
       moved = true; clearInterval(timer);
     }
     dragX = dx; layout(false);
+    hist.push([dx, performance.now()]); if (hist.length > 8) hist.shift();
   });
   addEventListener("pointerup", () => {
     if (!on) return; on = false;
     if (!moved) return;
-    const step = dragX < -40 ? 1 : dragX > 40 ? -1 : 0;
-    dragX = 0; go(step); play();
+    // Home: đích = trang gần điểm dừng dự kiến (tối đa ±1), spring bắt trang nhận vận tốc tay
+    const now = performance.now(), rec = hist.filter(h => now - h[1] < 100);
+    const vx = rec.length > 1 ? (rec[rec.length - 1][0] - rec[0][0]) / Math.max(1, rec[rec.length - 1][1] - rec[0][1]) * 1000 : 0;
+    const step = Math.max(-1, Math.min(1, Math.round(-(dragX + project(vx)) / STEP)));
+    const dist = -step * STEP - dragX;
+    const kf = springKF(SPRING.page, Math.abs(dist) > 1 ? vx / dist : 0);
+    dragX = 0; go(step, kf); play();
     drag.last = performance.now();
   });
   nb.addEventListener("click", e => { if (performance.now() - (drag.last || 0) < 250) { e.stopPropagation(); e.preventDefault(); } }, true);
@@ -1400,11 +1516,12 @@ function switchTab(i){
   tab = i;
   tabs.dataset.i = i; screen.dataset.tab = i;
   tabs.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", +x.dataset.t === i));
-  // 1) nội dung + tiêu đề số tiền trượt ra
-  const ease = "cubic-bezier(.2,.8,.2,1)";
-  const out = paneBody.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: `translateX(${-dir * 28}px)` }],
-    { duration: 180, easing: "ease-in", fill: "forwards" });
-  [totalLabel, amountIn].forEach(el => el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150, fill: "forwards" }));
+  // 1) Home (tab Đề xuất/Yêu thích): nội dung cũ mờ đi + blur 2 pt trong 180 ms, không trượt ngang
+  const ease = "cubic-bezier(.33,1,.68,1)";   // ease-out bậc 3 như Home
+  const rm = reduceMotion();
+  const out = paneBody.animate([{ opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: rm ? "none" : "blur(2px)" }],
+    { duration: rm ? 100 : 180, easing: ease, fill: "forwards" });
+  [totalLabel, amountIn].forEach(el => el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: rm ? 100 : 180, easing: ease, fill: "forwards" }));
   out.finished.then(() => {
     // 2) đổi pane + giữ nguyên trạng thái header: thu gọn / dở dang / chưa cuộn đều giữ đúng --p, không giật
     panes.forEach((pn, k) => pn.hidden = k !== i);
@@ -1414,11 +1531,9 @@ function switchTab(i){
     update();
     totalLabel.textContent = TABS[i].label;
     out.cancel();
-    paneBody.animate([{ opacity: 0, transform: `translateX(${dir * 28}px)` }, { opacity: 1, transform: "none" }], { duration: 340, easing: ease });
-    [totalLabel, amountIn].forEach(el => { el.getAnimations().forEach(a => a.cancel()); el.animate([{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 300, easing: ease }); });
-    panes[i].querySelectorAll(i ? ".qcard" : ".row, .list .h14").forEach((el, k) =>
-      el.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: 60 + k * 50, easing: ease, fill: "backwards" }));
-    if (i === 0) replayChart();
+    // 2) nội dung mới hiện cả khối (blur 2 → 0) trong 260 ms – Home không cho từng dòng chạy lẻ
+    paneBody.animate([{ opacity: 0, filter: rm ? "none" : "blur(2px)" }, { opacity: 1, filter: "blur(0px)" }], { duration: rm ? 150 : 260, easing: ease });
+    [totalLabel, amountIn].forEach(el => { el.getAnimations().forEach(a => a.cancel()); el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: rm ? 150 : 260, easing: ease }); });
     maybeCount(wasCompact, 700, 120);
     switching = false;
   });
@@ -1483,9 +1598,9 @@ function setupReveal(){
   if (io) io.disconnect();
   const els = document.querySelectorAll(".reveal");
   els.forEach(el => el.classList.remove("in"));
-  io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }),
-    { root: sc, threshold: .15 });
-  els.forEach(el => io.observe(el));
+  // Home: không hiện từng phần khi cuộn tới; mọi khối vào so le trong cùng một lượt (80 + 40·i ms, i ≤ 5)
+  void sc.offsetWidth;
+  requestAnimationFrame(() => els.forEach(el => el.classList.add("in")));
 }
 function intro(){
   screen.classList.remove("run"); void screen.offsetWidth; screen.classList.add("run");
@@ -1721,7 +1836,7 @@ Object.assign(A, {
 const SV_EASE = "cubic-bezier(.32,.72,0,1)";
 const svDim = document.getElementById("svDim");
 const svStack = [];
-const DIM = .22;
+const DIM = PUSH_DIM;
 
 /* Chạy animation rồi ghi trạng thái cuối vào style, để lần sau bắt đầu từ đúng chỗ */
 function svAnim(el, kf, opt){
@@ -1739,7 +1854,21 @@ function svStagger(v){
     { duration:520, delay:140 + i * 45, easing:SV_EASE, fill:"backwards" }));
 }
 
+/* Màn dưới lùi 112 pt khi màn con đẩy vào (Home), dùng thuộc tính translate để không đè transform sẵn có */
+const BASE_LAYERS = [...document.querySelectorAll("#screen > .bg, #screen > .scroller, #screen > .hdr-bg, #screen > .navrow, #screen > .tabs, #screen > .t-label, #screen > .t-amount, #screen > .sync-compact, #screen > .sync-hero, #screen > .tabbar")];
+function underLayers(){ const prev = svStack[svStack.length - 2]; return prev ? [prev] : BASE_LAYERS; }
+function shiftUnder(to, kf, layers = underLayers()){
+  if (reduceMotion()) return;
+  layers.forEach(el => {
+    el.getAnimations().filter(a => a.id === "shift").forEach(a => a.cancel());
+    const from = el.style.translate || "0px 0px";
+    el.style.translate = `${to}px 0px`;
+    const a = el.animate([{ translate: from }, { translate: `${to}px 0px` }], { duration: kf.duration, easing: kf.easing });
+    a.id = "shift";
+  });
+}
 function svOpen(id){
+  if (performance.now() - pressCommitAt < 80) { pressCommitAt = -1e9; return void setTimeout(() => svOpen(id), NAV_DELAY); }
   const v = document.getElementById(id);
   if (!v || svStack.includes(v)) return;
   const z = 17 + svStack.length * 2;
@@ -1747,26 +1876,35 @@ function svOpen(id){
   v.classList.add("open");
   svResetView(v);
   svStack.push(v);
-  svAnim(v, [{ transform:offT(v) }, { transform:"translate(0,0)" }], { duration:v.classList.contains("modal") ? 540 : 480, easing:SV_EASE });
-  svAnim(svDim, [{ opacity:getComputedStyle(svDim).opacity }, { opacity:DIM }], { duration:480, easing:SV_EASE });
+  const kf = springKF(SPRING.push), rm = reduceMotion();
+  if (rm) svAnim(v, [{ transform:"translate(0,0)", opacity:0 }, { transform:"translate(0,0)", opacity:1 }], { duration:200, easing:"ease-out" });
+  else svAnim(v, [{ transform:offT(v) }, { transform:"translate(0,0)" }], kf);
+  svAnim(svDim, [{ opacity:getComputedStyle(svDim).opacity }, { opacity:DIM }], rm ? { duration:200 } : kf);
+  if (!v.classList.contains("modal")) shiftUnder(-PUSH_SHIFT, kf);
   svStagger(v);
 }
 
-function svClose(){
+function svClose(v0 = 0){
+  if (typeof v0 !== "number") v0 = 0;   // gọi từ nút back (click event) → không có vận tốc
+  const under = underLayers();
   const v = svStack.pop(); if (!v) return;
   const modal = v.classList.contains("modal");
-  const a = svAnim(v, [{ transform:v.style.transform || "translate(0,0)" }, { transform:offT(v) }], { duration:modal ? 420 : 380, easing:SV_EASE });
-  svAnim(svDim, [{ opacity:getComputedStyle(svDim).opacity }, { opacity:0 }], { duration:380, easing:SV_EASE });
+  const kf = springKF(SPRING.push, v0), rm = reduceMotion();   // v0: vận tốc vuốt cạnh (đã chia quãng còn lại)
+  const a = rm ? svAnim(v, [{ opacity:1 }, { opacity:0 }], { duration:200 })
+               : svAnim(v, [{ transform:v.style.transform || "translate(0,0)" }, { transform:offT(v) }], kf);
+  svAnim(svDim, [{ opacity:getComputedStyle(svDim).opacity }, { opacity:0 }], rm ? { duration:200 } : kf);
+  if (!modal) shiftUnder(0, kf, under);
   a.addEventListener("finish", () => {
-    v.classList.remove("open");
+    v.classList.remove("open"); v.style.opacity = "";
     const top = svStack[svStack.length - 1];
     if (top) { svDim.style.zIndex = parseInt(top.style.zIndex) - 1; svDim.style.opacity = DIM; }
   });
 }
 
 function svReset(){
-  while (svStack.length) { const v = svStack.pop(); v.getAnimations().forEach(a => a.cancel()); v.style.transform = ""; v.classList.remove("open"); }
+  while (svStack.length) { const v = svStack.pop(); v.getAnimations().forEach(a => a.cancel()); v.style.transform = ""; v.style.translate = ""; v.style.opacity = ""; v.classList.remove("open"); }
   svDim.getAnimations().forEach(a => a.cancel()); svDim.style.opacity = 0;
+  BASE_LAYERS.forEach(el => { el.getAnimations().filter(a => a.id === "shift").forEach(a => a.cancel()); el.style.translate = ""; });
 }
 
 function svResetView(v){
@@ -1789,12 +1927,12 @@ document.getElementById("panel").addEventListener("click", e => { if (e.target.c
 
 /* Vuốt từ mép trái để quay lại (màn push) */
 document.querySelectorAll(".sv:not(.modal)").forEach(v => {
-  let on = false, moved = false, swallow = false, sx = 0, dx = 0, t0 = 0;
+  let on = false, moved = false, swallow = false, sx = 0, dx = 0, t0 = 0, hist = [];
   v.addEventListener("click", ev => { if (swallow) { ev.stopPropagation(); ev.preventDefault(); } }, true);
   v.addEventListener("pointerdown", e => {
     const r = screen.getBoundingClientRect();
     if ((e.clientX - r.left) / SCALE > 28 || svStack[svStack.length - 1] !== v || bsOpen) return;
-    on = true; moved = false; sx = e.clientX; dx = 0; t0 = performance.now();
+    on = true; moved = false; sx = e.clientX; dx = 0; t0 = performance.now(); hist = [[0, t0]];
   });
   v.addEventListener("pointermove", e => {
     if (!on) return;
@@ -1806,16 +1944,22 @@ document.querySelectorAll(".sv:not(.modal)").forEach(v => {
     }
     v.style.transform = `translate(${dx}px,0)`;
     svDim.style.opacity = DIM * (1 - dx / 375);
+    underLayers().forEach(el => { el.getAnimations().filter(a => a.id === "shift").forEach(a => a.cancel()); el.style.translate = `${(-PUSH_SHIFT * (1 - dx / 375)).toFixed(2)}px 0px`; });
+    hist.push([dx, performance.now()]); if (hist.length > 8) hist.shift();
   });
   const end = () => {
     if (!on) return; on = false;
     if (!moved) return;
     swallow = true; setTimeout(() => swallow = false, 0);
-    const vel = dx / Math.max(1, performance.now() - t0);
-    if (dx > 120 || (vel > .5 && dx > 30)) svClose();
+    // vận tốc 100 ms cuối (px/s); Home/Apple: quyết định theo điểm dừng dự kiến, rồi giao vận tốc cho spring
+    const now = performance.now(), rec = hist.filter(h => now - h[1] < 100);
+    const vx = rec.length > 1 ? (rec[rec.length - 1][0] - rec[0][0]) / Math.max(1, rec[rec.length - 1][1] - rec[0][1]) * 1000 : 0;
+    if (dx + project(vx, .998) > 375 / 2) svClose(vx / Math.max(1, 375 - dx));   // .998 = độ giảm tốc cuộn chuẩn của iOS
     else {
-      svAnim(v, [{ transform:v.style.transform }, { transform:"translate(0,0)" }], { duration:320, easing:SV_EASE });
-      svAnim(svDim, [{ opacity:svDim.style.opacity }, { opacity:DIM }], { duration:320, easing:SV_EASE });
+      const kf = springKF(SPRING.push, dx > 1 ? -vx / dx : 0);
+      svAnim(v, [{ transform:v.style.transform }, { transform:"translate(0,0)" }], kf);
+      svAnim(svDim, [{ opacity:svDim.style.opacity }, { opacity:DIM }], kf);
+      shiftUnder(-PUSH_SHIFT, kf);
     }
   };
   v.addEventListener("pointerup", end); v.addEventListener("pointercancel", end);
@@ -1841,6 +1985,7 @@ dragScroll(document.querySelector("#svFaq .sv-sc"), "y");
 const bs = document.getElementById("bs"), bsOv = document.getElementById("bsOv");
 let bsOpen = false;
 function bsShow(on, instant){
+  if (on && !instant && performance.now() - pressCommitAt < 80) { pressCommitAt = -1e9; return void setTimeout(() => bsShow(true), NAV_DELAY); }
   bsOpen = on; bsOv.classList.toggle("on", on);
   if (instant) {
     bs.getAnimations().forEach(a => a.cancel()); bsOv.getAnimations().forEach(a => a.cancel());
@@ -2052,7 +2197,6 @@ document.addEventListener("click", e => {
   const el = e.target.closest(ONBOARD_SEL);
   if (!el) return;
   e.preventDefault(); e.stopImmediatePropagation();
-  el.animate([{ transform:"scale(1)" }, { transform:"scale(.97)" }, { transform:"scale(1)" }], { duration:220, easing:"ease-out" });
   if (svStack.length) svReset();
   showReg(true, onbKey(el));
 }, true);
